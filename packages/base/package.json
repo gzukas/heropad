@@ -1,0 +1,12 @@
+{
+  "name": "base",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Gediminas Zukas",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "jotai": "^2.2.1"
+  }
+}

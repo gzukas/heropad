@@ -1,0 +1,29 @@
+{
+  "name": "sociogram",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Gediminas Zukas",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@react-sigma/core": "^3.4.2",
+    "@react-sigma/layout-core": "^3.4.2",
+    "@react-sigma/layout-forceatlas2": "^3.4.2",
+    "base": "*",
+    "clsx": "^1.2.1",
+    "graphology": "^0.25.1",
+    "graphology-communities-louvain": "^2.0.1",
+    "graphology-layout": "^0.6.1",
+    "graphology-layout-forceatlas2": "^0.10.1",
+    "graphology-operators": "^1.6.0",
+    "iwanthue": "^2.0.0",
+    "jotai": "^2.2.1",
+    "lodash": "^4.17.21",
+    "sigma": "^2.4.0"
+  },
+  "devDependencies": {
+    "graphology-types": "^0.24.7",
+    "react": "^18.2.0"
+  }
+}

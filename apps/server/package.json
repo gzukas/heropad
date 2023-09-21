@@ -1,0 +1,23 @@
+{
+  "name": "@heropad/server",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts --preserve-symlinks"
+  },
+  "author": "Gediminas Zukas",
+  "license": "MIT",
+  "dependencies": {
+    "@trpc/server": "^10.34.0",
+    "cors": "^2.8.5",
+    "database": "*",
+    "graphology": "^0.25.4",
+    "superjson": "^1.13.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "graphology-types": "^0.24.7",
+    "tsx": "^3.12.7"
+  }
+}
