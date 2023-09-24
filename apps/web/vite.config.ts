@@ -12,6 +12,11 @@ export default defineConfig({
     }),
     lingui()
   ],
+  resolve: {
+    alias: {
+      lodash: 'lodash-es'
+    }
+  },
   server: {
     port: 3000
   }

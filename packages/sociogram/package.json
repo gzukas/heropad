@@ -12,14 +12,14 @@
     "@react-sigma/layout-forceatlas2": "^3.4.2",
     "base": "*",
     "clsx": "^1.2.1",
-    "graphology": "^0.25.1",
+    "graphology": "0.25.4",
     "graphology-communities-louvain": "^2.0.1",
     "graphology-layout": "^0.6.1",
     "graphology-layout-forceatlas2": "^0.10.1",
     "graphology-operators": "^1.6.0",
     "iwanthue": "^2.0.0",
     "jotai": "^2.2.1",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "sigma": "^2.4.0"
   },
   "devDependencies": {

@@ -1,23 +1,26 @@
 {
   "name": "@heropad/server",
   "private": true,
+  "type": "commonjs",
+  "main": "./dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "start": "tsx src/index.ts --preserve-symlinks"
+    "build": "tsup src/index.ts --clean --format cjs"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
   "dependencies": {
     "@trpc/server": "^10.34.0",
     "cors": "^2.8.5",
-    "database": "*",
-    "graphology": "^0.25.4",
+    "@types/cors": "^2.8.13",
+    "graphology": "0.25.4",
     "superjson": "^1.13.1",
     "tsx": "^3.12.10",
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13",
-    "graphology-types": "^0.24.7"
+    "database": "*",
+    "graphology-types": "^0.24.7",
+    "tsup": "^7.2.0"
   }
 }

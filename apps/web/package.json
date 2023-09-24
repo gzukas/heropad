@@ -21,7 +21,7 @@
     "@trpc/client": "^10.34.0",
     "autosuggest-highlight": "^3.3.4",
     "base": "*",
-    "graphology": "0.26.0-alpha1",
+    "graphology": "0.25.4",
     "jotai": "^2.2.1",
     "jotai-trpc": "^0.5.1",
     "material-ui-popup-state": "^5.0.4",
@@ -33,16 +33,14 @@
     "zod": "^3.20.6"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.0.2",
     "@lingui/cli": "^4.3.0",
-    "@lingui/swc-plugin": "^4.0.2",
+    "@lingui/swc-plugin": "4.0.2",
     "@lingui/vite-plugin": "^4.3.0",
     "@swc-jotai/debug-label": "^0.1.0",
     "@types/autosuggest-highlight": "^3.2.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react-swc": "3.3.2",
-    "graphology-generators": "^0.11.2",
     "graphology-types": "^0.24.7",
     "vite": "^4.4.9",
     "vite-tsconfig-paths": "^4.2.0"
