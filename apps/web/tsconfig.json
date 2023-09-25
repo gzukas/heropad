@@ -22,6 +22,6 @@
       ]
     },
   },
-  "include": ["src", "scripts", "../../packages/ui/src/components/EdgeAvatar.tsx", "../../packages/ui/src/hooks/useDidUpdate.ts"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

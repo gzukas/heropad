@@ -13,27 +13,46 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-id: 6DGeau
-#: src/routes/$hero/hero.tsx
+#: src/components/Search/AwardGroup.tsx
+msgid "Awards"
+msgstr "Awards"
+
+#: src/components/ChangeLocale.tsx
+msgid "Change language"
+msgstr ""
+
+#: src/routes/$hero/index.tsx
 msgid "Given"
 msgstr "Given"
 
-#. js-lingui-id: A1taO8
-#: src/components/Search/Search.tsx
-msgid "Search"
-msgstr "Search"
-
-#. js-lingui-id: fZ5Vnu
-#: src/routes/$hero/hero.tsx
-msgid "Received"
-msgstr "Received"
-
-#. js-lingui-id: kKi2Hf
-#: src/components/Search/Search.tsx
+#: src/components/Search/HeroGroup.tsx
 msgid "Heroes"
 msgstr "Heroes"
 
-#. js-lingui-id: oosprE
-#: src/components/Search/Search.tsx
-msgid "Awards"
-msgstr "Awards"
+#: src/routes/$hero/index.tsx
+msgid "Received"
+msgstr "Received"
+
+#: src/components/Camera.tsx
+msgid "Reset zoom"
+msgstr "Reset zoom"
+
+#: src/components/Search/SearchButton.tsx
+msgid "Search"
+msgstr "Search"
+
+#: src/components/ChangeColorScheme.tsx
+msgid "Turn off the light"
+msgstr ""
+
+#: src/components/ChangeColorScheme.tsx
+msgid "Turn on the light"
+msgstr ""
+
+#: src/components/Camera.tsx
+msgid "Zoom in"
+msgstr "Zoom in"
+
+#: src/components/Camera.tsx
+msgid "Zoom out"
+msgstr "Zoom out"

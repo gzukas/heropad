@@ -1,3 +1,3 @@
 /*eslint-disable*/ export const messages = JSON.parse(
-  '{"6DGeau":"Given","A1taO8":"Search","fZ5Vnu":"Received","kKi2Hf":"Heroes","oosprE":"Awards"}'
+  '{"oosprE":"Awards","+DEogc":"Change language","6DGeau":"Given","kKi2Hf":"Heroes","fZ5Vnu":"Received","jKibyt":"Reset zoom","A1taO8":"Search","ozu0F0":"Turn off the light","nD+TME":"Turn on the light","AWOSPo":"Zoom in","FjkaiT":"Zoom out"}'
 );

@@ -3,10 +3,13 @@ import {
   ListItemIcon,
   ListItemText,
   Menu,
-  MenuItem
+  MenuItem,
+  Tooltip
 } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CheckIcon from '@mui/icons-material/Check';
+import { t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 import {
   usePopupState,
@@ -17,6 +20,7 @@ import { localeAtom } from '~/atoms';
 import { locales } from '~/locales';
 
 export function ChangeLocale() {
+  const { i18n } = useLingui();
   const [currentLocale, setCurrentLocale] = useAtom(localeAtom);
   const menuState = usePopupState({
     variant: 'popover',
@@ -43,11 +47,13 @@ export function ChangeLocale() {
 
   return (
     <>
-      <IconButton {...bindTrigger(menuState)}>
-        <TranslateIcon />
-      </IconButton>
+      <Tooltip title={t(i18n)`Change language`} enterDelay={300}>
+        <IconButton {...bindTrigger(menuState)}>
+          <TranslateIcon />
+        </IconButton>
+      </Tooltip>
       <Menu {...bindMenu(menuState)}>
-        {Object.entries(locales).map((renderLocaleMenuItem))}
+        {Object.entries(locales).map(renderLocaleMenuItem)}
       </Menu>
     </>
   );

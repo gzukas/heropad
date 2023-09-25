@@ -1,10 +1,13 @@
-import { Button, ButtonGroup, Paper } from '@mui/material';
+import { t } from '@lingui/macro';
+import { Button, ButtonGroup, Paper, Tooltip } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import { useCamera } from 'sociogram';
+import { useLingui } from '@lingui/react';
 
 export function Camera() {
+  const { i18n } = useLingui();
   const { zoomIn, zoomOut, reset } = useCamera();
   return (
     <Paper>
@@ -14,15 +17,21 @@ export function Camera() {
         variant="text"
         color="inherit"
       >
-        <Button onClick={zoomIn}>
-          <AddIcon />
-        </Button>
-        <Button onClick={zoomOut}>
-          <RemoveIcon />
-        </Button>
-        <Button onClick={reset}>
-          <AdjustIcon/>
-        </Button>
+        <Tooltip title={t(i18n)`Zoom in`} enterDelay={600} placement="left">
+          <Button onClick={zoomIn}>
+            <AddIcon />
+          </Button>
+        </Tooltip>
+        <Tooltip title={t(i18n)`Zoom out`} enterDelay={600} placement="left">
+          <Button onClick={zoomOut}>
+            <RemoveIcon />
+          </Button>
+        </Tooltip>
+        <Tooltip title={t(i18n)`Reset zoom`} enterDelay={600} placement="left">
+          <Button onClick={reset}>
+            <AdjustIcon />
+          </Button>
+        </Tooltip>
       </ButtonGroup>
     </Paper>
   );

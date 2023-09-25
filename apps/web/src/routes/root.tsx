@@ -17,9 +17,7 @@ import { graphAtom } from '~/atoms';
 const StyledSociogeram = styled(Sociogram)({
   '&, .sigma-container': {
     width: '100dvw',
-    height: '100dvh',
-    position: 'relative',
-    overflow: 'hidden'
+    height: '100dvh'
   },
   '&.Sociogram-nodeHovered .sigma-mouse': {
     cursor: 'pointer'

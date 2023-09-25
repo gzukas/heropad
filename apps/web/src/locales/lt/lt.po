@@ -13,27 +13,46 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. js-lingui-id: 6DGeau
-#: src/routes/$hero/hero.tsx
+#: src/components/Search/AwardGroup.tsx
+msgid "Awards"
+msgstr "Apdovanojimai"
+
+#: src/components/ChangeLocale.tsx
+msgid "Change language"
+msgstr "Keisti kalbą"
+
+#: src/routes/$hero/index.tsx
 msgid "Given"
 msgstr "Davė"
 
-#. js-lingui-id: A1taO8
-#: src/components/Search/Search.tsx
-msgid "Search"
-msgstr "Ieškoti"
-
-#. js-lingui-id: fZ5Vnu
-#: src/routes/$hero/hero.tsx
-msgid "Received"
-msgstr "Gavo"
-
-#. js-lingui-id: kKi2Hf
-#: src/components/Search/Search.tsx
+#: src/components/Search/HeroGroup.tsx
 msgid "Heroes"
 msgstr "Herojai"
 
-#. js-lingui-id: oosprE
-#: src/components/Search/Search.tsx
-msgid "Awards"
-msgstr "Apdovanojimai"
+#: src/routes/$hero/index.tsx
+msgid "Received"
+msgstr "Gavo"
+
+#: src/components/Camera.tsx
+msgid "Reset zoom"
+msgstr "Atkurti mastelį"
+
+#: src/components/Search/SearchButton.tsx
+msgid "Search"
+msgstr "Ieškoti"
+
+#: src/components/ChangeColorScheme.tsx
+msgid "Turn off the light"
+msgstr "Išjungti šviesą"
+
+#: src/components/ChangeColorScheme.tsx
+msgid "Turn on the light"
+msgstr "Įjungti šviesą"
+
+#: src/components/Camera.tsx
+msgid "Zoom in"
+msgstr "Priartinti"
+
+#: src/components/Camera.tsx
+msgid "Zoom out"
+msgstr "Nutolinti"
