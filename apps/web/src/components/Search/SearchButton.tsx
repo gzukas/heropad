@@ -26,7 +26,13 @@ export function SearchButton() {
 
   return (
     <Paper
-      sx={{ minWidth: 296, justifyContent: 'left', font: 'inherit', p: 1 }}
+      sx={{
+        flex: 1,
+        minWidth: 296,
+        justifyContent: 'left',
+        font: 'inherit',
+        p: 1
+      }}
       component={ButtonBase}
       onClick={handleClick}
       elevation={2}

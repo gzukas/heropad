@@ -1,5 +1,5 @@
 import { RootRoute } from '@tanstack/react-router';
-import { Stack } from '@mui/material';
+import { Stack, useMediaQuery } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtomValue } from 'jotai';
 import { Sociogram, SociogramProvider } from 'sociogram';
@@ -28,19 +28,26 @@ export const rootRoute = new RootRoute({
   component: function Root() {
     const graph = useAtomValue(graphAtom);
     const theme = useTheme();
+    const matchesXs = useMediaQuery(theme.breakpoints.only('xs'));
 
     return (
       <AppCanvas>
         <SociogramProvider graph={graph} theme={theme.palette.mode}>
           <StyledSociogeram>
             <SociogramEvents />
-            <Absolute position="bottomRight" gutters={24}>
-              <Camera />
-            </Absolute>
+            <Camera
+              component={Absolute}
+              placement="bottom-right"
+              gutters={24}
+            />
           </StyledSociogeram>
         </SociogramProvider>
-        <Absolute
-          position="topRight"
+
+        <Stack
+          component={Absolute}
+          placement={matchesXs ? 'top' : 'top-right'}
+          gap={1}
+          direction="row"
           sx={theme => ({
             display: 'flex',
             alignItems: 'center',
@@ -48,12 +55,10 @@ export const rootRoute = new RootRoute({
             ...theme.mixins.toolbar
           })}
         >
-          <Stack gap={1} direction="row">
-            <Search />
-            <ChangeLocale />
-            <ChangeColorScheme />
-          </Stack>
-        </Absolute>
+          <Search />
+          <ChangeLocale />
+          <ChangeColorScheme />
+        </Stack>
       </AppCanvas>
     );
   }

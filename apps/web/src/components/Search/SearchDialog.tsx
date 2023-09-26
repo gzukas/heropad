@@ -23,9 +23,6 @@ export function SearchDialog() {
   const resetDebouncedSearchTerm = useResetAtom(debouncedSearchTermAtom);
   const [isSearchOpen, toggleSearch] = useAtom(isSearchOpenAtom);
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDebouncedSearchTerm(event.target.value);
   };
@@ -38,7 +35,6 @@ export function SearchDialog() {
     <Dialog
       open={isSearchOpen}
       onClose={handleClose}
-      fullScreen={fullScreen}
       TransitionProps={{ onExited: resetDebouncedSearchTerm }}
       maxWidth="sm"
       disableRestoreFocus

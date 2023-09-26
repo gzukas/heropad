@@ -2,30 +2,34 @@ import { styled } from '@mui/material/styles';
 
 type Vertical = 'top' | 'bottom';
 type Horizontal = 'left' | 'right';
-
-type Position = `${Vertical}${Capitalize<Horizontal>}`;
+type Placement = Vertical | `${Vertical}-${Horizontal}`;
 
 export interface AbsoluteProps {
-  position: Position;
+  placement: Placement;
   gutters?: number;
 }
 
 export const Absolute = styled('div', { label: 'Absolute' })<AbsoluteProps>(
-  ({ position, gutters = 0 }) => ({
+  ({ placement, gutters = 0 }) => ({
     position: 'absolute',
-    ...(position === 'topLeft' && {
+    ...(placement === 'top' && {
+      top: gutters,
+      left: gutters,
+      right: gutters
+    }),
+    ...(placement === 'top-left' && {
       top: gutters,
       left: gutters
     }),
-    ...(position === 'topRight' && {
+    ...(placement === 'top-right' && {
       top: gutters,
       right: gutters
     }),
-    ...(position === 'bottomLeft' && {
+    ...(placement === 'bottom-left' && {
       bottom: gutters,
       left: gutters
     }),
-    ...(position === 'bottomRight' && {
+    ...(placement === 'bottom-right' && {
       bottom: gutters,
       right: gutters
     })
