@@ -11,8 +11,8 @@ export const heroAwardMolecule = molecule((_mol, scope) => {
   const hero = scope(HeroScope);
   const direction = scope(DirectionScope);
   const [heroAwardPagesAtom, fetchNextHeroAwardsAtom] = atomsWithPagination(
-    (givenSinceAtom: Atom<Date | undefined>) => {
-      const xxx = api.hero.getAwards.atomWithQuery(get =>
+    (givenSinceAtom: Atom<Date | undefined>) =>
+      api.hero.getAwards.atomWithQuery(get =>
         hero
           ? {
               hero,
@@ -20,10 +20,7 @@ export const heroAwardMolecule = molecule((_mol, scope) => {
               givenSince: get(givenSinceAtom)
             }
           : DISABLED
-      );
-      xxx.debugLabel = 'getAwards';
-      return xxx;
-    },
+      ),
     lastPage => lastPage?.nextGivenAt
   );
 
@@ -31,10 +28,6 @@ export const heroAwardMolecule = molecule((_mol, scope) => {
     atom(get => get(heroAwardPagesAtom).flatMap(page => page.rows)),
     prev => prev || []
   );
-
-  heroAwardPagesAtom.debugLabel = 'heroAwardPagesAtom';
-  fetchNextHeroAwardsAtom.debugLabel = 'fetchNextHeroAwardsAtom';
-  heroAwardsAtom.debugLabel = 'heroAwardsAtom';
 
   return {
     heroAwardsAtom,

@@ -8,4 +8,3 @@ export const searchSuggestionsByKindAtom = atom(async get => {
     ...groupBy(searchSuggestions, suggestion => suggestion.kind).entries()
   ];
 });
-searchSuggestionsByKindAtom.debugLabel = 'searchSuggestionsByKindAtom';

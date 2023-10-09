@@ -25,10 +25,5 @@ export function atomsWithPagination<T, TNextPageParam>(
     }
   );
 
-  nextPageParamAtom.debugLabel = 'nextPageParamAtom';
-  dataPagesAtom.debugLabel = 'dataPagesAtom';
-  lastDataPageAtom.debugLabel = 'lastDataPageAtom';
-  fetchNextPageAtom.debugLabel = 'fetchNextPageAtom';
-
   return [dataPagesAtom, fetchNextPageAtom] as const;
 }

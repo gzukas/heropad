@@ -10,7 +10,8 @@ export default defineConfig({
     react({
       plugins: [
         ['@lingui/swc-plugin', {}],
-        ['@swc-jotai/debug-label', {}]
+        ['@swc-jotai/debug-label', {}],
+        ['@swc-jotai/react-refresh', {}]
       ]
     }),
     lingui()

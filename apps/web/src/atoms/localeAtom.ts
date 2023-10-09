@@ -7,4 +7,3 @@ function getDefaultLocale() {
 }
 
 export const localeAtom = atomWithStorage('locale', getDefaultLocale());
-localeAtom.debugLabel = 'localeAtom';

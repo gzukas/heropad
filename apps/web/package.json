@@ -13,8 +13,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.10.5",
-    "@lingui/macro": "^4.3.0",
-    "@lingui/react": "^4.3.0",
+    "@lingui/macro": "^4.5.0",
+    "@lingui/react": "^4.5.0",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
     "@tanstack/react-router": "0.0.1-beta.194",
@@ -35,16 +35,17 @@
     "zod": "^3.20.6"
   },
   "devDependencies": {
-    "@lingui/cli": "^4.3.0",
-    "@lingui/swc-plugin": "4.0.2",
-    "@lingui/vite-plugin": "^4.3.0",
+    "@lingui/cli": "^4.5.0",
+    "@lingui/swc-plugin": "4.0.4",
+    "@lingui/vite-plugin": "^4.5.0",
     "@swc-jotai/debug-label": "^0.1.0",
+    "@swc-jotai/react-refresh": "^0.1.0",
     "@types/autosuggest-highlight": "^3.2.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@vitejs/plugin-react-swc": "3.3.2",
+    "@vitejs/plugin-react-swc": "3.4.0",
     "graphology-types": "^0.24.7",
-    "vite": "^4.4.9",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite": "^4.4.11",
+    "vite-tsconfig-paths": "^4.2.1"
   }
 }
