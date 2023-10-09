@@ -14,9 +14,9 @@ export const searchRouter = createTRPCRouter({
             .selectFrom('hero')
             .select([
               'hero.id as id',
-              'name as text',
-              sql<[string, string?]>`ARRAY["name"]`.as('nodes'),
-              sql<SeachSuggestionKind>`'hero'`.as('kind')
+              'username as text',
+              sql<[string, string?]>`ARRAY[${sql.id('username')}]`.as('nodes'),
+              sql.lit<SeachSuggestionKind>('hero').as('kind')
             ])
             .union(eb =>
               eb
@@ -26,10 +26,11 @@ export const searchRouter = createTRPCRouter({
                 .select([
                   'award.id as id',
                   'description as text',
-                  sql<[string, string?]>`ARRAY["from"."name", "to"."name"]`.as(
-                    'nodes'
-                  ),
-                  sql<SeachSuggestionKind>`'award'`.as('kind')
+                  sql<[string, string?]>`ARRAY[${sql.id(
+                    'from',
+                    'username'
+                  )}, ${sql.id('to', 'username')}]`.as('nodes'),
+                  sql.lit<SeachSuggestionKind>('award').as('kind')
                 ])
             )
             .as('xxx')

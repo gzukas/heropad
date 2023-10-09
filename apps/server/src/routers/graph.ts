@@ -7,7 +7,7 @@ export const graphRouter = createTRPCRouter({
       .selectFrom('award')
       .innerJoin('hero as from', 'award.fromId', 'from.id')
       .innerJoin('hero as to', 'award.toId', 'to.id')
-      .select(['award.id', 'from.name as from', 'to.name as to'])
+      .select(['award.id', 'from.username as from', 'to.username as to'])
       .execute();
 
     const graph = new MultiDirectedGraph();

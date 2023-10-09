@@ -8,7 +8,10 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     react({
-      plugins: [['@lingui/swc-plugin', {}]]
+      plugins: [
+        ['@lingui/swc-plugin', {}],
+        ['@swc-jotai/debug-label', {}]
+      ]
     }),
     lingui()
   ],

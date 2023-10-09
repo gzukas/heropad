@@ -1,8 +1,9 @@
-import { RootRoute } from '@tanstack/react-router';
 import { Stack, useMediaQuery } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtomValue } from 'jotai';
+import { DevTools } from 'jotai-devtools';
 import { Sociogram, SociogramProvider } from 'sociogram';
+import { routerContext } from '~/routerContext';
 import {
   Camera,
   ChangeLocale,
@@ -24,7 +25,8 @@ const StyledSociogeram = styled(Sociogram)({
   }
 });
 
-export const rootRoute = new RootRoute({
+export const rootRoute = routerContext.createRootRoute({
+  loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
     const graph = useAtomValue(graphAtom);
     const theme = useTheme();

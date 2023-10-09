@@ -22,3 +22,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export * from 'kysely';
+export type { Hero, Award } from './types';

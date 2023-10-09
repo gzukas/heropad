@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "scripts": {
     "db:start": "supabase start --ignore-health-check",
-    "db:stop": "supabase stop"
+    "db:stop": "supabase stop",
+    "db:migrate": "supabase migration up"
   },
   "dependencies": {
     "dotenv": "^16.3.1",

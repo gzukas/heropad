@@ -13,6 +13,7 @@ export const searchSuggestionsAtom = api.search.getSuggestions.atomWithQuery(
     disabledOutput: []
   }
 );
+searchSuggestionsAtom.debugLabel = 'searchSuggestionsAtom';
 
 export type SearchSuggestion = Extract<
   Awaited<ExtractAtomValue<typeof searchSuggestionsAtom>>

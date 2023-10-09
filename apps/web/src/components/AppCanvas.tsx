@@ -37,15 +37,14 @@ export interface AppCanvasProps {
 }
 
 export function AppCanvas(props: AppCanvasProps) {
-  const { children } = props;
   const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up('md'), { noSsr: true });
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
   const matchRoute = useMatchRoute();
   const shift = !Boolean(matchRoute({ from: '/' }));
 
   return (
     <Box>
-      <Content shift={shift}>{children}</Content>
+      <Content shift={shift}>{props.children}</Content>
       <Drawer
         open={shift}
         variant={isMdUp ? 'persistent' : 'temporary'}

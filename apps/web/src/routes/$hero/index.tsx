@@ -1,87 +1,78 @@
-import { useCallback } from 'react';
-import { useAtomValue } from 'jotai';
+import { Suspense } from 'react';
 import {
   AppBar,
-  Button,
   IconButton,
   Stack,
-  Tab,
   Tabs,
   Toolbar,
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link, Route, useNavigate } from '@tanstack/react-router';
+import { Link, Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { z } from 'zod';
-import { useHydrateAndSyncAtoms } from 'base';
-import { HeroAvatar, AwardList } from '~/components';
+import { HeroAvatar } from '~/components';
 import { rootRoute } from '../root';
-import { heroAwardsAtom, heroAtom, directionAtom } from './atoms';
+import { ScopeProvider } from 'bunshi/react';
+import { HeroAwards } from './components/HeroAwards';
+import { HeroScope } from './scopes/heroScope';
+import { DirectionScope } from './scopes/directionScope';
+import { TabLink } from './components/TabLink';
+import { selectHeroAtom } from './atoms/selectHeroAtom';
+import { Provider } from 'jotai';
 
 const heroSearchSchema = z.object({
-  direction: z.enum(['received', 'given']).catch('received'),
-  award: z.preprocess(String, z.string()).optional()
+  direction: z.enum(['received', 'given']).catch('received')
 });
 
 export const heroRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '$hero',
+  wrapInSuspense: false,
   validateSearch: heroSearchSchema,
-  component: function Hero({ useParams, useSearch }) {
-    const { hero } = useParams();
-    const { direction, award } = useSearch();
-
-    const navigate = useNavigate();
-    const awards = useAtomValue(heroAwardsAtom);
-    
-    useHydrateAndSyncAtoms([
-      [heroAtom, hero],
-      [directionAtom, direction]
-    ]);
-
-    const handleActiveAwardOutsideRange = useCallback(() => {
-      navigate({ to: '/$hero', params: { hero }, search: { direction } });
-    }, []);
+  loader: ({ params, context: { store } }) =>
+    store.get(selectHeroAtom(params.hero)),
+  component: function Hero({ useSearch, useLoader }) {
+    const { direction } = useSearch();
+    const { username, name } = useLoader();
 
     return (
-      <>
+      <ScopeProvider scope={HeroScope} value={username}>
         <AppBar position="relative" color="inherit">
           <Toolbar component={Stack} gap={2} direction="row">
-            <HeroAvatar sx={{ marginLeft: -0.75 }} hero={hero} />
+            <HeroAvatar sx={{ marginLeft: -0.75 }} hero={username} />
             <Typography sx={{ flex: 1 }} variant="h6" noWrap>
-              {hero}
+              {name}
             </Typography>
             <IconButton edge="end" component={Link as any} to="/">
               <CloseIcon />
             </IconButton>
           </Toolbar>
           <Tabs value={direction} variant="fullWidth">
-            <Tab
-              component={Link as any}
+            <TabLink
               label={<Trans>Received</Trans>}
               value="received"
-              from="/$hero"
-              params={{ hero }}
+              to="/$hero"
+              params={{ hero: username }}
               search={{ direction: 'received' }}
             />
-            <Tab
-              component={Link as any}
+            <TabLink
               label={<Trans>Given</Trans>}
               value="given"
-              from="/$hero"
-              params={{ hero }}
+              to="/$hero"
+              params={{ hero: username }}
               search={{ direction: 'given' }}
             />
           </Tabs>
         </AppBar>
-        <AwardList
-          awards={awards}
-          activeAwardId={award}
-          onActiveAwardOutsideRange={handleActiveAwardOutsideRange}
-        />
-      </>
+        <Provider key={direction}>
+          <ScopeProvider scope={DirectionScope} value={direction}>
+            <Suspense fallback="Loading">
+              <HeroAwards />
+            </Suspense>
+          </ScopeProvider>
+        </Provider>
+      </ScopeProvider>
     );
   }
 });
-

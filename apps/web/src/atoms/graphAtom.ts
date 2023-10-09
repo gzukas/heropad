@@ -4,8 +4,11 @@ import type { Node } from 'sociogram';
 import { api } from '~/utils/api';
 
 const serializedGraphAtom = api.graph.getGraph.atomWithQuery();
+serializedGraphAtom.debugLabel = 'serializedGraphAtom';
 
 export const graphAtom = atom(async get => {
   const serializedGraph = await get(serializedGraphAtom);
   return new MultiDirectedGraph<Node>().import(serializedGraph);
 });
+
+graphAtom.debugLabel = 'graphAtom';

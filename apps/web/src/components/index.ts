@@ -1,4 +1,3 @@
-export * from './AwardList/AwardList';
 export * from './Search';
 export * from './Absolute';
 export * from './App';

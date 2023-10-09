@@ -1,12 +1,5 @@
 import React, { Suspense } from 'react';
-import {
-  Stack,
-  InputBase,
-  Chip,
-  Dialog,
-  useMediaQuery,
-  useTheme
-} from '@mui/material';
+import { Stack, InputBase, Chip, Dialog } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';

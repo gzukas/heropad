@@ -1,6 +1,6 @@
 import { useSigma } from '@react-sigma/core';
-import { useCallback, useEffect, useRef } from 'react';
 import { AnimateOptions } from 'sigma/utils/animate';
+import { useEventCallback } from './useEventCallback';
 
 export type UseCameraOptions = Partial<AnimateOptions> & {
   factor?: number;
@@ -8,23 +8,23 @@ export type UseCameraOptions = Partial<AnimateOptions> & {
 
 export function useCamera(options?: UseCameraOptions) {
   const sigma = useSigma();
-  const optionsRef = useRef(options);
 
-  useEffect(() => {
-    optionsRef.current = options
-  }, [options]);
+  const zoomIn = useEventCallback(() =>
+    sigma.getCamera().animatedZoom(options)
+  );
+  const zoomOut = useEventCallback(() => {
+    sigma.getCamera().animatedUnzoom(options);
+  });
 
-  const zoomIn = useCallback(() => {
-    sigma.getCamera().animatedZoom(optionsRef.current);
-  }, [sigma]);
+  const reset = useEventCallback(() => {
+    sigma.getCamera().animatedReset(options);
+  });
+  const goto = useEventCallback((nodeKey: string) => {
+    const nodeDisplayData = sigma.getNodeDisplayData(nodeKey);
+    if (nodeDisplayData) {
+      sigma.getCamera().animate(nodeDisplayData, options);
+    }
+  });
 
-  const zoomOut = useCallback(() => {
-    sigma.getCamera().animatedUnzoom(optionsRef.current);
-  }, [sigma]);
-
-  const reset = useCallback(() => {
-    sigma.getCamera().animatedReset(optionsRef.current);
-  }, [sigma]);
-
-  return { zoomIn, zoomOut, reset };
+  return { zoomIn, zoomOut, goto, reset };
 }

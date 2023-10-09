@@ -7,6 +7,7 @@ export interface Database {
 
 export interface HeroTable {
   id: Generated<string>;
+  username: string;
   name: string;
 }
 
@@ -14,8 +15,8 @@ export interface AwardTable {
   id: Generated<string>;
   givenAt: Generated<Date>;
   description: string;
-  fromId: number;
-  toId: number;
+  fromId: string;
+  toId: string;
 }
 
 export type Hero = Selectable<HeroTable>;
