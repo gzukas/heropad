@@ -10,13 +10,13 @@
   "author": "Gediminas Zukas",
   "license": "MIT",
   "dependencies": {
-    "@trpc/server": "^10.34.0",
+    "@trpc/server": "^10.40.0",
     "cors": "^2.8.5",
-    "@types/cors": "^2.8.13",
+    "@types/cors": "^2.8.14",
     "graphology": "0.25.4",
-    "superjson": "^1.13.1",
-    "tsx": "^3.12.10",
-    "zod": "^3.21.4"
+    "superjson": "^1.13.3",
+    "tsx": "^3.13.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "database": "*",
