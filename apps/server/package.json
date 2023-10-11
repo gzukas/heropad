@@ -5,7 +5,8 @@
   "main": "./dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src/index.ts --clean --format cjs"
+    "build": "tsup src/server.ts --clean --format cjs",
+    "start": "node dist/server.js"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
