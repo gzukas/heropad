@@ -2,17 +2,20 @@
   "name": "@heropad/server",
   "private": true,
   "type": "commonjs",
-  "main": "./dist/index.js",
+  "main": "./dist/server.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsup src/index.ts --clean --format cjs"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
   "dependencies": {
+    "@fastify/compress": "^6.4.0",
+    "@fastify/cors": "^8.4.0",
     "@trpc/server": "^10.40.0",
-    "cors": "^2.8.5",
     "@types/cors": "^2.8.14",
+    "cors": "^2.8.5",
+    "fastify": "^4.24.0",
     "graphology": "0.25.4",
     "superjson": "^1.13.3",
     "tsx": "^3.13.0",

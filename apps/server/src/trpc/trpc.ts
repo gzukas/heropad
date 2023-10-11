@@ -9,11 +9,11 @@ const createInnerTRPCContext = () => {
   };
 };
 
-export const createTRPCContext = () => {
+export const createContext = () => {
   return createInnerTRPCContext();
 };
 
-const t = initTRPC.context<typeof createTRPCContext>().create({
+const t = initTRPC.context<typeof createContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
     return {
