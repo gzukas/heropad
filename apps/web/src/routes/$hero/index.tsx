@@ -18,8 +18,8 @@ import { HeroAwards } from './components/HeroAwards';
 import { HeroScope } from './scopes/heroScope';
 import { DirectionScope } from './scopes/directionScope';
 import { TabLink } from './components/TabLink';
-import { selectHeroAtom } from './atoms/selectHeroAtom';
-import { Provider } from 'jotai';
+import { heroFamily } from './atoms/heroFamily';
+import { Provider, useAtomValue } from 'jotai';
 
 const heroSearchSchema = z.object({
   direction: z.enum(['received', 'given']).catch('received')
@@ -28,13 +28,14 @@ const heroSearchSchema = z.object({
 export const heroRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '$hero',
-  wrapInSuspense: false,
+  wrapInSuspense: true,
   validateSearch: heroSearchSchema,
   loader: ({ params, context: { store } }) =>
-    store.get(selectHeroAtom(params.hero)),
-  component: function Hero({ useSearch, useLoader }) {
+    store.get(heroFamily(params.hero)),
+  component: function Hero({ useParams, useSearch }) {
+    const { hero } = useParams();
     const { direction } = useSearch();
-    const { username, name } = useLoader();
+    const { username, name } = useAtomValue(heroFamily(hero));
 
     return (
       <ScopeProvider scope={HeroScope} value={username}>

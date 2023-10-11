@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import {
@@ -27,11 +27,11 @@ export function HeroAwards() {
   });
 
   useDidUpdate(() => {
-    const [lastAward] = [...virtualizer.getVirtualItems()].reverse();
+    const lastAward = [...virtualizer.getVirtualItems()].pop();
     if (!lastAward) {
       return;
     }
-    if (lastAward.index >= awards.length - 1 && hasNextPage) {
+    if (lastAward?.index >= awards.length - 1 && hasNextPage) {
       fetchNextPage();
     }
   }, [

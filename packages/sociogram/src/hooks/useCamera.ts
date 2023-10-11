@@ -12,6 +12,7 @@ export function useCamera(options?: UseCameraOptions) {
   const zoomIn = useEventCallback(() =>
     sigma.getCamera().animatedZoom(options)
   );
+
   const zoomOut = useEventCallback(() => {
     sigma.getCamera().animatedUnzoom(options);
   });
@@ -19,6 +20,7 @@ export function useCamera(options?: UseCameraOptions) {
   const reset = useEventCallback(() => {
     sigma.getCamera().animatedReset(options);
   });
+
   const goto = useEventCallback((nodeKey: string) => {
     const nodeDisplayData = sigma.getNodeDisplayData(nodeKey);
     if (nodeDisplayData) {

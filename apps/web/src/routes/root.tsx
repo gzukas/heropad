@@ -1,7 +1,6 @@
 import { Stack, useMediaQuery } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtomValue } from 'jotai';
-import { DevTools } from 'jotai-devtools';
 import { Sociogram, SociogramProvider } from 'sociogram';
 import { routerContext } from '~/routerContext';
 import {
@@ -44,7 +43,6 @@ export const rootRoute = routerContext.createRootRoute({
             />
           </StyledSociogeram>
         </SociogramProvider>
-
         <Stack
           component={Absolute}
           placement={matchesXs ? 'top' : 'top-right'}
