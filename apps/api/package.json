@@ -31,7 +31,6 @@
     "@heropad/tsconfig": "*",
     "@tsconfig/node18": "^18.2.2",
     "@types/pg": "^8.10.5",
-    "supabase": "^1.100.1",
-    "tsup": "^7.2.0"
+    "supabase": "^1.100.1"
   }
 }
