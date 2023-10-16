@@ -1,0 +1,10 @@
+{
+  "name": "@heropad/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Gediminas Zukas",
+  "license": "MIT",
+  "devDependencies": {
+    "@total-typescript/ts-reset": "^0.5.1"
+  }
+}

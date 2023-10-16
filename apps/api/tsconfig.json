@@ -1,0 +1,9 @@
+{
+  "extends": ["@tsconfig/node18", "@heropad/tsconfig"],
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}

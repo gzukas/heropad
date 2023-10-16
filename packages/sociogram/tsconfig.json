@@ -1,8 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": ["@tsconfig/strictest", "@heropad/tsconfig"],
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react-jsx",
+    "exactOptionalPropertyTypes": false
   },
-  "include": [".", "../../apps/web/src/components/NodeAvatar.tsx"],
-  "exclude": ["dist", "build", "node_modules"]
+  "include": ["src"]
 }

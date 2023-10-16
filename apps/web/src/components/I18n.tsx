@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
-import { setupI18n } from '@lingui/core';
+import { setupI18n, AllMessages } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { localeAtom } from '../atoms';
 import { messages as enMessages } from '../locales/en/en';
@@ -14,7 +14,7 @@ export function I18n({ children }: React.PropsWithChildren) {
       messages: {
         en: enMessages,
         lt: ltMessages
-      },
+      } as AllMessages,
       locale
     })
   );

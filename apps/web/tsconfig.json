@@ -1,27 +1,9 @@
 {
+  "extends": ["@tsconfig/vite-react", "@heropad/tsconfig"],
   "compilerOptions": {
-    "target": "es2022",
-    "useDefineForClassFields": true,
-    "moduleDetection": "force",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "typeRoots": ["./node_modules/@types", "./typings"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
     "paths": {
-      "~/*": [
-        "./src/*"
-      ]
-    },
+      "~/*": ["./src/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

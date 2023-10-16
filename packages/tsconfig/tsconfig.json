@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleDetection": "force",
+    "types": ["@total-typescript/ts-reset"]
+  }
+}

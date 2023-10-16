@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { sql } from 'database';
-import { createTRPCRouter, publicProcedure } from '../trpc';
+import { sql } from 'kysely';
+import { createTRPCRouter, publicProcedure } from '../trpc.js';
 
 type SeachSuggestionKind = 'hero' | 'award';
 

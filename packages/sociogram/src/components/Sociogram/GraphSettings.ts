@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSetSettings } from '@react-sigma/core';
-import { useGetCommunityColor } from '../../hooks';
 import { useAtomValue } from 'jotai';
+import { useGetCommunityColor } from '../../hooks';
 import { communityGraphAtom, debouncedHoveredAtom } from '../../atoms';
 
 export function GraphSettings() {
@@ -16,7 +16,7 @@ export function GraphSettings() {
       : undefined;
 
     setSettings({
-      nodeReducer(node, data) {
+      nodeReducer: (node, data) => {
         const commonData = {
           ...data,
           name: node,

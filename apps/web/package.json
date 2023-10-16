@@ -25,7 +25,6 @@
     "bunshi": "^2.0.1",
     "graphology": "0.25.4",
     "jotai": "^2.4.3",
-    "jotai-devtools": "^0.6.3",
     "jotai-trpc": "^0.5.1",
     "material-ui-popup-state": "^5.0.9",
     "react": "^18.2.0",
@@ -35,11 +34,13 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@heropad/tsconfig": "*",
     "@lingui/cli": "^4.5.0",
     "@lingui/swc-plugin": "4.0.4",
     "@lingui/vite-plugin": "^4.5.0",
     "@swc-jotai/debug-label": "^0.1.0",
     "@swc-jotai/react-refresh": "^0.1.0",
+    "@tsconfig/vite-react": "^2.0.1",
     "@types/autosuggest-highlight": "^3.2.0",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.11",

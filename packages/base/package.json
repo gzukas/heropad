@@ -8,5 +8,9 @@
   "types": "./src/index.ts",
   "dependencies": {
     "jotai": "^2.2.1"
+  },
+  "devDependencies": {
+    "@heropad/tsconfig": "*",
+    "@tsconfig/strictest": "^2.0.2"
   }
 }

@@ -5,7 +5,6 @@ import {
 } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import type {} from '@mui/material/themeCssVarsAugmentation';
-import { DevTools } from 'jotai-devtools';
 import { router } from '~/router';
 import { AppStoreProvider } from '~/context';
 import { I18n } from './I18n';
@@ -28,7 +27,6 @@ export function App() {
         <I18n>
           <RouterProvider router={router} />
         </I18n>
-        <DevTools />
       </CssVarsProvider>
     </AppStoreProvider>
   );

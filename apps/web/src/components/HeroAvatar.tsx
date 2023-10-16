@@ -15,6 +15,13 @@ export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
     const graph = useAtomValue(graphAtom, { store });
     const src = graph.getNodeAttribute(hero, 'image');
 
-    return <Avatar ref={ref} src={src} {...other} />;
+    return (
+      <Avatar
+        ref={ref}
+        src={src}
+        imgProps={{ crossOrigin: 'anonymous' }}
+        {...other}
+      />
+    );
   }
 );

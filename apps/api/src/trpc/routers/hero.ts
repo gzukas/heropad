@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { createTRPCRouter, publicProcedure } from '../trpc';
-import { sql } from 'database';
+import { sql } from 'kysely';
+import { createTRPCRouter, publicProcedure } from '../trpc.js';
 
 export const heroRouter = createTRPCRouter({
   getHero: publicProcedure

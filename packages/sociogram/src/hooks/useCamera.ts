@@ -28,5 +28,5 @@ export function useCamera(options?: UseCameraOptions) {
     }
   });
 
-  return { zoomIn, zoomOut, goto, reset };
+  return { zoomIn, zoomOut, goto, reset } as const;
 }
