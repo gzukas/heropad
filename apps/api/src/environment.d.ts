@@ -4,6 +4,7 @@ declare global {
       HOST?: string;
       PORT?: string;
       DATABASE_URL: string;
+      CORS_ORIGIN?: string;
     }
   }
 }

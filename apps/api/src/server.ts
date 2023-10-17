@@ -9,7 +9,9 @@ const server = fastify({
   maxParamLength: 5000
 });
 
-await server.register(cors);
+await server.register(cors, {
+  origin: process.env.CORS_ORIGIN || '*'
+});
 await server.register(avatarRoutes);
 await server.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
