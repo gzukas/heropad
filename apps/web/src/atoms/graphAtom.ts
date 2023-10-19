@@ -3,19 +3,19 @@ import { MultiDirectedGraph } from 'graphology';
 import type { Node } from 'sociogram';
 import { api } from '~/utils/api';
 
-const edgesAtom = api.graph.getEdges.atomWithQuery();
+const serializedGraphAtom = api.graph.getGraph.atomWithQuery();
 
 export const graphAtom = atom(async get => {
-  const edges = await get(edgesAtom);
+  const { edges, nodes } = await get(serializedGraphAtom);
   const graph = new MultiDirectedGraph<Node>();
+  for (const { username, name } of nodes) {
+    graph.addNode(username, {
+      name,
+      image: `${import.meta.env.VITE_API_URL}/avatars/${username}.svg`
+    });
+  }
   for (const { id, from, to } of edges) {
-    graph.mergeNode(from, {
-      image: `${import.meta.env.VITE_API_URL}/avatars/${to}.svg`
-    });
-    graph.mergeNode(to, {
-      image: `${import.meta.env.VITE_API_URL}/avatars/${from}.svg`
-    });
-    graph.mergeEdgeWithKey(id, from, to);
+    graph.addEdgeWithKey(id, from, to);
   }
   return graph;
 });
