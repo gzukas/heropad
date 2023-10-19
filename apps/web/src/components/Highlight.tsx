@@ -15,7 +15,10 @@ const Mark = styled('mark')({
 
 export function Highlight(props: HighlightProps) {
   const { highlight, children } = props;
-  const highlightParts = parse(children, match(children, highlight));
+  const highlightParts = parse(
+    children,
+    match(children, highlight, { insideWords: true })
+  );
 
   return (
     <>

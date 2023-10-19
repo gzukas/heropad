@@ -8,7 +8,8 @@
     "start": "dotenv node dist/server.js",
     "db:start": "supabase start --ignore-health-check",
     "db:stop": "supabase stop",
-    "db:migrate": "supabase migration up"
+    "db:migrate": "supabase migration up",
+    "db:push": "npx supabase db push"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
@@ -24,13 +25,13 @@
     "kysely": "^0.26.3",
     "pg": "^8.11.3",
     "superjson": "^1.13.3",
-    "tsx": "^3.13.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@heropad/tsconfig": "*",
     "@tsconfig/node18": "^18.2.2",
     "@types/pg": "^8.10.5",
-    "supabase": "^1.100.1"
+    "supabase": "^1.100.1",
+    "tsx": "^3.13.0"
   }
 }

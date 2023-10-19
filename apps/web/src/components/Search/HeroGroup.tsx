@@ -18,7 +18,7 @@ export function HeroGroup(props: HeroGroupProps) {
   return (
     <ul>
       <ListSubheader>{t(i18n)`Heroes`}</ListSubheader>
-      {suggestions.map(({ id, text, nodes: [hero] }) => (
+      {suggestions.map(({ id, text, nodes: [[hero]] }) => (
         <SearchSuggestion
           key={id}
           renderButton={props => (

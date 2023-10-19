@@ -18,7 +18,7 @@ export function AwardGroup(props: AwardGroupProps) {
   return (
     <ul>
       <ListSubheader>{t(i18n)`Awards`}</ListSubheader>
-      {suggestions.map(({ id, text, nodes: [from, to] }) => (
+      {suggestions.map(({ id, text, nodes: [[from], [to]] }) => (
         <SearchSuggestion
           key={id}
           renderButton={props => (
