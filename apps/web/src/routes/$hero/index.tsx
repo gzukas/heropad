@@ -20,6 +20,9 @@ import { DirectionScope } from './scopes/directionScope';
 import { TabLink } from './components/TabLink';
 import { heroFamily } from './atoms/heroFamily';
 import { Provider, useAtomValue } from 'jotai';
+import { useAppStore } from '~/context';
+import { useHydrateAndSyncAtoms } from 'base';
+import { selectedNodeAtom } from '~/atoms';
 
 const heroSearchSchema = z.object({
   direction: z.enum(['received', 'given']).catch('received')
@@ -36,6 +39,9 @@ export const heroRoute = new Route({
     const { hero } = useParams();
     const { direction } = useSearch();
     const { username, name } = useAtomValue(heroFamily(hero));
+    const store = useAppStore();
+
+    useHydrateAndSyncAtoms([[selectedNodeAtom, hero]], { store });
 
     return (
       <ScopeProvider scope={HeroScope} value={username}>

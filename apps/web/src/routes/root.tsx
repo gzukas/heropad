@@ -1,7 +1,8 @@
-import { Stack, useMediaQuery } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { Box, Stack, useMediaQuery } from '@mui/material';
+import { Theme, useColorScheme } from '@mui/material/styles';
+import { useParams } from '@tanstack/react-router';
 import { useAtomValue } from 'jotai';
-import { Sociogram, SociogramProvider } from 'sociogram';
+import { Sociogram } from 'sociogram';
 import { routerContext } from '~/routerContext';
 import {
   Camera,
@@ -9,40 +10,45 @@ import {
   ChangeColorScheme,
   Search,
   SociogramEvents,
+  SociogramSettings,
   Absolute,
   AppCanvas
 } from '~/components';
 import { graphAtom } from '~/atoms';
 
-const StyledSociogeram = styled(Sociogram)({
-  '&, .sigma-container': {
-    width: '100dvw',
-    height: '100dvh'
-  },
-  '&.Sociogram-nodeHovered .sigma-mouse': {
-    cursor: 'pointer'
-  }
-});
-
 export const rootRoute = routerContext.createRootRoute({
   loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
+    const { hero } = useParams({ from: '/$hero' });
+    const { colorScheme } = useColorScheme();
+    const matchesXs = useMediaQuery<Theme>(theme =>
+      theme.breakpoints.only('xs')
+    );
     const graph = useAtomValue(graphAtom);
-    const theme = useTheme();
-    const matchesXs = useMediaQuery(theme.breakpoints.only('xs'));
 
     return (
       <AppCanvas>
-        <SociogramProvider graph={graph} theme={theme.palette.mode}>
-          <StyledSociogeram>
+        <Box
+          sx={{
+            '.sigma-container': {
+              width: '100dvw',
+              height: '100dvh'
+            },
+            '.Sociogram-nodeHovered .sigma-mouse': {
+              cursor: 'pointer'
+            }
+          }}
+        >
+          <Sociogram graph={graph} selectedNode={hero} theme={colorScheme}>
             <SociogramEvents />
+            <SociogramSettings />
             <Camera
               component={Absolute}
               placement="bottom-right"
               gutters={24}
             />
-          </StyledSociogeram>
-        </SociogramProvider>
+          </Sociogram>
+        </Box>
         <Stack
           component={Absolute}
           placement={matchesXs ? 'top' : 'top-right'}

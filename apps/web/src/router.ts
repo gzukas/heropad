@@ -1,4 +1,4 @@
-import { Router, RouterContext } from '@tanstack/react-router';
+import { Router } from '@tanstack/react-router';
 import { indexRoute } from './routes';
 import { heroRoute } from './routes/$hero';
 import { rootRoute } from './routes/root';

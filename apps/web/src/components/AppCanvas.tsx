@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Box, Drawer, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Drawer, useMediaQuery } from '@mui/material';
 import { Outlet, useMatchRoute } from '@tanstack/react-router';
-import { styled } from '@mui/material/styles';
+import { Theme, styled } from '@mui/material/styles';
 
 const drawerWidth = 400;
 
@@ -37,8 +37,7 @@ export interface AppCanvasProps {
 }
 
 export function AppCanvas(props: AppCanvasProps) {
-  const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
+  const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
   const matchRoute = useMatchRoute();
   const shift = !Boolean(matchRoute({ from: '/' }));
 

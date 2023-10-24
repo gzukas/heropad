@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { useSigma, useRegisterEvents } from '@react-sigma/core';
+import { useRegisterEvents } from '@react-sigma/core';
 import { useNavigate } from '@tanstack/react-router';
 
 export function SociogramEvents() {
-  const sigma = useSigma();
   const registerEvents = useRegisterEvents();
   const navigate = useNavigate();
 
@@ -15,9 +14,12 @@ export function SociogramEvents() {
           params: { hero: node },
           search: { direction: 'received' }
         });
+      },
+      clickStage() {
+        navigate({ to: '/' });
       }
     });
-  }, [sigma, registerEvents]);
+  }, [registerEvents]);
 
   return null;
 }

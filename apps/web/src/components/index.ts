@@ -9,3 +9,4 @@ export * from './AwardAvatar';
 export * from './Highlight';
 export * from './HeroAvatar';
 export * from './SociogramEvents';
+export * from './SociogramSettings';
