@@ -1,5 +1,5 @@
 {
-  "name": "base",
+  "name": "@heropad/base",
   "version": "0.1.0",
   "private": true,
   "author": "Gediminas Zukas",

@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { Settings } from 'sigma/settings';
 import { useAtomValue } from 'jotai';
+import { useCommitedRef } from '@heropad/base';
 import { useGetCommunityColor } from './useGetCommunityColor';
-import { useCommitedRef } from 'base';
 import {
   debouncedHoveredAtom,
   selectedNodeAtom,

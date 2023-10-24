@@ -19,7 +19,7 @@ export function useColors({ count }: UseColorsOptions) {
   return useMemo(
     () =>
       iwanthue(count, {
-        seed: 'sociogram',
+        seed: '@heropad/sociogram',
         colorSpace
       }),
     [count, colorSpace]

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useCommitedRef } from 'base';
+import { useCommitedRef } from '@heropad/base';
 
 export function useEventCallback<Args extends unknown[], R>(
   fn: (...args: Args) => R

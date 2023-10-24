@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useSetSettings } from '@react-sigma/core';
 import { useTheme, decomposeColor, recomposeColor } from '@mui/material/styles';
-import { createNodeHoverRenderer, useNodeReducer } from 'sociogram';
+import { createNodeHoverRenderer, useNodeReducer } from '@heropad/sociogram';
 import { blendAlpha } from '~/utils';
 
 export function SociogramSettings() {

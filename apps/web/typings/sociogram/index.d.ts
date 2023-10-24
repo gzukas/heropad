@@ -1,6 +1,6 @@
-import { Edge } from 'sociogram';
+import { Edge } from '@heropad/sociogram';
 
-declare module 'sociogram' {
+declare module '@heropad/sociogram' {
   export interface Edge {
     id: string;
     givenAt: Date;

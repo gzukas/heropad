@@ -9,11 +9,11 @@ import { useWorkerLayoutForceAtlas2 } from '@react-sigma/layout-forceatlas2';
 import { createStore, useAtomValue, Provider as JotaiProvider } from 'jotai';
 import { MultiDirectedGraph } from 'graphology';
 import { inferSettings } from 'graphology-layout-forceatlas2';
+import { useHydrateAndSyncAtoms } from '@heropad/base';
 import { GraphEvents } from './GraphEvents';
 import { GraphLayout } from './GraphLayout';
 import { GraphSettings } from './GraphSettings';
 import { Graph } from './Graph';
-import { useHydrateAndSyncAtoms } from 'base';
 import {
   graphAtom,
   hoveredNodeAtom,
@@ -81,7 +81,7 @@ export const Sociogram = React.forwardRef<Sigma, SociogramProps>(
           <GraphSettings />
           <GraphLayout
             layout={useWorkerLayoutForceAtlas2}
-            getSettings={graph => ({ settings: inferSettings(graph) })}
+            settings={{ settings: inferSettings(graph) }}
           />
           {children}
         </SigmaContainer>

@@ -11,6 +11,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link, Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { z } from 'zod';
+import { Provider, useAtomValue } from 'jotai';
+import { useHydrateAndSyncAtoms } from '@heropad/base';
 import { HeroAvatar } from '~/components';
 import { rootRoute } from '../root';
 import { ScopeProvider } from 'bunshi/react';
@@ -19,9 +21,8 @@ import { HeroScope } from './scopes/heroScope';
 import { DirectionScope } from './scopes/directionScope';
 import { TabLink } from './components/TabLink';
 import { heroFamily } from './atoms/heroFamily';
-import { Provider, useAtomValue } from 'jotai';
+
 import { useAppStore } from '~/context';
-import { useHydrateAndSyncAtoms } from 'base';
 import { selectedNodeAtom } from '~/atoms';
 
 const heroSearchSchema = z.object({

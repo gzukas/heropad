@@ -1,4 +1,4 @@
-import { atomWithDebounce } from 'base';
+import { atomWithDebounce } from '@heropad/base';
 
 export const [hoveredNodeAtom, debouncedHoveredAtom] = atomWithDebounce<
   string | null

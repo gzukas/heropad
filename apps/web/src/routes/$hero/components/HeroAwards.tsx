@@ -11,7 +11,7 @@ import {
 import { AwardAvatar } from '~/components';
 import { useMolecule } from 'bunshi/react';
 import { heroAwardMolecule } from '../molecules/heroAwardsMolecule';
-import { useDidUpdate } from 'base';
+import { useDidUpdate } from '@heropad/base';
 
 export function HeroAwards() {
   const parentRef = useRef(null);

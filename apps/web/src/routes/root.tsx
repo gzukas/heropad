@@ -2,7 +2,7 @@ import { Box, Stack, useMediaQuery } from '@mui/material';
 import { Theme, useColorScheme } from '@mui/material/styles';
 import { useParams } from '@tanstack/react-router';
 import { useAtomValue } from 'jotai';
-import { Sociogram } from 'sociogram';
+import { Sociogram } from '@heropad/sociogram';
 import { routerContext } from '~/routerContext';
 import {
   Camera,
