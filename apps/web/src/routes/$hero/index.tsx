@@ -12,7 +12,6 @@ import { Link, Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { z } from 'zod';
 import { Provider, useAtomValue } from 'jotai';
-import { useHydrateAndSyncAtoms } from '@heropad/base';
 import { HeroAvatar } from '~/components';
 import { rootRoute } from '../root';
 import { ScopeProvider } from 'bunshi/react';
@@ -21,9 +20,6 @@ import { HeroScope } from './scopes/heroScope';
 import { DirectionScope } from './scopes/directionScope';
 import { TabLink } from './components/TabLink';
 import { heroFamily } from './atoms/heroFamily';
-
-import { useAppStore } from '~/context';
-import { selectedNodeAtom } from '~/atoms';
 
 const heroSearchSchema = z.object({
   direction: z.enum(['received', 'given']).catch('received')
@@ -40,9 +36,6 @@ export const heroRoute = new Route({
     const { hero } = useParams();
     const { direction } = useSearch();
     const { username, name } = useAtomValue(heroFamily(hero));
-    const store = useAppStore();
-
-    useHydrateAndSyncAtoms([[selectedNodeAtom, hero]], { store });
 
     return (
       <ScopeProvider scope={HeroScope} value={username}>
