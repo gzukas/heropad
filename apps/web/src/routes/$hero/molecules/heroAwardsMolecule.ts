@@ -1,17 +1,17 @@
 import { molecule } from 'bunshi';
 import { Atom, atom } from 'jotai';
+import { unwrap } from 'jotai/utils';
 import { DISABLED } from 'jotai-trpc';
 import { atomsWithPagination } from '~/utils';
 import { api } from '~/utils/api';
-import { unwrap } from 'jotai/utils';
 import { DirectionScope } from '../scopes/directionScope';
 import { HeroScope } from '../scopes/heroScope';
 
 export const heroAwardMolecule = molecule((_mol, scope) => {
   const hero = scope(HeroScope);
   const direction = scope(DirectionScope);
-  const [heroAwardPagesAtom, fetchNextHeroAwardsAtom] = atomsWithPagination(
-    (givenSinceAtom: Atom<Date | undefined>) =>
+  const [heroAwardPagesAtom, fetchNextHeroAwardsAtom] = atomsWithPagination({
+    getQueryAtom: (givenSinceAtom: Atom<Date | undefined>) =>
       api.hero.getAwards.atomWithQuery(get =>
         hero
           ? {
@@ -21,11 +21,15 @@ export const heroAwardMolecule = molecule((_mol, scope) => {
             }
           : DISABLED
       ),
-    lastPage => lastPage?.nextGivenAt
-  );
+    getNextPageParam: lastPage => lastPage?.nextGivenAt
+  });
 
   const heroAwardsAtom = unwrap(
-    atom(get => get(heroAwardPagesAtom).flatMap(page => page.rows)),
+    atom(get =>
+      get(heroAwardPagesAtom)
+        .flatMap(page => page?.rows)
+        .filter(Boolean)
+    ),
     prev => prev || []
   );
 

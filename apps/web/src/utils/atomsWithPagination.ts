@@ -1,29 +1,33 @@
 import { Atom, atom } from 'jotai';
 import { selectAtom, unwrap } from 'jotai/utils';
 
-export function atomsWithPagination<T, TNextPageParam>(
+export interface AtomsWithPaginationOptions<TPage, TNextPageParam> {
   getQueryAtom: (
     nextPageParamAtom: Atom<TNextPageParam | undefined>
-  ) => Atom<Promise<T>>,
-  getNextPageParam: (lastPage?: T) => TNextPageParam | undefined
-) {
+  ) => Atom<Promise<TPage>>;
+  getNextPageParam: (lastPage?: TPage) => TNextPageParam | undefined;
+}
+
+export function atomsWithPagination<TPage, TNextPageParam>({
+  getQueryAtom,
+  getNextPageParam
+}: AtomsWithPaginationOptions<TPage, TNextPageParam>) {
   const nextPageParamAtom = atom<TNextPageParam | undefined>(undefined);
+  const _nextPageParamAtom = atom(get =>
+    getNextPageParam([...get(dataPagesAtom)].pop())
+  );
   const dataPagesAtom = unwrap(
-    selectAtom(
+    selectAtom<Promise<TPage>, TPage[]>(
       getQueryAtom(nextPageParamAtom),
-      (curr, prev: Array<NonNullable<T>> = []) =>
-        [...prev, curr].filter(Boolean)
+      (curr, prev = []) => [...prev, curr]
     ),
     prev => prev || []
   );
-
-  const lastDataPageAtom = atom(get => [...get(dataPagesAtom)].pop());
   const fetchNextPageAtom = atom(
-    get => Boolean(getNextPageParam(get(lastDataPageAtom))),
+    get => Boolean(get(_nextPageParamAtom)),
     (get, set) => {
-      set(nextPageParamAtom, getNextPageParam(get(lastDataPageAtom)));
+      set(nextPageParamAtom, get(_nextPageParamAtom));
     }
   );
-
   return [dataPagesAtom, fetchNextPageAtom] as const;
 }
