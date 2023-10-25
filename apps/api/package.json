@@ -8,8 +8,8 @@
     "start": "dotenv node dist/server.js",
     "db:start": "supabase start --ignore-health-check",
     "db:stop": "supabase stop",
-    "db:migrate": "supabase migration up",
-    "db:push": "npx supabase db push"
+    "db:push": "npx supabase db push",
+    "db:seed": "dotenv -- npx snaplet generate"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
@@ -29,8 +29,11 @@
   },
   "devDependencies": {
     "@heropad/tsconfig": "*",
+    "@snaplet/copycat": "^0.18.0-rc.6",
     "@tsconfig/node18": "^18.2.2",
     "@types/pg": "^8.10.5",
+    "graphology": "^0.25.4",
+    "graphology-generators": "^0.11.2",
     "supabase": "^1.100.1",
     "tsx": "^3.13.0"
   }
