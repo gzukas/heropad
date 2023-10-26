@@ -1,8 +1,16 @@
 import { z } from 'zod';
-import { sql } from 'kysely';
+import { sql, Expression } from 'kysely';
 import { createTRPCRouter, publicProcedure } from '../trpc.js';
 
 type SeachSuggestionKind = 'hero' | 'award';
+
+function to_tsvector(expression: Expression<string>) {
+  return sql`to_tsvector(${sql.lit('english')}, ${expression})`;
+}
+
+function to_tsquery(expression: Expression<string>) {
+  return sql`to_tsquery(${sql.lit('english')}, ${expression})`;
+}
 
 export const searchRouter = createTRPCRouter({
   getSuggestions: publicProcedure
@@ -38,10 +46,12 @@ export const searchRouter = createTRPCRouter({
                   sql.lit<SeachSuggestionKind>('award').as('kind')
                 ])
             )
-            .as('xxx')
+            .as('heroes_and_awards')
         )
         .selectAll()
-        .where('text', 'ilike', `%${input.query}%`)
+        .where(eb =>
+          eb(to_tsvector(eb.ref('text')), '@@', to_tsquery(eb.val(input.query)))
+        )
         .limit(10)
         .execute()
     )

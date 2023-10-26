@@ -7,8 +7,9 @@
     "build": "tsc --build",
     "start": "dotenv node dist/server.js",
     "db:start": "supabase start --ignore-health-check",
+    "db:reset": "supabase db reset",
     "db:stop": "supabase stop",
-    "db:push": "npx supabase db push",
+    "db:push": "supabase db push",
     "db:seed": "dotenv -- npx snaplet generate"
   },
   "author": "Gediminas Zukas",
