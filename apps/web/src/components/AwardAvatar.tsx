@@ -3,19 +3,18 @@ import { HeroAvatar } from './HeroAvatar';
 
 export interface AwardAvatarProps {
   from: string;
-  to?: string;
+  to: string;
 }
 
 export function AwardAvatar(props: AwardAvatarProps) {
   const { from, to } = props;
-
   return (
     <Badge
       overlap="circular"
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       badgeContent={
         <HeroAvatar
-          hero={from}
+          hero={to}
           sx={{
             border: '2px solid',
             borderColor: 'background.paper',
@@ -25,7 +24,7 @@ export function AwardAvatar(props: AwardAvatarProps) {
         />
       }
     >
-      {to ? <HeroAvatar hero={to} /> : null}
+      {from ? <HeroAvatar hero={from} /> : null}
     </Badge>
   );
 }

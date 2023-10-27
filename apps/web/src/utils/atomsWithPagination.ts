@@ -1,5 +1,5 @@
 import { Atom, atom } from 'jotai';
-import { selectAtom, unwrap } from 'jotai/utils';
+import { loadable, selectAtom, unwrap } from 'jotai/utils';
 
 export interface AtomsWithPaginationOptions<TPage, TNextPageParam> {
   getQueryAtom: (
@@ -13,15 +13,16 @@ export function atomsWithPagination<TPage, TNextPageParam>({
   getNextPageParam
 }: AtomsWithPaginationOptions<TPage, TNextPageParam>) {
   const nextPageParamAtom = atom<TNextPageParam | undefined>(undefined);
-  const _nextPageParamAtom = atom(get =>
-    getNextPageParam([...get(dataPagesAtom)].pop())
-  );
-  const dataPagesAtom = unwrap(
-    selectAtom<Promise<TPage>, TPage[]>(
-      getQueryAtom(nextPageParamAtom),
-      (curr, prev = []) => [...prev, curr]
-    ),
+  const queryAtom = getQueryAtom(nextPageParamAtom);
+  const pagesAtom = unwrap(
+    selectAtom<Promise<TPage>, TPage[]>(queryAtom, (curr, prev = []) => [
+      ...prev,
+      curr
+    ]),
     prev => prev || []
+  );
+  const _nextPageParamAtom = atom(get =>
+    getNextPageParam([...get(pagesAtom)].pop())
   );
   const fetchNextPageAtom = atom(
     get => Boolean(get(_nextPageParamAtom)),
@@ -29,5 +30,5 @@ export function atomsWithPagination<TPage, TNextPageParam>({
       set(nextPageParamAtom, get(_nextPageParamAtom));
     }
   );
-  return [dataPagesAtom, fetchNextPageAtom] as const;
+  return [pagesAtom, fetchNextPageAtom, queryAtom] as const;
 }

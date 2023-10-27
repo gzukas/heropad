@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import {
   AppBar,
   IconButton,
@@ -12,14 +11,12 @@ import { Link, Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { z } from 'zod';
 import { Provider, useAtomValue } from 'jotai';
-import { HeroAvatar } from '~/components';
-import { rootRoute } from '../root';
 import { ScopeProvider } from 'bunshi/react';
-import { HeroAwards } from './components/HeroAwards';
-import { HeroScope } from './scopes/heroScope';
-import { DirectionScope } from './scopes/directionScope';
-import { TabLink } from './components/TabLink';
+import { HeroAvatar } from '~/components';
+import { HeroAwards, TabLink } from './components';
+import { HeroScope, DirectionScope } from './scopes';
 import { heroFamily } from './atoms/heroFamily';
+import { rootRoute } from '../root';
 
 const heroSearchSchema = z.object({
   direction: z.enum(['received', 'given']).catch('received')
@@ -68,9 +65,7 @@ export const heroRoute = new Route({
         </AppBar>
         <Provider key={direction}>
           <ScopeProvider scope={DirectionScope} value={direction}>
-            <Suspense fallback="Loading">
-              <HeroAwards />
-            </Suspense>
+            <HeroAwards />
           </ScopeProvider>
         </Provider>
       </ScopeProvider>
