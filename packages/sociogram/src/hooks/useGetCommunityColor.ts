@@ -14,15 +14,13 @@ export function useGetCommunityColor() {
       ).size,
     [communityGraph]
   );
-  const colors = useColors({
-    count: communities || 1
-  });
+  const colors = useColors(communities || 1);
   return useCallback(
     (node: string) => {
       return communityGraph.hasNode(node)
         ? colors[communityGraph.getNodeAttribute(node, 'community') || 0]
         : undefined;
     },
-    [colors, communityGraph]
+    [communityGraph, colors]
   );
 }
