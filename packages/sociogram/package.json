@@ -18,7 +18,7 @@
     "graphology-layout-forceatlas2": "^0.10.1",
     "graphology-operators": "^1.6.0",
     "iwanthue": "^2.0.0",
-    "jotai": "^2.4.3",
+    "jotai": "^2.5.0",
     "lodash-es": "^4.17.21",
     "sigma": "3.0.0-alpha3"
   },
