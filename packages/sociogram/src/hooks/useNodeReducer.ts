@@ -10,16 +10,15 @@ import {
 } from '../atoms';
 import { SociogramNodeDisplayData } from '../types';
 
-export type NodeReducer = NonNullable<Settings['nodeReducer']>;
-
-export interface UseNodeReducerOptions {
-  unfocusedColor?: string;
-}
+type NodeReducer = NonNullable<Settings['nodeReducer']>;
 
 export function useNodeReducer(
-  options: UseNodeReducerOptions = {}
-): NodeReducer {
-  const optionsRef = useCommitedRef(options);
+  nodeReducer: (
+    node: string,
+    data: SociogramNodeDisplayData
+  ) => Partial<SociogramNodeDisplayData> = (_node, data) => data
+) {
+  const nodeReducerRef = useCommitedRef(nodeReducer);
   const getCommunityColor = useGetCommunityColor();
   const selectedNode = useAtomValue(selectedNodeAtom);
   const focusedNodes = useAtomValue(focusedNodesAtom);
@@ -27,23 +26,23 @@ export function useNodeReducer(
 
   return useCallback<NodeReducer>(
     (node, data) => {
-      const focused = focusedNodes.has(node);
       const highlighted =
         node === selectedNode || node === debouncedHoveredNode;
-      return {
+      const focused = focusedNodes.has(node);
+      const label = focused || highlighted ? data['name'] : null;
+      return nodeReducerRef.current(node, {
         ...data,
-        size: 24,
         color: getCommunityColor(node),
-        label: focused || highlighted ? data['name'] : null,
+        size: 24,
         zIndex: 1,
-        highlighted,
         ...(!focused && {
           zIndex: 0,
-          color: optionsRef.current.unfocusedColor,
           image: null
-        })
-      } satisfies SociogramNodeDisplayData;
+        }),
+        label,
+        highlighted
+      });
     },
-    [getCommunityColor, selectedNode, focusedNodes, debouncedHoveredNode]
+    [selectedNode, debouncedHoveredNode, focusedNodes, getCommunityColor]
   );
 }

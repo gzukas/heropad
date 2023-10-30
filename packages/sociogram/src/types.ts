@@ -1,4 +1,4 @@
-import { NodeDisplayData } from 'sigma/types';
+import { EdgeDisplayData, NodeDisplayData } from 'sigma/types';
 
 export type SociogramTheme = 'dark' | 'light';
 
@@ -12,6 +12,4 @@ export interface SociogramNodeDisplayData extends Partial<NodeDisplayData> {
   image?: string | null;
 }
 
-// export interface Edge {
-//   id: string;
-// }
+export type SociogramEdgeDisplayData = Partial<EdgeDisplayData>;

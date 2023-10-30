@@ -1,33 +1,44 @@
 import { useEffect, useMemo } from 'react';
 import { useSetSettings } from '@react-sigma/core';
 import { useTheme, decomposeColor, recomposeColor } from '@mui/material/styles';
-import { createNodeHoverRenderer, useNodeReducer } from '@heropad/sociogram';
+import {
+  createNodeHoverRenderer,
+  useEdgeReducer,
+  useNodeReducer
+} from '@heropad/sociogram';
 import { blendAlpha } from '~/utils';
 
 export function SociogramSettings() {
   const setSettings = useSetSettings();
   const { palette } = useTheme();
 
-  const unfocusedColor = useMemo(
+  const grayish = useMemo(
     () =>
       recomposeColor(
-        // Because there's no alpha support in sigma's webgl renderer
         blendAlpha(
           decomposeColor(palette.background.default),
-          decomposeColor(palette.action.disabledBackground),
-          palette.action.focusOpacity
+          decomposeColor(palette.action.selected),
+          palette.action.selectedOpacity
         )
       ),
     [palette]
   );
 
-  const nodeReducer = useNodeReducer({
-    unfocusedColor
-  });
+  const nodeReducer = useNodeReducer((_node, data) => ({
+    ...data,
+    ...(!data.zIndex && { color: grayish })
+  }));
+
+  const edgeReducer = useEdgeReducer((_edge, data) => ({
+    ...data,
+    size: 3,
+    color: grayish
+  }));
 
   useEffect(() => {
     setSettings({
       nodeReducer,
+      edgeReducer,
       hoverRenderer: createNodeHoverRenderer({
         hoverBackgroundColor: palette.primary.main,
         labelColor: { color: palette.primary.contrastText }
@@ -36,7 +47,7 @@ export function SociogramSettings() {
         color: palette.text.primary
       }
     });
-  }, [setSettings, nodeReducer, palette]);
+  }, [setSettings, nodeReducer, edgeReducer, palette]);
 
   return null;
 }
