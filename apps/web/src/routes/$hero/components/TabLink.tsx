@@ -1,17 +1,7 @@
-import { Tab, TabProps } from '@mui/material';
+import { Tab } from '@mui/material';
+import { Link } from '@tanstack/react-router';
+import { RouterLinkComponent } from '~/types';
 
-import {
-  AnyRoute,
-  MakeLinkOptions,
-  RegisteredRouter,
-  Link,
-  RoutePaths
-} from '@tanstack/react-router';
-
-export function TabLink<
-  TRouteTree extends AnyRoute = RegisteredRouter['routeTree'],
-  TFrom extends RoutePaths<TRouteTree> = '/',
-  TTo extends string = ''
->(props: MakeLinkOptions<TRouteTree, TFrom, TTo> & TabProps) {
-  return <Tab {...props} component={Link as any} />;
-}
+export const TabLink: RouterLinkComponent<typeof Tab> = props => (
+  <Tab {...props} component={Link as any} />
+);
