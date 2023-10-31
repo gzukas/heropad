@@ -8,17 +8,17 @@ export function useGetCommunityColor() {
   const communities = useMemo(
     () =>
       new Set(
-        communityGraph
-          .mapNodes((_node, attributes) => attributes.community)
-          .filter(Boolean)
+        communityGraph.mapNodes(
+          (_node, attributes) => attributes.community ?? 0
+        )
       ).size,
     [communityGraph]
   );
-  const colors = useColors(communities || 1);
+  const colors = useColors(communities);
   return useCallback(
     (node: string) => {
       return communityGraph.hasNode(node)
-        ? colors[communityGraph.getNodeAttribute(node, 'community') || 0]
+        ? colors[communityGraph.getNodeAttribute(node, 'community') ?? 0]
         : undefined;
     },
     [communityGraph, colors]

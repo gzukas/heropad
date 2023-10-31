@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, AvatarProps } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { graphAtom } from '~/atoms';
-import { useAppStore } from '~/context';
+import { useGetCommunityColor } from '@heropad/sociogram';
 
 export interface HeroAvatarProps extends Omit<AvatarProps, 'src'> {
   hero: string;
@@ -10,9 +10,9 @@ export interface HeroAvatarProps extends Omit<AvatarProps, 'src'> {
 
 export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
   (props, ref) => {
-    const { hero, ...other } = props;
-    const store = useAppStore();
-    const graph = useAtomValue(graphAtom, { store });
+    const { hero, sx = [], ...other } = props;
+    const graph = useAtomValue(graphAtom);
+    const getCommunityColor = useGetCommunityColor();
     const src = graph.getNodeAttribute(hero, 'image');
 
     return (
@@ -20,6 +20,12 @@ export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
         ref={ref}
         src={src}
         imgProps={{ crossOrigin: 'anonymous' }}
+        sx={[
+          {
+            bgcolor: getCommunityColor(hero)
+          },
+          ...(Array.isArray(sx) ? sx : [sx])
+        ]}
         {...other}
       />
     );

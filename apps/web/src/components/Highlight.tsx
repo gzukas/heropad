@@ -19,7 +19,6 @@ export function Highlight(props: HighlightProps) {
     children,
     match(children, highlight, { insideWords: true })
   );
-
   return (
     <>
       {highlightParts.map((part, i) => (

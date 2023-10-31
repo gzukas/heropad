@@ -31,7 +31,6 @@ export function SociogramSettings() {
 
   const edgeReducer = useEdgeReducer((_edge, data) => ({
     ...data,
-    size: 3,
     color: grayish
   }));
 

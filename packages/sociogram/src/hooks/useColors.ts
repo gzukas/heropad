@@ -16,11 +16,13 @@ export function useColors(count: number, options?: UseColorsOptions) {
   const colorSpace = colorSpaceMapping[theme];
   return useMemo(
     () =>
-      iwanthue(count, {
-        seed: '@heropad/sociogram',
-        colorSpace,
-        ...options
-      }),
+      count === 0
+        ? []
+        : iwanthue(count, {
+            seed: '@heropad/sociogram',
+            colorSpace,
+            ...options
+          }),
     [count, colorSpace]
   );
 }

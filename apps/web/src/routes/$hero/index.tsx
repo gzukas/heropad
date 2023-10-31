@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link, Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { z } from 'zod';
-import { Provider, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { ScopeProvider } from 'bunshi/react';
 import { HeroAvatar } from '~/components';
 import { HeroAwards, TabLink } from './components';
@@ -27,8 +27,9 @@ export const heroRoute = new Route({
   path: '$hero',
   wrapInSuspense: true,
   validateSearch: heroSearchSchema,
-  loader: ({ params, context: { store } }) =>
-    store.get(heroFamily(params.hero)),
+  loader: ({ params, context: { store } }) => {
+    return store.get(heroFamily(params.hero));
+  },
   component: function Hero({ useParams, useSearch }) {
     const { hero } = useParams();
     const { direction } = useSearch();
@@ -63,11 +64,9 @@ export const heroRoute = new Route({
             />
           </Tabs>
         </AppBar>
-        <Provider key={direction}>
-          <ScopeProvider scope={DirectionScope} value={direction}>
-            <HeroAwards />
-          </ScopeProvider>
-        </Provider>
+        <ScopeProvider scope={DirectionScope} value={direction}>
+          <HeroAwards />
+        </ScopeProvider>
       </ScopeProvider>
     );
   }

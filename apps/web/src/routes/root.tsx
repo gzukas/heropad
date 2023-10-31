@@ -39,7 +39,7 @@ export const rootRoute = routerContext.createRootRoute({
             }
           }}
         >
-          <Sociogram graph={graph} selectedNode={hero} theme={colorScheme}>
+          <Sociogram graph={graph} theme={colorScheme} selectedNode={hero}>
             <SociogramEvents />
             <SociogramSettings />
             <Camera
