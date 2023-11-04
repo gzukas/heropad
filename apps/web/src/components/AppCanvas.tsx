@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Drawer, useMediaQuery, Portal } from '@mui/material';
+import { Box, Drawer, useMediaQuery } from '@mui/material';
 import { Theme, styled } from '@mui/material/styles';
 import { Outlet, useMatchRoute } from '@tanstack/react-router';
 

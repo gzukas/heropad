@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { useMolecule } from 'bunshi/react';
 import { useVirtualizer } from '@tanstack/react-virtual';

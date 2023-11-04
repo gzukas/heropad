@@ -10,6 +10,8 @@ type SetStateActionWithReset<T> =
 export function atomWithDebounce<T>(initialValue: T, delay = 500) {
   const prevTimeoutAtom = atom<Timeout | undefined>(undefined);
   const _currentValueAtom = atom(initialValue);
+  _currentValueAtom.debugPrivate = true;
+
   const debouncedValueAtom = atom(
     initialValue,
     (get, set, update: SetStateActionWithReset<T>) => {

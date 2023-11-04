@@ -14,7 +14,7 @@ import { useAtomValue } from 'jotai';
 import { ScopeProvider } from 'bunshi/react';
 import { HeroAvatar } from '~/components';
 import { HeroAwards, TabLink } from './components';
-import { HeroScope, DirectionScope } from './scopes';
+import { HeroScope, DirectionScope, VoidScope } from './scopes';
 import { heroFamily } from './atoms/heroFamily';
 import { rootRoute } from '../root';
 
@@ -36,7 +36,7 @@ export const heroRoute = new Route({
     const { username, name } = useAtomValue(heroFamily(hero));
 
     return (
-      <ScopeProvider scope={HeroScope} value={username}>
+      <ScopeProvider key={username} scope={HeroScope} value={username}>
         <AppBar position="relative" color="inherit">
           <Toolbar component={Stack} gap={2} direction="row">
             <HeroAvatar sx={{ marginLeft: -0.75 }} hero={username} />
@@ -64,8 +64,14 @@ export const heroRoute = new Route({
             />
           </Tabs>
         </AppBar>
-        <ScopeProvider scope={DirectionScope} value={direction}>
-          <HeroAwards />
+        <ScopeProvider scope={VoidScope} uniqueValue>
+          <ScopeProvider
+            key={direction}
+            scope={DirectionScope}
+            value={direction}
+          >
+            <HeroAwards />
+          </ScopeProvider>
         </ScopeProvider>
       </ScopeProvider>
     );

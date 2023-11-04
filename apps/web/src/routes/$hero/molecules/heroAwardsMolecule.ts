@@ -1,13 +1,13 @@
 import { molecule } from 'bunshi';
 import { Atom, atom } from 'jotai';
 import { DISABLED } from 'jotai-trpc';
+import { loadable } from 'jotai/utils';
 import { atomsWithPagination } from '~/utils';
 import { api } from '~/utils/api';
-import { DirectionScope } from '../scopes/directionScope';
-import { HeroScope } from '../scopes/heroScope';
-import { loadable } from 'jotai/utils';
+import { HeroScope, DirectionScope, VoidScope } from '../scopes';
 
 export const heroAwardsMolecule = molecule((_mol, scope) => {
+  scope(VoidScope);
   const hero = scope(HeroScope);
   const direction = scope(DirectionScope);
 

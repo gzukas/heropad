@@ -2,6 +2,7 @@ import { Box, Stack, useMediaQuery } from '@mui/material';
 import { Theme, useColorScheme } from '@mui/material/styles';
 import { useParams } from '@tanstack/react-router';
 import { useAtomValue } from 'jotai';
+import { DevTools as JotaiDevTools } from 'jotai-devtools';
 import { Sociogram } from '@heropad/sociogram';
 import { routerContext } from '~/routerContext';
 import {
@@ -21,9 +22,7 @@ export const rootRoute = routerContext.createRootRoute({
   component: function Root() {
     const { hero } = useParams({ from: '/$hero' });
     const { colorScheme } = useColorScheme();
-    const matchesXs = useMediaQuery<Theme>(theme =>
-      theme.breakpoints.only('xs')
-    );
+    const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
     const graph = useAtomValue(graphAtom);
 
     return (
@@ -51,7 +50,7 @@ export const rootRoute = routerContext.createRootRoute({
         </Box>
         <Stack
           component={Absolute}
-          placement={matchesXs ? 'top' : 'top-right'}
+          placement={isXs ? 'top' : 'top-right'}
           gap={1}
           direction="row"
           sx={theme => ({
@@ -65,6 +64,7 @@ export const rootRoute = routerContext.createRootRoute({
           <ChangeLocale />
           <ChangeColorScheme />
         </Stack>
+        <JotaiDevTools theme={colorScheme} />
       </AppCanvas>
     );
   }
