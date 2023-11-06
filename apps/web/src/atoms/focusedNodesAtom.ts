@@ -1,9 +1,8 @@
 import { atom } from 'jotai';
-import { graphAtom } from './graphAtom';
-import { selectedNodeAtom } from './selectedNodeAtom';
+import { graphAtom, selectedNodeAtom } from '.';
 
-export const focusedNodesAtom = atom(get => {
-  const graph = get(graphAtom);
+export const focusedNodesAtom = atom(async get => {
+  const graph = await get(graphAtom);
   const selectedNode = get(selectedNodeAtom);
   return selectedNode
     ? new Set([

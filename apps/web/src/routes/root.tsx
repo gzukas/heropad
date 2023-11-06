@@ -1,21 +1,19 @@
 import { Box, Stack, useMediaQuery } from '@mui/material';
 import { Theme, useColorScheme } from '@mui/material/styles';
 import { useParams } from '@tanstack/react-router';
-import { useAtomValue } from 'jotai';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
-import { Sociogram } from '@heropad/sociogram';
 import { routerContext } from '~/routerContext';
 import {
   Camera,
   ChangeLocale,
   ChangeColorScheme,
   Search,
-  SociogramEvents,
-  SociogramSettings,
   Absolute,
-  AppCanvas
+  AppCanvas,
+  Sociogram
 } from '~/components';
-import { graphAtom } from '~/atoms';
+import { graphAtom, selectedNodeAtom } from '~/atoms';
+import { useHydrateAndSyncAtoms } from '@heropad/base';
 
 export const rootRoute = routerContext.createRootRoute({
   loader: ({ context: { store } }) => store.get(graphAtom),
@@ -23,7 +21,8 @@ export const rootRoute = routerContext.createRootRoute({
     const { hero } = useParams({ from: '/$hero' });
     const { colorScheme } = useColorScheme();
     const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
-    const graph = useAtomValue(graphAtom);
+
+    useHydrateAndSyncAtoms([[selectedNodeAtom, hero]]);
 
     return (
       <AppCanvas>
@@ -38,9 +37,7 @@ export const rootRoute = routerContext.createRootRoute({
             }
           }}
         >
-          <Sociogram graph={graph} theme={colorScheme} selectedNode={hero}>
-            <SociogramEvents />
-            <SociogramSettings />
+          <Sociogram>
             <Camera
               component={Absolute}
               placement="bottom-right"

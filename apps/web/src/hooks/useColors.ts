@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import iwanthue, { ColorSpace, IWantHueSettings } from 'iwanthue';
 import { useAtomValue } from 'jotai';
-import { themeAtom } from '../atoms';
 import { SociogramTheme } from '../types';
+import { useColorScheme } from '@mui/material';
 
 const colorSpaceMapping: Record<SociogramTheme, ColorSpace> = {
   dark: 'fancy-dark',
@@ -12,8 +12,8 @@ const colorSpaceMapping: Record<SociogramTheme, ColorSpace> = {
 export type UseColorsOptions = IWantHueSettings;
 
 export function useColors(count: number, options?: UseColorsOptions) {
-  const theme = useAtomValue(themeAtom);
-  const colorSpace = colorSpaceMapping[theme];
+  const { colorScheme } = useColorScheme();
+  const colorSpace = colorSpaceMapping[colorScheme];
   return useMemo(
     () =>
       count === 0

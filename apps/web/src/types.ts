@@ -21,3 +21,9 @@ export interface RouterLinkComponent<TElement extends React.ElementType> {
       MakeLinkOptions<TRouteTree, TFrom, TTo>
   ): React.ReactNode;
 }
+
+export interface Node {
+  name: string;
+  community?: number;
+  image?: string;
+}

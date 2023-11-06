@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, AvatarProps } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { graphAtom } from '~/atoms';
-import { useGetCommunityColor } from '@heropad/sociogram';
+import { useGetCommunityColor } from '~/hooks';
 
 export interface HeroAvatarProps extends Omit<AvatarProps, 'src'> {
   hero: string;

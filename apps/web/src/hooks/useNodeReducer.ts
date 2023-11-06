@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { Settings } from 'sigma/settings';
+import { NodeDisplayData } from 'sigma/types';
 import { useAtomValue } from 'jotai';
 import { useCommitedRef } from '@heropad/base';
 import { useGetCommunityColor } from './useGetCommunityColor';
@@ -7,8 +8,11 @@ import {
   debouncedHoveredAtom,
   selectedNodeAtom,
   focusedNodesAtom
-} from '../atoms';
-import { SociogramNodeDisplayData } from '../types';
+} from '~/atoms';
+
+export interface SociogramNodeDisplayData extends Partial<NodeDisplayData> {
+  image?: string | null;
+}
 
 type NodeReducer = NonNullable<Settings['nodeReducer']>;
 

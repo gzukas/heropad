@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
 import { useAtomValue } from 'jotai';
 import { Settings } from 'sigma/settings';
+import { EdgeDisplayData } from 'sigma/types';
 import { useCommitedRef } from '@heropad/base';
 import { graphAtom, selectedNodeAtom } from '../atoms';
-import { SociogramEdgeDisplayData } from '../types';
+
+export type SociogramEdgeDisplayData = Partial<EdgeDisplayData>;
 
 export type EdgeReducer = NonNullable<Settings['edgeReducer']>;
 

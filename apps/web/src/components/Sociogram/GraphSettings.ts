@@ -1,14 +1,10 @@
 import { useEffect, useMemo } from 'react';
 import { useSetSettings } from '@react-sigma/core';
-import { useTheme, decomposeColor, recomposeColor } from '@mui/material/styles';
-import {
-  createNodeHoverRenderer,
-  useEdgeReducer,
-  useNodeReducer
-} from '@heropad/sociogram';
-import { blendAlpha } from '~/utils';
+import { useEdgeReducer, useNodeReducer } from '../../hooks';
+import { decomposeColor, recomposeColor, useTheme } from '@mui/material';
+import { blendAlpha, createNodeHoverRenderer } from '~/utils';
 
-export function SociogramSettings() {
+export function GraphSettings() {
   const setSettings = useSetSettings();
   const { palette } = useTheme();
 
@@ -46,7 +42,7 @@ export function SociogramSettings() {
         color: palette.text.primary
       }
     });
-  }, [setSettings, nodeReducer, edgeReducer, palette]);
+  }, [setSettings, nodeReducer, edgeReducer]);
 
   return null;
 }

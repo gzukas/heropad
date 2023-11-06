@@ -1,8 +1,0 @@
-{
-  "extends": ["@tsconfig/strictest", "@heropad/tsconfig"],
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "exactOptionalPropertyTypes": false
-  },
-  "include": ["src"]
-}
