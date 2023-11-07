@@ -14,7 +14,7 @@ import { useAtomValue } from 'jotai';
 import { ScopeProvider } from 'bunshi/react';
 import { HeroAvatar } from '~/components';
 import { HeroAwards, TabLink } from './components';
-import { HeroScope, DirectionScope, VoidScope } from './scopes';
+import { HeroScope, DirectionScope } from './scopes';
 import { heroFamily } from './atoms/heroFamily';
 import { rootRoute } from '../root';
 
@@ -25,7 +25,7 @@ const heroSearchSchema = z.object({
 export const heroRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '$hero',
-  wrapInSuspense: true,
+  wrapInSuspense: false,
   validateSearch: heroSearchSchema,
   loader: ({ params, context: { store } }) => {
     return store.get(heroFamily(params.hero));
@@ -33,13 +33,13 @@ export const heroRoute = new Route({
   component: function Hero({ useParams, useSearch }) {
     const { hero } = useParams();
     const { direction } = useSearch();
-    const { username, name } = useAtomValue(heroFamily(hero));
+    const { name } = useAtomValue(heroFamily(hero));
 
     return (
-      <ScopeProvider key={username} scope={HeroScope} value={username}>
+      <ScopeProvider scope={HeroScope} value={hero}>
         <AppBar position="relative" color="inherit">
           <Toolbar component={Stack} gap={2} direction="row">
-            <HeroAvatar sx={{ marginLeft: -0.75 }} hero={username} />
+            <HeroAvatar sx={{ marginLeft: -0.75 }} hero={hero} />
             <Typography sx={{ flex: 1 }} variant="h6" noWrap>
               {name}
             </Typography>
@@ -52,26 +52,20 @@ export const heroRoute = new Route({
               label={<Trans>Received</Trans>}
               value="received"
               to="/$hero"
-              params={{ hero: username }}
+              params={{ hero }}
               search={{ direction: 'received' }}
             />
             <TabLink
               label={<Trans>Given</Trans>}
               value="given"
               to="/$hero"
-              params={{ hero: username }}
+              params={{ hero }}
               search={{ direction: 'given' }}
             />
           </Tabs>
         </AppBar>
-        <ScopeProvider scope={VoidScope} uniqueValue>
-          <ScopeProvider
-            key={direction}
-            scope={DirectionScope}
-            value={direction}
-          >
-            <HeroAwards />
-          </ScopeProvider>
+        <ScopeProvider scope={DirectionScope} value={direction}>
+          <HeroAwards key={direction} />
         </ScopeProvider>
       </ScopeProvider>
     );

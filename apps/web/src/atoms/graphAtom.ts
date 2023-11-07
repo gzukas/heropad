@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { MultiDirectedGraph } from 'graphology';
-import type { Node } from '@heropad/sociogram';
+import type { Node } from '~/types';
 import { api } from '~/utils/api';
 
 const serializedGraphAtom = api.graph.getGraph.atomWithQuery();

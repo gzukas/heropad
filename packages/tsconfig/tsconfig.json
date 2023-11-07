@@ -5,7 +5,7 @@
     "module": "ESNext",
     "noEmit": true,
     "esModuleInterop": true,
-    "moduleDetection": "force",
-    "types": ["@total-typescript/ts-reset"]
-  }
+    "moduleDetection": "force"
+  },
+  "files": ["./types/filter-boolean.d.ts", "./types/is-array.d.ts"]
 }

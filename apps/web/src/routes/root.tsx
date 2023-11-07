@@ -2,6 +2,7 @@ import { Box, Stack, useMediaQuery } from '@mui/material';
 import { Theme, useColorScheme } from '@mui/material/styles';
 import { useParams } from '@tanstack/react-router';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
+import { useHydrateAndSyncAtoms } from '@heropad/base';
 import { routerContext } from '~/routerContext';
 import {
   Camera,
@@ -13,7 +14,6 @@ import {
   Sociogram
 } from '~/components';
 import { graphAtom, selectedNodeAtom } from '~/atoms';
-import { useHydrateAndSyncAtoms } from '@heropad/base';
 
 export const rootRoute = routerContext.createRootRoute({
   loader: ({ context: { store } }) => store.get(graphAtom),

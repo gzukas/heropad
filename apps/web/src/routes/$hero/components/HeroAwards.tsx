@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { useMolecule } from 'bunshi/react';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -21,14 +21,13 @@ export function HeroAwards() {
   const listRef = useRef(null);
   const { i18n } = useLingui();
 
-  const { heroAwardsAtom, heroAwardsQueryAtom, fetchNextHeroAwardsAtom } =
+  const { awardsAtom, fetchNextPageAtom, loadableQueryAtom } =
     useMolecule(heroAwardsMolecule);
-  const heroAwardsQuery = useAtomValue(heroAwardsQueryAtom);
-  const awards = useAtomValue(heroAwardsAtom);
-  const [hasNextPage, fetchNextPage] = useAtom(fetchNextHeroAwardsAtom);
-
+  const awards = useAtomValue(awardsAtom);
+  const [hasNextPage, fetchNextPage] = useAtom(fetchNextPageAtom);
+  const loadableQuery = useAtomValue(loadableQueryAtom);
   const hasMoreAwards =
-    hasNextPage || (!awards.length && heroAwardsQuery.state === 'loading');
+    hasNextPage || (!awards.length && loadableQuery.state === 'loading');
 
   const virtualizer = useVirtualizer({
     count: hasMoreAwards ? awards.length + 1 : awards.length,
@@ -58,6 +57,7 @@ export function HeroAwards() {
         {virtualizer.getVirtualItems().map(virtualItem => {
           const isLoaderRow = virtualItem.index > awards.length - 1;
           const award = awards[virtualItem.index];
+
           return (
             <ListItem
               key={virtualItem.index}

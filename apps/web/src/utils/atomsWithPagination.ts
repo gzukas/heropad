@@ -1,5 +1,5 @@
 import { Atom, atom } from 'jotai';
-import { loadable, selectAtom, unwrap } from 'jotai/utils';
+import { selectAtom, unwrap } from 'jotai/utils';
 
 export interface AtomsWithPaginationOptions<TPage, TNextPageParam> {
   getQueryAtom: (
@@ -30,5 +30,5 @@ export function atomsWithPagination<TPage, TNextPageParam>({
       set(nextPageParamAtom, get(_nextPageParamAtom));
     }
   );
-  return [pagesAtom, fetchNextPageAtom, queryAtom] as const;
+  return { pagesAtom, fetchNextPageAtom, queryAtom };
 }
