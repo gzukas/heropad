@@ -25,7 +25,13 @@ export const rootRoute = routerContext.createRootRoute({
     useHydrateAndSyncAtoms([[selectedNodeAtom, hero]]);
 
     return (
-      <AppCanvas>
+      <AppCanvas
+        sx={{
+          ...(import.meta.env.DEV && {
+            ['.jotai-devtools-shell']: { position: 'absolute' }
+          })
+        }}
+      >
         <Box
           sx={{
             '.sigma-container': {
