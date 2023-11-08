@@ -3,21 +3,19 @@ import { WritableAtom } from 'jotai';
 import { useHydrateAtoms, useAtomCallback } from 'jotai/utils';
 
 type AnyWritableAtom = WritableAtom<unknown, any[], any>;
-type AtomTuple<A = AnyWritableAtom, V = unknown> = readonly [A, V];
-type InferAtoms<T extends Iterable<AtomTuple>> = {
-  [K in keyof T]: T[K] extends AtomTuple<infer A>
-    ? A extends AnyWritableAtom
-      ? AtomTuple<A, ReturnType<A['read']>>
+type InferAtomTuples<T> = {
+  [K in keyof T]: T[K] extends readonly [infer A, unknown]
+    ? A extends WritableAtom<unknown, infer Args, any>
+      ? readonly [A, Args[0]]
       : T[K]
     : never;
 };
 
 type Options = Parameters<typeof useHydrateAtoms>[1];
 
-export function useHydrateAndSyncAtoms<T extends Iterable<AtomTuple>>(
-  values: InferAtoms<T>,
-  options?: Options
-) {
+export function useHydrateAndSyncAtoms<
+  T extends Iterable<readonly [AnyWritableAtom, unknown]>
+>(values: InferAtomTuples<T>, options?: Options) {
   useHydrateAtoms(values, options);
   const sync = useAtomCallback(
     useCallback(
