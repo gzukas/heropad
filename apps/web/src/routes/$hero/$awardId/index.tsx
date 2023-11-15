@@ -1,7 +1,6 @@
-import { Suspense } from 'react';
 import { ListItem, Tooltip } from '@mui/material';
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { Route, useParams } from '@tanstack/react-router';
+import { Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { useAtomValue } from 'jotai';
 import { awardFamily } from '~/atoms/awardFamily';
@@ -11,17 +10,24 @@ import { heroRoute } from '../index';
 export const awardRoute = new Route({
   getParentRoute: () => heroRoute,
   path: '$awardId',
-  wrapInSuspense: false,
-  component: function Award() {
+  load: ({ context: { store }, params }) => {
+    return store.get(awardFamily(params.awardId));
+  },
+  pendingComponent: () => (
+    <ListItem>
+      <ListItemAward loading />
+    </ListItem>
+  ),
+  component: function Award({ useParams }) {
+    const { hero, awardId } = useParams();
+    const award = useAtomValue(awardFamily(awardId));
     return (
       <ListItem>
-        <Suspense fallback={<ListItemAward loading />}>
-          <AwardInner />
-        </Suspense>
+        <ListItemAward award={award} />
         <Tooltip title={<Trans>Unpin award</Trans>}>
           <IconButtonLink
             to="/$hero"
-            params={prev => prev}
+            params={{ hero }}
             search={prev => prev}
             edge="end"
             sx={{ ml: 0.5 }}
@@ -33,9 +39,3 @@ export const awardRoute = new Route({
     );
   }
 });
-
-function AwardInner() {
-  const { awardId } = useParams({ from: '/$hero/$awardId' });
-  const award = useAtomValue(awardFamily(awardId));
-  return <ListItemAward award={award} />;
-}

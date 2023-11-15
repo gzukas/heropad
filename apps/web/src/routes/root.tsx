@@ -1,9 +1,8 @@
 import { Box, Stack, useMediaQuery } from '@mui/material';
 import { Theme, useColorScheme } from '@mui/material/styles';
-import { useParams } from '@tanstack/react-router';
+import { useParams, rootRouteWithContext } from '@tanstack/react-router';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
 import { useHydrateAndSyncAtoms } from '@heropad/base';
-import { routerContext } from '~/routerContext';
 import {
   Camera,
   ChangeLocale,
@@ -14,9 +13,10 @@ import {
   Sociogram
 } from '~/components';
 import { graphAtom, selectedNodeAtom } from '~/atoms';
+import { AppRouterContext } from '~/router';
 
-export const rootRoute = routerContext.createRootRoute({
-  loader: ({ context: { store } }) => store.get(graphAtom),
+export const rootRoute = rootRouteWithContext<AppRouterContext>()({
+  load: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
     const { hero } = useParams({ from: '/$hero' });
     const { colorScheme } = useColorScheme();
@@ -26,6 +26,7 @@ export const rootRoute = routerContext.createRootRoute({
 
     return (
       <AppCanvas
+        shift={Boolean(hero)}
         sx={{
           ...(import.meta.env.DEV && {
             ['.jotai-devtools-shell']: { position: 'absolute' }

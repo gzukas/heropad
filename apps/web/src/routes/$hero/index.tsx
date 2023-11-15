@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { Suspense, useRef } from 'react';
 import {
   AppBar,
-  IconButton,
+  Avatar,
   ListItem,
   Paper,
+  Skeleton,
   Slide,
   Stack,
   Tabs,
@@ -11,16 +12,22 @@ import {
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link, Outlet, Route } from '@tanstack/react-router';
+import { Outlet, Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { z } from 'zod';
 import { ScopeProvider } from 'bunshi/react';
-import { HeroAvatar, ListItemAward, ListItemLink } from '~/components';
+import { heroFamily } from '~/atoms';
+import {
+  HeroAvatar,
+  IconButtonLink,
+  ListItemAward,
+  ListItemLink,
+  UseAtomValue
+} from '~/components';
 import { useMatchesChildRoute } from '~/hooks';
+import { rootRoute } from '../root';
 import { HeroAwards, TabLink } from './components';
 import { HeroScope, DirectionScope } from './scopes';
-import { heroFamily } from '../../atoms/heroFamily';
-import { rootRoute } from '../root';
 
 const heroSearchSchema = z.object({
   direction: z.enum(['received', 'given']).nullish().catch('received')
@@ -29,19 +36,15 @@ const heroSearchSchema = z.object({
 export const heroRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '$hero',
-  wrapInSuspense: false,
   validateSearch: heroSearchSchema,
-  loader: ({ params, context: { store } }) => {
-    return store.get(heroFamily(params.hero));
-  },
-  component: function Hero({ useSearch, useLoader }) {
+  component: function Hero({ useParams, useSearch }) {
     const { direction } = useSearch();
-    const { name, username } = useLoader();
+    const { hero } = useParams();
     const awardsRef = useRef<HTMLElement>(null);
     const matchesChildRoute = useMatchesChildRoute();
 
     return (
-      <ScopeProvider scope={HeroScope} value={username}>
+      <ScopeProvider scope={HeroScope} value={hero}>
         <AppBar
           position="relative"
           color="inherit"
@@ -49,28 +52,52 @@ export const heroRoute = new Route({
             zIndex: theme.zIndex.appBar
           })}
         >
-          <Toolbar component={Stack} gap={2} direction="row">
-            <HeroAvatar sx={{ marginLeft: -0.75 }} hero={username} />
-            <Typography sx={{ flex: 1 }} variant="h6" noWrap>
-              {name}
-            </Typography>
-            <IconButton edge="end" component={Link as any} to="/">
+          <Toolbar
+            component={Stack}
+            gap={2}
+            direction="row"
+            disableGutters
+            sx={{ pl: 2, pr: 3 }}
+          >
+            <Suspense
+              key={hero}
+              fallback={
+                <>
+                  <Skeleton variant="circular" animation="wave">
+                    <Avatar />
+                  </Skeleton>
+                  <Skeleton animation="wave" sx={{ flexGrow: 1, height: 32 }} />
+                </>
+              }
+            >
+              <UseAtomValue atom={heroFamily(hero)}>
+                {({ name, username }) => (
+                  <>
+                    <HeroAvatar hero={username} />
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                      {name}
+                    </Typography>
+                  </>
+                )}
+              </UseAtomValue>
+            </Suspense>
+            <IconButtonLink to="/" edge="end">
               <CloseIcon />
-            </IconButton>
+            </IconButtonLink>
           </Toolbar>
           <Tabs value={direction} variant="fullWidth">
             <TabLink
               label={<Trans>Received</Trans>}
               value="received"
               to="/$hero"
-              params={{ hero: username }}
+              params={prev => prev}
               search={{ direction: 'received' }}
             />
             <TabLink
               label={<Trans>Given</Trans>}
               value="given"
               to="/$hero"
-              params={{ hero: username }}
+              params={prev => prev}
               search={{ direction: 'given' }}
             />
           </Tabs>
@@ -91,7 +118,7 @@ export const heroRoute = new Route({
                 {award ? (
                   <ListItemLink
                     to="/$hero/$awardId"
-                    params={params => ({ ...params, awardId: award.id })}
+                    params={prev => ({ ...prev, awardId: award.id })}
                     search={prev => prev}
                   >
                     <ListItemAward award={award} />

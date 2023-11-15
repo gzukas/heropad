@@ -5,6 +5,10 @@ import { rootRoute } from './routes/root';
 import { getAppStore } from './context/getAppStore';
 import { awardRoute } from './routes/$hero/$awardId';
 
+export interface AppRouterContext {
+  store: ReturnType<typeof getAppStore>;
+}
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   heroRoute.addChildren([awardRoute])
@@ -12,7 +16,6 @@ const routeTree = rootRoute.addChildren([
 
 export const router = new Router({
   routeTree,
-  reloadOnWindowFocus: false,
   context: { store: getAppStore() }
 });
 

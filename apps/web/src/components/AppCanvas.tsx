@@ -1,6 +1,6 @@
 import { Box, BoxProps, Drawer, useMediaQuery } from '@mui/material';
 import { Theme, styled } from '@mui/material/styles';
-import { Outlet, useMatchRoute } from '@tanstack/react-router';
+import { Outlet } from '@tanstack/react-router';
 
 const drawerWidth = 400;
 
@@ -31,13 +31,13 @@ const Content = styled('div', { shouldForwardProp: prop => prop !== 'shift' })<{
   })
 }));
 
-export type AppCanvasProps = BoxProps;
+export interface AppCanvasProps extends BoxProps {
+  shift?: boolean;
+}
 
 export function AppCanvas(props: AppCanvasProps) {
-  const { children, ...other } = props;
+  const { shift, children, ...other } = props;
   const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
-  const matchRoute = useMatchRoute();
-  const shift = !Boolean(matchRoute({ from: '/' }));
 
   return (
     <Box {...other}>

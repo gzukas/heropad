@@ -12,3 +12,4 @@ export * from './HeroAvatar';
 export * from './IconButtonLink';
 export * from './ListItemAward';
 export * from './ListItemLink';
+export * from './UseAtomValue';
