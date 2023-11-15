@@ -1,116 +1,100 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { useMolecule } from 'bunshi/react';
-import { useVirtualizer } from '@tanstack/react-virtual';
 import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
-  Skeleton,
-  Avatar,
-  Box
-} from '@mui/material';
-import { useLingui } from '@lingui/react';
+  VirtualItem,
+  VirtualizerOptions,
+  useVirtualizer
+} from '@tanstack/react-virtual';
+import { List, ListItem, useForkRef, ListItemProps } from '@mui/material';
 import { useDidUpdate } from '@heropad/base';
-import { AwardAvatar } from '~/components';
+import { ListItemAward } from '~/components';
 import { heroAwardsMolecule } from '../molecules/heroAwardsMolecule';
+import { Award } from '~/atoms';
 
-export function HeroAwards() {
-  const listRef = useRef(null);
-  const { i18n } = useLingui();
+export type RenderAwardFunction = (
+  options: { award?: Award; virtualAward: VirtualItem },
+  props: ListItemProps
+) => React.ReactNode;
 
-  const { awardsAtom, fetchNextPageAtom, loadableQueryAtom } =
-    useMolecule(heroAwardsMolecule);
-  const awards = useAtomValue(awardsAtom);
-  const [hasNextPage, fetchNextPage] = useAtom(fetchNextPageAtom);
-  const loadableQuery = useAtomValue(loadableQueryAtom);
-  const hasMoreAwards =
-    hasNextPage || (!awards.length && loadableQuery.state === 'loading');
-
-  const virtualizer = useVirtualizer({
-    count: hasMoreAwards ? awards.length + 1 : awards.length,
-    getScrollElement: () => listRef.current,
-    estimateSize: () => 72
-  });
-
-  useDidUpdate(() => {
-    const lastAward = [...virtualizer.getVirtualItems()].pop();
-    if (hasNextPage && lastAward && lastAward.index >= awards.length - 1) {
-      fetchNextPage();
-    }
-  }, [
-    virtualizer.getVirtualItems(),
-    hasNextPage,
-    awards.length,
-    fetchNextPage
-  ]);
-
-  return (
-    <List ref={listRef} component="div" sx={{ overflow: 'auto' }}>
-      <div
-        style={{
-          height: `${virtualizer.getTotalSize()}px`
-        }}
-      >
-        {virtualizer.getVirtualItems().map(virtualItem => {
-          const isLoaderRow = virtualItem.index > awards.length - 1;
-          const award = awards[virtualItem.index];
-
-          return (
-            <ListItem
-              key={virtualItem.index}
-              component="div"
-              disablePadding
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                height: `${virtualItem.size}`,
-                transform: `translateY(${virtualItem.start}px)`
-              }}
-            >
-              {isLoaderRow ? (
-                hasMoreAwards ? (
-                  <Box
-                    sx={{
-                      py: 1,
-                      px: 2,
-                      display: 'flex',
-                      flex: 1,
-                      alignItems: 'center'
-                    }}
-                  >
-                    <ListItemAvatar>
-                      <Skeleton variant="circular" animation="wave">
-                        <Avatar />
-                      </Skeleton>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={<Skeleton animation="wave" />}
-                      secondary={<Skeleton animation="wave" width="30%" />}
-                    />
-                  </Box>
-                ) : null
-              ) : (
-                <ListItemButton>
-                  <ListItemAvatar>
-                    <AwardAvatar from={award.from} to={award.to} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primaryTypographyProps={{ noWrap: true }}
-                    primary={award.description}
-                    secondary={i18n.date(award.givenAt, {
-                      dateStyle: 'medium'
-                    })}
-                  />
-                </ListItemButton>
-              )}
-            </ListItem>
-          );
-        })}
-      </div>
-    </List>
-  );
+export interface HeroAwardsProps {
+  virtualizerOptions?: Partial<VirtualizerOptions<HTMLElement, Element>>;
+  renderAward?: RenderAwardFunction;
+  children?: React.ReactNode;
 }
+
+export const HeroAwards = React.forwardRef<HTMLElement, HeroAwardsProps>(
+  (props, ref) => {
+    const {
+      virtualizerOptions,
+      children,
+      renderAward = ({ award, virtualAward }, props) => (
+        <ListItem key={virtualAward.index} {...props}>
+          <ListItemAward award={award} loading={!Boolean(award)} />
+        </ListItem>
+      )
+    } = props;
+
+    const listRef = useRef<HTMLElement>(null);
+    const handleListRef = useForkRef(listRef, ref);
+
+    const { awardsAtom, fetchNextPageAtom, loadableQueryAtom } =
+      useMolecule(heroAwardsMolecule);
+    const awards = useAtomValue(awardsAtom);
+    const [hasNextPage, fetchNextPage] = useAtom(fetchNextPageAtom);
+    const loadableQuery = useAtomValue(loadableQueryAtom);
+    const hasMoreAwards =
+      hasNextPage || (!awards.length && loadableQuery.state === 'loading');
+
+    const virtualizer = useVirtualizer({
+      count: hasMoreAwards ? awards.length + 1 : awards.length,
+      getScrollElement: () => listRef.current,
+      estimateSize: () => 72,
+      ...virtualizerOptions
+    });
+
+    useDidUpdate(() => {
+      const lastAward = [...virtualizer.getVirtualItems()].pop();
+      if (hasNextPage && lastAward && lastAward.index >= awards.length - 1) {
+        fetchNextPage();
+      }
+    }, [
+      virtualizer.getVirtualItems(),
+      hasNextPage,
+      awards.length,
+      fetchNextPage
+    ]);
+
+    return (
+      <List
+        ref={handleListRef}
+        component="div"
+        sx={{ overflow: 'auto' }}
+        disablePadding
+      >
+        <div
+          style={{
+            height: `${virtualizer.getTotalSize()}px`
+          }}
+        >
+          {virtualizer.getVirtualItems().map(virtualAward =>
+            renderAward(
+              { award: awards[virtualAward.index], virtualAward },
+              {
+                component: 'div',
+                style: {
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  height: `${virtualAward.size}`,
+                  transform: `translateY(${virtualAward.start}px)`
+                }
+              }
+            )
+          )}
+          {children}
+        </div>
+      </List>
+    );
+  }
+);

@@ -19,17 +19,17 @@ export function Camera<C extends React.ElementType>(
         variant="text"
         color="inherit"
       >
-        <Tooltip title={t(i18n)`Zoom in`} enterDelay={600} placement="left">
+        <Tooltip title={t(i18n)`Zoom in`} placement="left">
           <Button onClick={zoomIn}>
             <AddIcon />
           </Button>
         </Tooltip>
-        <Tooltip title={t(i18n)`Zoom out`} enterDelay={600} placement="left">
+        <Tooltip title={t(i18n)`Zoom out`} placement="left">
           <Button onClick={zoomOut}>
             <RemoveIcon />
           </Button>
         </Tooltip>
-        <Tooltip title={t(i18n)`Reset zoom`} enterDelay={600} placement="left">
+        <Tooltip title={t(i18n)`Reset zoom`} placement="left">
           <Button onClick={reset}>
             <AdjustIcon />
           </Button>

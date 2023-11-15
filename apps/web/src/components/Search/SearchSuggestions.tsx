@@ -1,8 +1,8 @@
 import { List } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { SearchSuggestion, searchSuggestionsByKindAtom } from '~/atoms';
-import { HeroGroup } from './HeroGroup';
-import { AwardGroup } from './AwardGroup';
+import { HeroSuggestionList } from './HeroSuggestionList';
+import { AwardSuggestionList } from './AwardSuggestionList';
 
 interface SearchSuggestionGroupRenderParams {
   kind: SearchSuggestion['kind'];
@@ -13,8 +13,8 @@ const groupComponentByKind: Record<
   SearchSuggestion['kind'],
   React.ElementType
 > = {
-  hero: HeroGroup,
-  award: AwardGroup
+  hero: HeroSuggestionList,
+  award: AwardSuggestionList
 };
 
 export function SearchSuggestions() {

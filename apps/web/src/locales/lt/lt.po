@@ -49,6 +49,10 @@ msgstr "Išjungti šviesą"
 msgid "Turn on the light"
 msgstr "Įjungti šviesą"
 
+#: src/routes/$hero/$awardId/index.tsx
+msgid "Unpin award"
+msgstr "Atsegti apdovanojimą"
+
 #: src/components/Camera.tsx
 msgid "Zoom in"
 msgstr "Priartinti"

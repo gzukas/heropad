@@ -47,7 +47,7 @@ export function ChangeLocale() {
 
   return (
     <>
-      <Tooltip title={t(i18n)`Change language`} enterDelay={300}>
+      <Tooltip title={t(i18n)`Change language`}>
         <IconButton {...bindTrigger(menuState)}>
           <TranslateIcon />
         </IconButton>

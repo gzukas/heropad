@@ -3,8 +3,12 @@ import { indexRoute } from './routes';
 import { heroRoute } from './routes/$hero';
 import { rootRoute } from './routes/root';
 import { getAppStore } from './context/getAppStore';
+import { awardRoute } from './routes/$hero/$awardId';
 
-const routeTree = rootRoute.addChildren([indexRoute, heroRoute]);
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  heroRoute.addChildren([awardRoute])
+]);
 
 export const router = new Router({
   routeTree,

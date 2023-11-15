@@ -15,6 +15,11 @@ const theme = extendTheme({
       defaultProps: {
         noSsr: true
       }
+    },
+    MuiTooltip: {
+      defaultProps: {
+        enterDelay: 600
+      }
     }
   }
 });

@@ -11,8 +11,8 @@ export default defineConfig({
   generate: {
     async run(snaplet) {
       const erdosRenyiGraph = erdosRenyi(Graph, {
-        order: 10,
-        probability: 0.5
+        order: 100,
+        probability: 0.8
       });
 
       const heroesByNode = new Map(

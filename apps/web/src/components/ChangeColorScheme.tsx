@@ -20,7 +20,6 @@ export function ChangeColorScheme() {
           ? t(i18n)`Turn on the light`
           : t(i18n)`Turn off the light`
       }
-      enterDelay={300}
     >
       <IconButton color="inherit" onClick={handleClick}>
         {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}

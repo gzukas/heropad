@@ -12,7 +12,7 @@ export const heroAwardsMolecule = molecule((_mol, scope) => {
 
   const { pagesAtom, fetchNextPageAtom, queryAtom } = atomsWithPagination({
     getQueryAtom: (givenSinceAtom: Atom<Date | undefined>) =>
-      api.hero.getAwards.atomWithQuery(get =>
+      api.award.getAwards.atomWithQuery(get =>
         hero
           ? {
               hero,
