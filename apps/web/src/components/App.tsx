@@ -6,7 +6,6 @@ import {
 import { CssBaseline } from '@mui/material';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import { router } from '~/router';
-import { AppStoreProvider } from '~/context';
 import { I18n } from './I18n';
 
 const theme = extendTheme({
@@ -26,13 +25,11 @@ const theme = extendTheme({
 
 export function App() {
   return (
-    <AppStoreProvider>
-      <CssVarsProvider theme={theme}>
-        <CssBaseline enableColorScheme />
-        <I18n>
-          <RouterProvider router={router} />
-        </I18n>
-      </CssVarsProvider>
-    </AppStoreProvider>
+    <CssVarsProvider theme={theme}>
+      <CssBaseline enableColorScheme />
+      <I18n>
+        <RouterProvider router={router} />
+      </I18n>
+    </CssVarsProvider>
   );
 }
