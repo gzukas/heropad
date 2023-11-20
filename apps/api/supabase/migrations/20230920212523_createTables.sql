@@ -1,15 +1,17 @@
+CREATE extension pg_hashids WITH SCHEMA extensions;
+
 CREATE TABLE "hero" (
-  "id" UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "username" VARCHAR NOT NULL UNIQUE,
   "name" TEXT NOT NULL
 );
 
 CREATE TABLE "award" (
-  "id" UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "givenAt" TIMESTAMP DEFAULT now() NOT NULL,
   "description" TEXT NOT NULL,
-  "fromId" UUID NOT NULL REFERENCES "hero" ("id"),
-  "toId" UUID NOT NULL REFERENCES "hero" ("id")
+  "fromId" INTEGER NOT NULL REFERENCES "hero" ("id"),
+  "toId" INTEGER NOT NULL REFERENCES "hero" ("id")
 );
 
 CREATE INDEX "hero_username_index" ON "hero" ("username");

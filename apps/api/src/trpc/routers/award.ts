@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { sql } from 'kysely';
 import { createTRPCRouter, publicProcedure } from '../trpc.js';
+import { pqids } from '../../utils/pqids.js';
 
 export const awardRouter = createTRPCRouter({
   getAward: publicProcedure
@@ -10,14 +11,14 @@ export const awardRouter = createTRPCRouter({
         .selectFrom('award')
         .innerJoin('hero as from', 'award.fromId', 'from.id')
         .innerJoin('hero as to', 'award.toId', 'to.id')
-        .select([
-          'award.id',
+        .select(eb => [
+          pqids(eb).encode('award.id').as('id'),
           'award.givenAt',
           'award.description',
           'from.username as from',
           'to.username as to'
         ])
-        .where('award.id', '=', input.id)
+        .where(eb => eb('award.id', '=', pqids(eb).decode(input.id)))
         .executeTakeFirstOrThrow()
     ),
   getAwards: publicProcedure
@@ -31,12 +32,13 @@ export const awardRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const { hero, direction, limit, givenSince } = input;
+
       const rows = await ctx.db
         .selectFrom('award')
         .innerJoin('hero as from', 'award.fromId', 'from.id')
         .innerJoin('hero as to', 'award.toId', 'to.id')
-        .select([
-          'award.id',
+        .select(eb => [
+          pqids(eb).encode(eb.ref('award.id')).as('id'),
           'award.givenAt',
           'award.description',
           'from.username as from',

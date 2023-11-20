@@ -5,6 +5,7 @@ import { defineConfig } from 'snaplet';
 import { copycat } from '@snaplet/copycat';
 import Graph, { MultiDirectedGraph } from 'graphology';
 import erdosRenyi from 'graphology-generators/random/erdos-renyi';
+import { type Hero } from './src/database/types';
 import { awardsScalars, herosScalars } from './.snaplet/snaplet-client';
 
 export default defineConfig({
@@ -16,10 +17,10 @@ export default defineConfig({
       });
 
       const heroesByNode = new Map(
-        erdosRenyiGraph.nodes().map(node => {
+        erdosRenyiGraph.nodes().map<[string, Hero]>((node, index) => {
           const username = copycat.username(node);
           const name = copycat.fullName(username);
-          return [node, { id: crypto.randomUUID(), username, name }];
+          return [node, { id: index + 1, username, name }];
         })
       );
 
@@ -29,13 +30,14 @@ export default defineConfig({
         graph.addNode(hero.id, hero);
       }
 
+      let edgeId = 0;
       erdosRenyiGraph.forEachEdge((_edge, _attributes, source, target) => {
         const { id: fromId } = heroesByNode.get(source)!;
         const { id: toId } = heroesByNode.get(target)!;
         const id = crypto.randomUUID();
 
         graph.addDirectedEdgeWithKey(id, fromId, toId, {
-          id,
+          id: ++edgeId,
           givenAt: copycat.dateString(id),
           description: copycat.sentence(id),
           fromId,

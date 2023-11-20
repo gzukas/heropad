@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { sql, Expression } from 'kysely';
 import { createTRPCRouter, publicProcedure } from '../trpc.js';
+import { pqids } from '../../utils/pqids.js';
 
 type SeachSuggestionKind = 'hero' | 'award';
 
@@ -20,8 +21,8 @@ export const searchRouter = createTRPCRouter({
         .selectFrom(eb =>
           eb
             .selectFrom('hero')
-            .select([
-              'hero.id as id',
+            .select(eb => [
+              pqids(eb).encode('hero.id').as('id'),
               'name as text',
               sql<Array<[string, string]>>`ARRAY[[${sql.id(
                 'username'
@@ -33,8 +34,8 @@ export const searchRouter = createTRPCRouter({
                 .selectFrom('award')
                 .innerJoin('hero as from', 'award.fromId', 'from.id')
                 .innerJoin('hero as to', 'award.toId', 'to.id')
-                .select([
-                  'award.id as id',
+                .select(eb => [
+                  pqids(eb).encode('award.id').as('id'),
                   'description as text',
                   sql<Array<[string, string]>>`ARRAY[[${sql.id(
                     'from',

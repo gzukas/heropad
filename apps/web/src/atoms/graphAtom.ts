@@ -14,8 +14,8 @@ export const graphAtom = atom(async get => {
       image: `${import.meta.env.VITE_API_URL}/avatars/${username}.svg`
     });
   }
-  for (const { id, from, to } of edges) {
-    graph.addEdgeWithKey(id, from, to);
+  for (const { from, to } of edges) {
+    graph.addEdge(from, to);
   }
   return graph;
 });

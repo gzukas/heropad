@@ -10,7 +10,7 @@ const compiledEdgesQuery = db
   .selectFrom('award')
   .innerJoin('hero as from', 'award.fromId', 'from.id')
   .innerJoin('hero as to', 'award.toId', 'to.id')
-  .select(['award.id', 'from.username as from', 'to.username as to'])
+  .select(['from.username as from', 'to.username as to'])
   .compile();
 
 export const graphRouter = createTRPCRouter({

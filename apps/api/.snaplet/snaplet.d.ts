@@ -38,11 +38,11 @@ interface Table_auth_audit_log_entries {
   ip_address: string;
 }
 interface Table_public_award {
-  id: string;
+  id: number;
   givenAt: string;
   description: string;
-  fromId: string;
-  toId: string;
+  fromId: number;
+  toId: number;
 }
 interface Table_storage_buckets {
   id: string;
@@ -69,7 +69,7 @@ interface Table_auth_flow_state {
   authentication_method: string;
 }
 interface Table_public_hero {
-  id: string;
+  id: number;
   username: string;
   name: string;
 }
@@ -345,7 +345,8 @@ interface Extension {
     | 'pgcrypto'
     | 'pgjwt'
     | 'pg_stat_statements'
-    | 'pg_net';
+    | 'pg_net'
+    | 'pg_hashids';
   graphql: 'pg_graphql';
   pgsodium: 'pgsodium';
   vault: 'supabase_vault';

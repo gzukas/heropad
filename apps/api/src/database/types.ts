@@ -6,17 +6,17 @@ export interface Database {
 }
 
 export interface HeroTable {
-  id: Generated<string>;
+  id: Generated<number>;
   username: string;
   name: string;
 }
 
 export interface AwardTable {
-  id: Generated<string>;
+  id: Generated<number>;
   givenAt: Generated<Date>;
   description: string;
-  fromId: string;
-  toId: string;
+  fromId: number;
+  toId: number;
 }
 
 export type Hero = Selectable<HeroTable>;

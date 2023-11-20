@@ -303,11 +303,11 @@ type auditLogEntriesParentInputs<TPath extends string[]> = ParentInputs<
   TPath
 >;
 type awardsScalars = {
-  id?: string;
+  id?: number;
   givenAt?: string;
   description: string;
-  fromId: string;
-  toId: string;
+  fromId: number;
+  toId: number;
 };
 type awardsParentsInputs<TPath extends string[]> = {
   from: OmitParentInputs<
@@ -403,7 +403,7 @@ type flowStatesParentInputs<TPath extends string[]> = ParentInputs<
   TPath
 >;
 type herosScalars = {
-  id?: string;
+  id?: number;
   username: string;
   name: string;
 };
