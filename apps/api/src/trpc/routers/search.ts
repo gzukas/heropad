@@ -22,7 +22,7 @@ export const searchRouter = createTRPCRouter({
           eb
             .selectFrom('hero')
             .select(eb => [
-              pqids(eb).encode('hero.id').as('id'),
+              pqids(eb).encode<string>('hero.id').as('id'),
               'name as text',
               sql<Array<[string, string]>>`ARRAY[[${sql.id(
                 'username'
@@ -35,7 +35,7 @@ export const searchRouter = createTRPCRouter({
                 .innerJoin('hero as from', 'award.fromId', 'from.id')
                 .innerJoin('hero as to', 'award.toId', 'to.id')
                 .select(eb => [
-                  pqids(eb).encode('award.id').as('id'),
+                  pqids(eb).encode<string>('award.id').as('id'),
                   'description as text',
                   sql<Array<[string, string]>>`ARRAY[[${sql.id(
                     'from',

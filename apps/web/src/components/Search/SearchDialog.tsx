@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Stack, InputBase, Chip, Dialog } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
 import {
   isSearchOpenAtom,
@@ -9,25 +9,23 @@ import {
   debouncedSearchTermAtom
 } from '~/atoms';
 import { SearchSuggestions } from './SearchSuggestions';
+import { useCloseSearch } from './useCloseSearch';
 
 export function SearchDialog() {
   const searchTerm = useAtomValue(searchTermAtom);
   const setDebouncedSearchTerm = useSetAtom(debouncedSearchTermAtom);
   const resetDebouncedSearchTerm = useResetAtom(debouncedSearchTermAtom);
-  const [isSearchOpen, toggleSearch] = useAtom(isSearchOpenAtom);
+  const isSearchOpen = useAtomValue(isSearchOpenAtom);
+  const closeSearch = useCloseSearch();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDebouncedSearchTerm(event.target.value);
   };
 
-  const handleClose = () => {
-    toggleSearch(false);
-  };
-
   return (
     <Dialog
       open={isSearchOpen}
-      onClose={handleClose}
+      onClose={closeSearch}
       TransitionProps={{ onExited: resetDebouncedSearchTerm }}
       maxWidth="sm"
       disableRestoreFocus
@@ -54,7 +52,7 @@ export function SearchDialog() {
           size="small"
           label="esc"
           variant="outlined"
-          onClick={handleClose}
+          onClick={closeSearch}
         />
       </Stack>
       <Suspense>

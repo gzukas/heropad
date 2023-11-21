@@ -4,12 +4,14 @@ import { type SearchSuggestion } from '~/atoms';
 import { ListItemLink } from '~/components';
 import { AwardAvatar } from '../AwardAvatar';
 import { SearchSuggestionText } from './SearchSuggestionText';
+import { useCloseSearch } from './useCloseSearch';
 
 export interface AwardSuggestionListProps {
   suggestions: SearchSuggestion[];
 }
 
 export function AwardSuggestionList(props: AwardSuggestionListProps) {
+  const closeSearch = useCloseSearch();
   return (
     <List
       subheader={
@@ -19,7 +21,7 @@ export function AwardSuggestionList(props: AwardSuggestionListProps) {
       }
     >
       {props.suggestions.map(({ id, text, nodes: [[from], [to]] }) => (
-        <ListItem key={id} disablePadding>
+        <ListItem key={id} onClick={closeSearch} disablePadding>
           <ListItemLink
             to="/$hero/$awardId"
             params={{ hero: from, awardId: id }}
