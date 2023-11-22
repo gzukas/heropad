@@ -12,7 +12,7 @@ export const awardRouter = createTRPCRouter({
         .innerJoin('hero as from', 'award.fromId', 'from.id')
         .innerJoin('hero as to', 'award.toId', 'to.id')
         .select(eb => [
-          pqids(eb).encode('award.id').as('id'),
+          pqids(eb).encode<string>('award.id').as('id'),
           'award.givenAt',
           'award.description',
           'from.username as from',
@@ -38,7 +38,7 @@ export const awardRouter = createTRPCRouter({
         .innerJoin('hero as from', 'award.fromId', 'from.id')
         .innerJoin('hero as to', 'award.toId', 'to.id')
         .select(eb => [
-          pqids(eb).encode(eb.ref('award.id')).as('id'),
+          pqids(eb).encode<string>('award.id').as('id'),
           'award.givenAt',
           'award.description',
           'from.username as from',

@@ -16,6 +16,7 @@ dist
 .DS_Store
 *.pem
 .swc
+.turbo
 
 # debug
 npm-debug.log*

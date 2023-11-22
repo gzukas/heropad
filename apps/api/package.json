@@ -10,7 +10,7 @@
     "db:reset": "supabase db reset",
     "db:stop": "supabase stop",
     "db:push": "supabase db push",
-    "db:seed": "dotenv -- npx snaplet generate"
+    "db:seed": "dotenv npx snaplet generate"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
