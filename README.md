@@ -21,9 +21,10 @@ The Heropad is built within a monorepository powered by [turborepo](https://turb
 
 The API is crafted with:
 
-- [Supabase](https://supabase.com) for database
-- [Snaplet](https://www.snaplet.dev) for seeding
 - [Fastify](https://fastify.dev) and [tRPC](https://trpc.io) for running an end-to-end typesafe server
+- [Supabase](https://supabase.com) for database
+- [kysely](https://kysely.dev) for typesafe database querying
+- [Snaplet](https://www.snaplet.dev) for seeding
 
 For the web application, the following is used:
 
