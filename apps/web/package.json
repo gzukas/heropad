@@ -35,7 +35,6 @@
     "iwanthue": "^2.0.0",
     "jotai": "^2.5.1",
     "jotai-devtools": "^0.7.0",
-    "jotai-scope": "^0.4.1",
     "jotai-trpc": "^0.5.1",
     "lodash-es": "^4.17.21",
     "material-ui-popup-state": "^5.0.10",
