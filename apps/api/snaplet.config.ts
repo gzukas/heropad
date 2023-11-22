@@ -1,6 +1,5 @@
 /// <reference path=".snaplet/snaplet.d.ts" />
 
-import crypto from 'node:crypto';
 import { defineConfig } from 'snaplet';
 import { copycat } from '@snaplet/copycat';
 import Graph, { MultiDirectedGraph } from 'graphology';
@@ -30,15 +29,14 @@ export default defineConfig({
       }
 
       let edgeId = 0;
-      sourceGraph.forEachEdge((_edge, _attributes, source, target) => {
+      sourceGraph.forEachEdge((edge, _attributes, source, target) => {
         const { id: fromId } = heroesByNode.get(source)!;
         const { id: toId } = heroesByNode.get(target)!;
-        const id = crypto.randomUUID();
 
-        graph.addDirectedEdgeWithKey(id, fromId, toId, {
+        graph.addDirectedEdge(fromId, toId, {
           id: ++edgeId,
-          givenAt: copycat.dateString(id),
-          description: copycat.sentence(id),
+          givenAt: copycat.dateString(edge),
+          description: copycat.sentence(edge),
           fromId,
           toId
         });
