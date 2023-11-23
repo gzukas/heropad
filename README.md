@@ -2,7 +2,7 @@
 
 Heropad is an experimental sociogram visualization tool, providing an innovative way to explore and understand the dynamic network of relationships between heroes. It offers insights into the awards they have earned.
 
-The tool serves as a demonstration platform, showcasing a variety of technologies.
+Please be aware that all generated hero names and awards are entirely fictional. Any coincidences with real-world are purely accidental and unintended.
 
 ## 🚀 Highlights
 
