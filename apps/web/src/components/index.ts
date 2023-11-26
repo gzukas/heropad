@@ -2,7 +2,6 @@ export * from './Search';
 export * from './Sociogram';
 export * from './Absolute';
 export * from './App';
-export * from './AppCanvas';
 export * from './AwardAvatar';
 export * from './Camera';
 export * from './ChangeColorScheme';

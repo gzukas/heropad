@@ -1,7 +1,7 @@
 import { Router } from '@tanstack/react-router';
 import { indexRoute } from './routes';
 import { heroRoute } from './routes/$hero';
-import { rootRoute } from './routes/root';
+import { rootRoute } from './routes/__root';
 import { awardRoute } from './routes/$hero/$awardId';
 import { getDefaultStore } from 'jotai';
 
