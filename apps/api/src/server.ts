@@ -1,5 +1,6 @@
 import fastify from 'fastify';
 import cors from '@fastify/cors';
+import compress from '@fastify/compress';
 import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
 import { appRouter, createContext } from './trpc/index.js';
 import { avatarRoutes } from './routes/avatar.js';
@@ -12,6 +13,7 @@ const server = fastify({
 await server.register(cors, {
   origin: process.env.CORS_ORIGIN || '*'
 });
+await server.register(compress);
 await server.register(avatarRoutes);
 await server.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
