@@ -20,8 +20,7 @@ export function GraphEvents() {
       clickNode({ node }) {
         navigate({
           to: '/$hero',
-          params: { hero: node },
-          search: { direction: 'received' }
+          params: { hero: node }
         });
       },
       clickStage() {

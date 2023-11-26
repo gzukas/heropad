@@ -21,8 +21,8 @@ export function useCamera(options?: UseCameraOptions) {
     sigma.getCamera().animatedReset(options);
   });
 
-  const goto = useEventCallback((nodeKey: string) => {
-    const nodeDisplayData = sigma.getNodeDisplayData(nodeKey);
+  const goto = useEventCallback((node: string) => {
+    const nodeDisplayData = sigma.getNodeDisplayData(node);
     if (nodeDisplayData) {
       sigma.getCamera().animate(nodeDisplayData, options);
     }

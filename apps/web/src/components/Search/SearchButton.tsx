@@ -28,7 +28,7 @@ export function SearchButton() {
     <Paper
       sx={{
         flex: 1,
-        minWidth: 296,
+        width: 296,
         justifyContent: 'left',
         font: 'inherit',
         p: 1

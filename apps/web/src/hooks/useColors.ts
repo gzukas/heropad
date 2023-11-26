@@ -17,7 +17,7 @@ export function useColors(count: number, options?: UseColorsOptions) {
       count === 0
         ? []
         : iwanthue(count, {
-            seed: '@heropad/sociogram',
+            seed: 'use-colors',
             colorSpace,
             ...options
           }),

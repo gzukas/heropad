@@ -7,23 +7,15 @@ const drawerWidth = 400;
 const Content = styled('div', { shouldForwardProp: prop => prop !== 'shift' })<{
   shift?: boolean;
 }>(({ theme, shift }) => ({
-  position: 'fixed',
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
+  position: 'relative',
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
-  pointerEvents: 'none',
-  ['> *']: {
-    pointerEvents: 'all'
-  },
   ...(shift && {
     [theme.breakpoints.up('md')]: {
       marginRight: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
+      transition: theme.transitions.create(['margin'], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
       })
