@@ -40,7 +40,10 @@ export function GraphSettings() {
       }),
       labelColor: {
         color: palette.text.primary
-      }
+      },
+      labelDensity: 0.07,
+      labelGridCellSize: 60,
+      labelRenderedSizeThreshold: 15
     });
   }, [setSettings, nodeReducer, edgeReducer]);
 

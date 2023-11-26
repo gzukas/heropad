@@ -9,6 +9,7 @@ import {
   selectedNodeAtom,
   focusedNodesAtom
 } from '~/atoms';
+import { useDevicePixelRatio } from './useDevicePixelRatio';
 
 export interface SociogramNodeDisplayData extends Partial<NodeDisplayData> {
   image?: string | null;
@@ -27,6 +28,7 @@ export function useNodeReducer(
   const selectedNode = useAtomValue(selectedNodeAtom);
   const focusedNodes = useAtomValue(focusedNodesAtom);
   const debouncedHoveredNode = useAtomValue(debouncedHoveredAtom);
+  const devicePixelRatio = useDevicePixelRatio();
 
   return useCallback<NodeReducer>(
     (node, data) => {
@@ -37,7 +39,7 @@ export function useNodeReducer(
       return nodeReducerRef.current(node, {
         ...data,
         color: getCommunityColor(node),
-        size: 24,
+        size: 24 / devicePixelRatio,
         zIndex: 1,
         ...(!focused && {
           zIndex: 0,
@@ -47,6 +49,12 @@ export function useNodeReducer(
         highlighted
       });
     },
-    [selectedNode, debouncedHoveredNode, focusedNodes, getCommunityColor]
+    [
+      selectedNode,
+      debouncedHoveredNode,
+      focusedNodes,
+      getCommunityColor,
+      devicePixelRatio
+    ]
   );
 }
