@@ -10,7 +10,7 @@ export interface PqidsOptions {
 }
 
 const defaultOptions: PqidsOptions = {
-  salt: process.env.PQIDS_SALT
+  salt: process.env.HEROPAD_PQIDS_SALT
 };
 
 export interface Pqids<DB, TB extends keyof DB> {

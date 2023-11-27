@@ -1,11 +1,11 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      HOST?: string;
-      PORT?: string;
-      DATABASE_URL: string;
-      HASHID_SALT?: string;
-      CORS_ORIGIN?: string;
+      HEROPAD_HOST?: string;
+      HEROPAD_PORT?: string;
+      HEROPAD_DB_URL: string;
+      HEROPAD_PQIDS_SALT?: string;
+      HEROPAD_CORS_ORIGIN?: string;
     }
   }
 }

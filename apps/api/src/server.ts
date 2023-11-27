@@ -11,7 +11,7 @@ const server = fastify({
 });
 
 await server.register(cors, {
-  origin: process.env.CORS_ORIGIN || '*'
+  origin: process.env.HEROPAD_CORS_ORIGIN || '*'
 });
 await server.register(compress);
 await server.register(avatarRoutes);
@@ -22,8 +22,8 @@ await server.register(fastifyTRPCPlugin, {
 
 try {
   await server.listen({
-    host: process.env.HOST || '0.0.0.0',
-    port: Number(process.env.PORT || 3001)
+    host: process.env.HEROPAD_HOST || '0.0.0.0',
+    port: Number(process.env.HEROPAD_PORT || 3001)
   });
 } catch (err) {
   server.log.error(err);

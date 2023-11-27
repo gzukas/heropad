@@ -5,7 +5,7 @@ import { Database } from './types.js';
 export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
     pool: new pg.Pool({
-      connectionString: process.env.DATABASE_URL
+      connectionString: process.env.HEROPAD_DB_URL
     })
   })
 });
