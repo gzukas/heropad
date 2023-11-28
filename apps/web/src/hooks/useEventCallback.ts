@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { useCommitedRef } from '@heropad/base';
+import { useCommittedRef } from '@heropad/base';
 
 export function useEventCallback<Args extends unknown[], R>(
   fn: (...args: Args) => R
 ) {
-  const ref = useCommitedRef(fn);
+  const ref = useCommittedRef(fn);
   return useCallback((...args: Args) => ref.current(...args), []);
 }

@@ -1,3 +1,3 @@
-export * from './useCommitedRef';
+export * from './useCommittedRef';
 export * from './useDidUpdate';
 export * from './useHydrateAndSyncAtoms';

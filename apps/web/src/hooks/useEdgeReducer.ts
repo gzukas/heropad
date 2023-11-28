@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useAtomValue } from 'jotai';
 import { Settings } from 'sigma/settings';
 import { EdgeDisplayData } from 'sigma/types';
-import { useCommitedRef } from '@heropad/base';
+import { useCommittedRef } from '@heropad/base';
 import { graphAtom, selectedNodeAtom } from '../atoms';
 
 export type SociogramEdgeDisplayData = Partial<EdgeDisplayData>;
@@ -15,7 +15,7 @@ export function useEdgeReducer(
     data: SociogramEdgeDisplayData
   ) => SociogramEdgeDisplayData = (_edge, data) => data
 ) {
-  const edgeReducerRef = useCommitedRef(edgeReducer);
+  const edgeReducerRef = useCommittedRef(edgeReducer);
   const selectedNode = useAtomValue(selectedNodeAtom);
   const graph = useAtomValue(graphAtom);
 

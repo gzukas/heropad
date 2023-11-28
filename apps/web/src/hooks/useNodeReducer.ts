@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Settings } from 'sigma/settings';
 import { NodeDisplayData } from 'sigma/types';
 import { useAtomValue } from 'jotai';
-import { useCommitedRef } from '@heropad/base';
+import { useCommittedRef } from '@heropad/base';
 import { useGetCommunityColor } from './useGetCommunityColor';
 import {
   debouncedHoveredAtom,
@@ -23,7 +23,7 @@ export function useNodeReducer(
     data: SociogramNodeDisplayData
   ) => Partial<SociogramNodeDisplayData> = (_node, data) => data
 ) {
-  const nodeReducerRef = useCommitedRef(nodeReducer);
+  const nodeReducerRef = useCommittedRef(nodeReducer);
   const getCommunityColor = useGetCommunityColor();
   const selectedNode = useAtomValue(selectedNodeAtom);
   const focusedNodes = useAtomValue(focusedNodesAtom);
