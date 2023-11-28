@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useAtomValue } from 'jotai';
-import { communityGraphAtom } from '../atoms';
+import { communityGraphAtom } from '~/atoms/communityGraphAtom';
 import { useColors } from './useColors';
 
 export function useGetCommunityColor() {

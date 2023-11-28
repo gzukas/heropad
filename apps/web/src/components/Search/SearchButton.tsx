@@ -3,7 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useLingui } from '@lingui/react';
 import { t } from '@lingui/macro';
 import { useSetAtom } from 'jotai';
-import { isSearchOpenAtom } from '~/atoms';
+import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
 
 const Placeholder = styled('span')(({ theme }) => ({
   color: 'currentcolor',

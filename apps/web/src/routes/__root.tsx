@@ -7,15 +7,14 @@ import {
 } from '@tanstack/react-router';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
 import { useHydrateAndSyncAtoms } from '@heropad/base';
-import {
-  Camera,
-  ChangeLocale,
-  ChangeColorScheme,
-  Search,
-  Absolute,
-  Sociogram
-} from '~/components';
-import { graphAtom, selectedNodeAtom } from '~/atoms';
+import { Camera } from '~/components/Camera';
+import { ChangeLocale } from '~/components/ChangeLocale';
+import { ChangeColorScheme } from '~/components/ChangeColorScheme';
+import { Search } from '~/components/Search/Search';
+import { Absolute } from '~/components/Absolute';
+import { Sociogram } from '~/components/Sociogram/Sociogram';
+import { graphAtom } from '~/atoms/graphAtom';
+import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
 import { AppRouterContext } from '~/router';
 
 const drawerWidth = 400;

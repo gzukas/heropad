@@ -8,9 +8,9 @@ import {
 } from '@tanstack/react-virtual';
 import { List, ListItem, useForkRef, ListItemProps } from '@mui/material';
 import { useDidUpdate } from '@heropad/base';
-import { ListItemAward } from '~/components';
+import { Award } from '~/atoms/awardFamily';
+import { ListItemAward } from '~/components/ListItemAward';
 import { heroAwardsMolecule } from '../molecules/heroAwardsMolecule';
-import { Award } from '~/atoms';
 
 export type RenderAwardFunction = (
   options: { award?: Award; virtualAward: VirtualItem },
