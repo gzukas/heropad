@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { lingui } from '@lingui/vite-plugin';
@@ -14,7 +14,8 @@ export default defineConfig({
         ['@swc-jotai/react-refresh', {}]
       ]
     }),
-    lingui()
+    lingui(),
+    splitVendorChunkPlugin()
   ],
   resolve: {
     alias: {
