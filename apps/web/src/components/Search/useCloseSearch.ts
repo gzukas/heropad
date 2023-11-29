@@ -1,5 +1,5 @@
-import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
+import { useSetAtom } from 'jotai';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
 
 export function useCloseSearch() {

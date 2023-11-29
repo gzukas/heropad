@@ -1,5 +1,5 @@
-import { useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from '@mui/material';
 
 function getDevicePixelRatio() {
   return window.devicePixelRatio;
