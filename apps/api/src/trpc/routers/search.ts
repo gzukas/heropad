@@ -1,17 +1,9 @@
 import { z } from 'zod';
-import { sql, Expression } from 'kysely';
+import { sql } from 'kysely';
 import { createTRPCRouter, publicProcedure } from '../trpc.js';
 import { pqids } from '../../utils/pqids.js';
 
 type SeachSuggestionKind = 'hero' | 'award';
-
-function to_tsvector(expression: Expression<string>) {
-  return sql`to_tsvector(${sql.lit('english')}, ${expression})`;
-}
-
-function to_tsquery(expression: Expression<string>) {
-  return sql`to_tsquery(${sql.lit('english')}, ${expression})`;
-}
 
 export const searchRouter = createTRPCRouter({
   getSuggestions: publicProcedure
@@ -24,6 +16,7 @@ export const searchRouter = createTRPCRouter({
             .select(eb => [
               pqids(eb).encode<string>('hero.id').as('id'),
               'name as text',
+              'hero.search as search',
               sql<Array<[string, string]>>`ARRAY[[${sql.id(
                 'username'
               )}, ${sql.id('name')}]]`.as('nodes'),
@@ -37,6 +30,7 @@ export const searchRouter = createTRPCRouter({
                 .select(eb => [
                   pqids(eb).encode<string>('award.id').as('id'),
                   'description as text',
+                  'award.search as search',
                   sql<Array<[string, string]>>`ARRAY[[${sql.id(
                     'from',
                     'username'
@@ -47,12 +41,10 @@ export const searchRouter = createTRPCRouter({
                   sql.lit<SeachSuggestionKind>('award').as('kind')
                 ])
             )
-            .as('heroes_and_awards')
+            .as('heroes_awards')
         )
-        .selectAll()
-        .where(eb =>
-          eb(to_tsvector(eb.ref('text')), '@@', to_tsquery(eb.val(input.query)))
-        )
+        .select(['id', 'kind', 'nodes', 'text'])
+        .where('search', '@@', sql`to_tsquery(${input.query})`)
         .limit(10)
         .execute()
     )
