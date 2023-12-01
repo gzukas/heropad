@@ -1,6 +1,6 @@
+import React from 'react';
 import { IconButton, IconButtonProps } from '@mui/material';
 import { Link } from '@tanstack/react-router';
-import React from 'react';
 import { RouterLinkComponent } from '~/types';
 
 export const IconButtonLink: RouterLinkComponent<typeof IconButton> =

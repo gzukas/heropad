@@ -3,11 +3,9 @@ import { Stack, InputBase, Chip, Dialog } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
-import {
-  isSearchOpenAtom,
-  searchTermAtom,
-  debouncedSearchTermAtom
-} from '~/atoms';
+import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
+import { searchTermAtom } from '~/atoms/searchTermAtom';
+import { debouncedSearchTermAtom } from '~/atoms/searchTermAtom';
 import { SearchSuggestions } from './SearchSuggestions';
 import { useCloseSearch } from './useCloseSearch';
 

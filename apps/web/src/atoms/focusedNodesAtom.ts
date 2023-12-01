@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
-import { graphAtom, selectedNodeAtom } from '.';
+import { graphAtom } from './graphAtom';
+import { selectedNodeAtom } from './selectedNodeAtom';
 
 export const focusedNodesAtom = atom(async get => {
   const graph = await get(graphAtom);

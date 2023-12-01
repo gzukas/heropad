@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useRegisterEvents } from '@react-sigma/core';
-import { useSetAtom } from 'jotai';
-import { debouncedHoveredAtom } from '~/atoms';
 import { useNavigate } from '@tanstack/react-router';
+import { useSetAtom } from 'jotai';
+import { debouncedHoveredAtom } from '~/atoms/hoveredNodeAtom';
 
 export function GraphEvents() {
   const registerEvents = useRegisterEvents();

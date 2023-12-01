@@ -1,8 +1,10 @@
 import { useEffect, useMemo } from 'react';
-import { useSetSettings } from '@react-sigma/core';
-import { useEdgeReducer, useNodeReducer } from '../../hooks';
 import { decomposeColor, recomposeColor, useTheme } from '@mui/material';
-import { blendAlpha, createNodeHoverRenderer } from '~/utils';
+import { useSetSettings } from '@react-sigma/core';
+import { useEdgeReducer } from '~/hooks/useEdgeReducer';
+import { useNodeReducer } from '~/hooks/useNodeReducer';
+import { blendAlpha } from '~/utils/blendAlpha';
+import { createNodeHoverRenderer } from '~/utils/createNodeHoverRenderer';
 
 export function GraphSettings() {
   const setSettings = useSetSettings();

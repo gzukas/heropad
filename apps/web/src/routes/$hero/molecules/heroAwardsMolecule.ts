@@ -2,7 +2,7 @@ import { molecule } from 'bunshi';
 import { Atom, atom } from 'jotai';
 import { DISABLED } from 'jotai-trpc';
 import { loadable } from 'jotai/utils';
-import { atomsWithPagination } from '~/utils';
+import { atomsWithPagination } from '~/utils/atomsWithPagination';
 import { api } from '~/utils/api';
 import { HeroScope, DirectionScope } from '../scopes';
 

@@ -1,6 +1,6 @@
 import { Avatar, ListItemAvatar, ListItemText, Skeleton } from '@mui/material';
 import { useLingui } from '@lingui/react';
-import { type Award } from '~/atoms';
+import { type Award } from '~/atoms/awardFamily';
 import { AwardAvatar } from './AwardAvatar';
 
 export interface ListItemAwardProps {
