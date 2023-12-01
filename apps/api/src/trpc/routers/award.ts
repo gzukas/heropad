@@ -1,23 +1,28 @@
 import { z } from 'zod';
-import { sql } from 'kysely';
+import { Kysely, sql } from 'kysely';
 import { createTRPCRouter, publicProcedure } from '../trpc.js';
 import { pqids } from '../../utils/pqids.js';
+import { Database } from '../../database/types.js';
+
+function selectAwards(db: Kysely<Database>) {
+  return db
+    .selectFrom('award')
+    .innerJoin('hero as from', 'award.fromId', 'from.id')
+    .innerJoin('hero as to', 'award.toId', 'to.id')
+    .select(eb => [
+      pqids(eb).encode<string>('award.id').as('id'),
+      'award.givenAt',
+      'award.description',
+      'from.username as from',
+      'to.username as to'
+    ]);
+}
 
 export const awardRouter = createTRPCRouter({
   getAward: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) =>
-      ctx.db
-        .selectFrom('award')
-        .innerJoin('hero as from', 'award.fromId', 'from.id')
-        .innerJoin('hero as to', 'award.toId', 'to.id')
-        .select(eb => [
-          pqids(eb).encode<string>('award.id').as('id'),
-          'award.givenAt',
-          'award.description',
-          'from.username as from',
-          'to.username as to'
-        ])
+      selectAwards(ctx.db)
         .where(eb => eb('award.id', '=', pqids(eb).decode(input.id)))
         .executeTakeFirstOrThrow()
     ),
@@ -32,18 +37,7 @@ export const awardRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const { hero, direction, limit, givenSince } = input;
-
-      const rows = await ctx.db
-        .selectFrom('award')
-        .innerJoin('hero as from', 'award.fromId', 'from.id')
-        .innerJoin('hero as to', 'award.toId', 'to.id')
-        .select(eb => [
-          pqids(eb).encode<string>('award.id').as('id'),
-          'award.givenAt',
-          'award.description',
-          'from.username as from',
-          'to.username as to'
-        ])
+      const rows = await selectAwards(ctx.db)
         .$if(direction === 'received', qb => qb.where('to.username', '=', hero))
         .$if(direction === 'given', qb => qb.where('from.username', '=', hero))
         .$if(Boolean(givenSince), qb =>
