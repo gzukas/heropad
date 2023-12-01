@@ -17,7 +17,6 @@ Please be aware that all generated hero names and awards are entirely fictional.
 
 ## Technology Stack
 
-m
 The Heropad is built within a monorepository powered by [turborepo](https://turbo.build/repo).
 
 The API is crafted with:
