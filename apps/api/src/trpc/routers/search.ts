@@ -22,7 +22,7 @@ export const searchRouter = createTRPCRouter({
               )}, ${sql.id('name')}]]`.as('nodes'),
               sql.lit<SeachSuggestionKind>('hero').as('kind')
             ])
-            .union(eb =>
+            .unionAll(eb =>
               eb
                 .selectFrom('award')
                 .innerJoin('hero as from', 'award.fromId', 'from.id')
