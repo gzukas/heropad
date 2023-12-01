@@ -3,12 +3,10 @@ import { Settings } from 'sigma/settings';
 import { NodeDisplayData } from 'sigma/types';
 import { useAtomValue } from 'jotai';
 import { useCommittedRef } from '@heropad/base';
+import { debouncedHoveredAtom } from '~/atoms/hoveredNodeAtom';
+import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
+import { focusedNodesAtom } from '~/atoms/focusedNodesAtom';
 import { useGetCommunityColor } from './useGetCommunityColor';
-import {
-  debouncedHoveredAtom,
-  selectedNodeAtom,
-  focusedNodesAtom
-} from '~/atoms';
 import { useDevicePixelRatio } from './useDevicePixelRatio';
 
 export interface SociogramNodeDisplayData extends Partial<NodeDisplayData> {

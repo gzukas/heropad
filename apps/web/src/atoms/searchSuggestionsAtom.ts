@@ -1,8 +1,8 @@
 import { ExtractAtomValue } from 'jotai';
+import { DISABLED } from 'jotai-trpc';
 import { api } from '~/utils/api';
 import { Extract } from '~/types';
 import { debouncedSearchTermAtom } from './searchTermAtom';
-import { DISABLED } from 'jotai-trpc';
 
 export const searchSuggestionsAtom = api.search.getSuggestions.atomWithQuery(
   get => {

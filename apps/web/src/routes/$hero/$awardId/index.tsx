@@ -4,7 +4,8 @@ import { Route } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { useAtomValue } from 'jotai';
 import { awardFamily } from '~/atoms/awardFamily';
-import { ListItemAward, IconButtonLink } from '~/components';
+import { ListItemAward } from '~/components/ListItemAward';
+import { IconButtonLink } from '~/components/IconButtonLink';
 import { heroRoute } from '../index';
 
 export const awardRoute = new Route({

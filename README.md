@@ -21,10 +21,11 @@ The Heropad is built within a monorepository powered by [turborepo](https://turb
 
 The API is crafted with:
 
-- [Fastify](https://fastify.dev) and [tRPC](https://trpc.io) for running an end-to-end typesafe server
-- [Supabase](https://supabase.com) for database
+- [Fastify](https://fastify.dev), [tRPC](https://trpc.io), and [superjson](https://github.com/blitz-js/superjson) for running an end-to-end typesafe server
+- [Supabase](https://supabase.com) as the database
 - [kysely](https://kysely.dev) for typesafe database querying
-- [Snaplet](https://www.snaplet.dev) for seeding
+- [DiceBear](https://www.dicebear.com/) for avatar generation
+- [Snaplet](https://www.snaplet.dev) for Postgres data seeding
 
 For the web application, the following is used:
 

@@ -15,18 +15,17 @@ import {
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  HeroAvatar,
-  IconButtonLink,
-  ListItemAward,
-  ListItemLink,
-  UseAtomValue
-} from '~/components';
-import { heroFamily } from '~/atoms';
-import { useMatchesChildRoute } from '~/hooks';
+import { HeroAvatar } from '~/components/HeroAvatar';
+import { IconButtonLink } from '~/components/IconButtonLink';
+import { ListItemAward } from '~/components/ListItemAward';
+import { ListItemLink } from '~/components/ListItemLink';
+import { UseAtomValue } from '~/components/UseAtomValue';
+import { heroFamily } from '~/atoms/heroFamily';
+import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
 import { DirectionScope, HeroScope } from '../scopes';
 import { heroRoute } from '..';
-import { HeroAwards, TabLink } from '.';
+import { HeroAwards } from './HeroAwards';
+import { TabLink } from './TabLink';
 
 export function Hero() {
   const { direction } = useSearch({ from: heroRoute.id });

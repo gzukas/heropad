@@ -3,7 +3,8 @@ import { useAtomValue } from 'jotai';
 import { Settings } from 'sigma/settings';
 import { EdgeDisplayData } from 'sigma/types';
 import { useCommittedRef } from '@heropad/base';
-import { graphAtom, selectedNodeAtom } from '../atoms';
+import { graphAtom } from '~/atoms/graphAtom';
+import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
 
 export type SociogramEdgeDisplayData = Partial<EdgeDisplayData>;
 

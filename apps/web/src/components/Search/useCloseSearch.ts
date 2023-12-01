@@ -1,6 +1,6 @@
-import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
-import { isSearchOpenAtom } from '~/atoms';
+import { useSetAtom } from 'jotai';
+import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
 
 export function useCloseSearch() {
   const toggleSearch = useSetAtom(isSearchOpenAtom);

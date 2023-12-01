@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { LayoutWorkerHook } from '@react-sigma/layout-core';
+import type { LayoutWorkerHook } from '@react-sigma/layout-core';
 
 export interface GraphLayoutProps<T> {
   layout: LayoutWorkerHook<T>;

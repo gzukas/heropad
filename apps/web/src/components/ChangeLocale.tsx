@@ -16,7 +16,7 @@ import {
   bindTrigger,
   bindMenu
 } from 'material-ui-popup-state/hooks';
-import { localeAtom } from '~/atoms';
+import { localeAtom } from '~/atoms/localeAtom';
 import { locales } from '~/locales';
 
 export function ChangeLocale() {

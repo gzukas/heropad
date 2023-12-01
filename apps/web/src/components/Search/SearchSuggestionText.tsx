@@ -1,7 +1,7 @@
 import { ListItemText } from '@mui/material';
 import { useAtomValue } from 'jotai';
-import { Highlight } from '~/components';
-import { searchTermAtom } from '~/atoms';
+import { Highlight } from '~/components/Highlight';
+import { searchTermAtom } from '~/atoms/searchTermAtom';
 
 export interface SearchSuggestionTextProps {
   text: string;
