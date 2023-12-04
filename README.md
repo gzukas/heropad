@@ -1,21 +1,22 @@
 # Heropad
 
-Heropad is an experimental sociogram visualization tool, providing an innovative way to explore and understand the dynamic network of relationships between heroes. It offers insights into the awards they have earned.
+Heropad is an experimental full-stack application designed to visualize social links. It introduces an innovative way to explore and understand the dynamic network of relationships between heroes, providing insights into the awards they have earned.
 
-Please be aware that all generated hero names and awards are entirely fictional. Any coincidences with real-world are purely accidental and unintended.
+Note that the generated hero names and awards are entirely fictional, with no intentional resemblance to the real world.
 
 ## 🚀 Highlights
 
-- Interactive sociogram navigation.
-- Community detection for grouping related heroes.
-- Search functionality for heroes and awards.
-- Optimized award viewing through infinite loading and virtualization.
+- A full-stack app presenting a pre-generated sociogram from the database to the UI
+- Interactive sociogram navigation
+- Visualize the connections between related heroes within communities
+- Look for heroes and awards with optimal search functionality
+- Infinite loading and virtualization for award viewing
 
 ## 📺 Preview
 
 ![Alt text](./docs/images/screenshot.jpg?raw=true 'Title')
 
-## Technology Stack
+## Built With
 
 The Heropad is built within a monorepository powered by [turborepo](https://turbo.build/repo).
 
