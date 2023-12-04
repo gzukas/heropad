@@ -16,6 +16,12 @@ CREATE TABLE "award" (
   "search" TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', "description")) stored
 );
 
+ALTER TABLE
+  "hero" ENABLE ROW LEVEL SECURITY;
+
+ALTER TABLE
+  "award" ENABLE ROW LEVEL SECURITY;
+
 CREATE INDEX "hero_username" ON "hero" ("username");
 
 CREATE INDEX "award_givenAt" ON "award" ("givenAt");
