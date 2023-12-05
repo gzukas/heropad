@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/Search/AwardGroup.tsx
+#: src/components/Search/AwardSuggestionList.tsx
 msgid "Awards"
 msgstr "Awards"
 
@@ -21,15 +21,19 @@ msgstr "Awards"
 msgid "Change language"
 msgstr ""
 
-#: src/routes/$hero/index.tsx
+#: src/routes/$hero/components/Hero.tsx
+msgid "Close"
+msgstr ""
+
+#: src/routes/$hero/components/Hero.tsx
 msgid "Given"
 msgstr "Given"
 
-#: src/components/Search/HeroGroup.tsx
+#: src/components/Search/HeroSuggestionList.tsx
 msgid "Heroes"
 msgstr "Heroes"
 
-#: src/routes/$hero/index.tsx
+#: src/routes/$hero/components/Hero.tsx
 msgid "Received"
 msgstr "Received"
 

@@ -13,11 +13,12 @@ export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
     const { hero, sx = [], ...other } = props;
     const graph = useAtomValue(graphAtom);
     const getCommunityColor = useGetCommunityColor();
-    const src = graph.getNodeAttribute(hero, 'image');
+    const { name, image } = graph.getNodeAttributes(hero);
     return (
       <Avatar
         ref={ref}
-        src={src}
+        src={image}
+        alt={name}
         imgProps={{ crossOrigin: 'anonymous' }}
         sx={[
           {
