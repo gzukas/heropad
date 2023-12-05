@@ -23,7 +23,7 @@
     "@react-sigma/core": "^3.4.2",
     "@react-sigma/layout-core": "^3.4.2",
     "@react-sigma/layout-forceatlas2": "^3.4.2",
-    "@tanstack/react-router": "^0.0.1-beta.211",
+    "@tanstack/react-router": "^0.0.1-beta.230",
     "@tanstack/react-virtual": "3.0.0-beta.68",
     "@trpc/client": "^10.44.1",
     "autosuggest-highlight": "^3.3.4",

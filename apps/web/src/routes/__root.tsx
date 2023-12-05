@@ -49,7 +49,7 @@ const Content = styled('div', { label: 'Content' })<{
 }));
 
 export const rootRoute = rootRouteWithContext<AppRouterContext>()({
-  load: ({ context: { store } }) => store.get(graphAtom),
+  loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
     const { hero } = useParams({ from: '/$hero' });
     const { colorScheme } = useColorScheme();
