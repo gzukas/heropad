@@ -1,17 +1,14 @@
-import { initTRPC } from '@trpc/server';
+import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
+import { NoResultError } from 'kysely';
 import { db } from '../database/index.js';
 
-const createInnerTRPCContext = () => {
+export function createContext() {
   return {
     db
   };
-};
-
-export const createContext = () => {
-  return createInnerTRPCContext();
-};
+}
 
 const t = initTRPC.context<typeof createContext>().create({
   transformer: superjson,
@@ -26,5 +23,15 @@ const t = initTRPC.context<typeof createContext>().create({
   }
 });
 
+const noResultMiddleware = t.middleware(async opts => {
+  const response = await opts.next(opts);
+  if (!response.ok && response.error.cause instanceof NoResultError) {
+    throw new TRPCError({
+      code: 'NOT_FOUND'
+    });
+  }
+  return response;
+});
+
 export const createTRPCRouter = t.router;
-export const publicProcedure = t.procedure;
+export const dbProcedure = t.procedure.use(noResultMiddleware);

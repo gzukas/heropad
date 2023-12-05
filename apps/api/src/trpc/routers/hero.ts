@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { createTRPCRouter, publicProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../trpc.js';
 
 export const heroRouter = createTRPCRouter({
-  getHero: publicProcedure
+  getHero: dbProcedure
     .input(z.object({ username: z.string() }))
     .query(({ ctx, input }) =>
       ctx.db

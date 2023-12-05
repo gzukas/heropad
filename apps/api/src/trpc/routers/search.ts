@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { sql } from 'kysely';
-import { createTRPCRouter, publicProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../trpc.js';
 import { pqids } from '../../utils/pqids.js';
 
 type SeachSuggestionKind = 'hero' | 'award';
 
 export const searchRouter = createTRPCRouter({
-  getSuggestions: publicProcedure
+  getSuggestions: dbProcedure
     .input(z.object({ query: z.string() }))
     .query(({ ctx, input }) =>
       ctx.db

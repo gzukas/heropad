@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../trpc.js';
 import { db } from '../../database/db.js';
 
 const compiledNodesQuery = db
@@ -14,7 +14,7 @@ const compiledEdgesQuery = db
   .compile();
 
 export const graphRouter = createTRPCRouter({
-  getGraph: publicProcedure.query(async ({ ctx }) => {
+  getGraph: dbProcedure.query(async ({ ctx }) => {
     const { rows: nodes } = await ctx.db.executeQuery(compiledNodesQuery);
     const { rows: edges } = await ctx.db.executeQuery(compiledEdgesQuery);
     return { nodes, edges };

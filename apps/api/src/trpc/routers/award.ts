@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Kysely, sql } from 'kysely';
-import { createTRPCRouter, publicProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../trpc.js';
 import { pqids } from '../../utils/pqids.js';
 import { Database } from '../../database/types.js';
 
@@ -19,14 +19,14 @@ function selectAwards(db: Kysely<Database>) {
 }
 
 export const awardRouter = createTRPCRouter({
-  getAward: publicProcedure
+  getAward: dbProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) =>
       selectAwards(ctx.db)
         .where(eb => eb('award.id', '=', pqids(eb).decode(input.id)))
         .executeTakeFirstOrThrow()
     ),
-  getAwards: publicProcedure
+  getAwards: dbProcedure
     .input(
       z.object({
         hero: z.string(),
