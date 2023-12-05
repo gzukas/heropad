@@ -44,7 +44,11 @@ export const searchRouter = createTRPCRouter({
             .as('heroes_awards')
         )
         .select(['id', 'kind', 'nodes', 'text'])
-        .where('search', '@@', sql`to_tsquery(${input.query})`)
+        .where(
+          'search',
+          '@@',
+          sql`websearch_to_tsquery('english', ${input.query})`
+        )
         .limit(10)
         .execute()
     )

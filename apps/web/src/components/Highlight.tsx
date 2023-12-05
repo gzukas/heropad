@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { amber } from '@mui/material/colors';
@@ -15,9 +16,9 @@ const Mark = styled('mark')({
 
 export function Highlight(props: HighlightProps) {
   const { highlight, children } = props;
-  const highlightParts = parse(
-    children,
-    match(children, highlight, { insideWords: true })
+  const highlightParts = useMemo(
+    () => parse(children, match(children, highlight)),
+    [children, highlight]
   );
   return (
     <>
