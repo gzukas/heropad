@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CheckIcon from '@mui/icons-material/Check';
-import { t } from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 import {
@@ -20,7 +20,6 @@ import { localeAtom } from '~/atoms/localeAtom';
 import { locales } from '~/locales';
 
 export function ChangeLocale() {
-  const { i18n } = useLingui();
   const [currentLocale, setCurrentLocale] = useAtom(localeAtom);
   const menuState = usePopupState({
     variant: 'popover',
@@ -47,7 +46,7 @@ export function ChangeLocale() {
 
   return (
     <>
-      <Tooltip title={t(i18n)`Change language`}>
+      <Tooltip title={<Trans>Change language</Trans>}>
         <IconButton {...bindTrigger(menuState)}>
           <TranslateIcon />
         </IconButton>

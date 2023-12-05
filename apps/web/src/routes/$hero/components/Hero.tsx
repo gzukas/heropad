@@ -1,7 +1,7 @@
 import { Suspense, useRef } from 'react';
 import { Outlet, useParams, useSearch } from '@tanstack/react-router';
 import { ScopeProvider } from 'bunshi/react';
-import { t } from '@lingui/macro';
+import { msg } from '@lingui/macro';
 import {
   AppBar,
   Avatar,
@@ -29,7 +29,7 @@ import { TabLink } from './TabLink';
 import { useLingui } from '@lingui/react';
 
 export function Hero() {
-  const { i18n } = useLingui();
+  const { _ } = useLingui();
   const { direction } = useSearch({ from: heroRoute.id });
   const { hero } = useParams({ from: heroRoute.id });
   const awardsRef = useRef<HTMLElement>(null);
@@ -73,20 +73,20 @@ export function Hero() {
               )}
             </UseAtomValue>
           </Suspense>
-          <IconButtonLink to="/" edge="end" aria-label={t(i18n)`Close`}>
+          <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
             <CloseIcon />
           </IconButtonLink>
         </Toolbar>
         <Tabs value={direction} variant="fullWidth">
           <TabLink
-            label={t(i18n)`Received`}
+            label={_(msg`Received`)}
             value="received"
             to="/$hero"
             params={prev => prev}
             search={{ direction: 'received' }}
           />
           <TabLink
-            label={t(i18n)`Given`}
+            label={_(msg`Given`)}
             value="given"
             to="/$hero"
             params={prev => prev}

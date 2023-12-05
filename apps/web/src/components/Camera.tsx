@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Button, ButtonGroup, Paper, PaperProps, Tooltip } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -9,7 +9,7 @@ import { useCamera } from '~/hooks/useCamera';
 export function Camera<C extends React.ElementType>(
   props: PaperProps<C, { component: C }>
 ) {
-  const { i18n } = useLingui();
+  const { _ } = useLingui();
   const { zoomIn, zoomOut, reset } = useCamera();
   return (
     <Paper {...props}>
@@ -19,17 +19,17 @@ export function Camera<C extends React.ElementType>(
         variant="text"
         color="inherit"
       >
-        <Tooltip title={t(i18n)`Zoom in`} placement="left">
+        <Tooltip title={_(msg`Zoom in`)} placement="left">
           <Button onClick={zoomIn}>
             <AddIcon />
           </Button>
         </Tooltip>
-        <Tooltip title={t(i18n)`Zoom out`} placement="left">
+        <Tooltip title={_(msg`Zoom out`)} placement="left">
           <Button onClick={zoomOut}>
             <RemoveIcon />
           </Button>
         </Tooltip>
-        <Tooltip title={t(i18n)`Reset zoom`} placement="left">
+        <Tooltip title={_(msg`Reset zoom`)} placement="left">
           <Button onClick={reset}>
             <AdjustIcon />
           </Button>
