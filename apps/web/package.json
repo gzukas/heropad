@@ -48,6 +48,7 @@
     "superjson": "^2.2.1"
   },
   "devDependencies": {
+    "@heropad/eslint-config": "*",
     "@heropad/tsconfig": "*",
     "@lingui/cli": "^4.5.0",
     "@lingui/swc-plugin": "4.0.4",

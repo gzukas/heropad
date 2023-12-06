@@ -13,6 +13,7 @@
     "jotai": "^2.6.0"
   },
   "devDependencies": {
+    "@heropad/eslint-config": "*",
     "@heropad/tsconfig": "*",
     "@tsconfig/strictest": "^2.0.2"
   }
