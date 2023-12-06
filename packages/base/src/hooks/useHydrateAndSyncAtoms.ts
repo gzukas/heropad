@@ -2,10 +2,12 @@ import { useCallback, useRef, useEffect } from 'react';
 import { WritableAtom } from 'jotai';
 import { useHydrateAtoms, useAtomCallback } from 'jotai/utils';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyWritableAtom = WritableAtom<unknown, any[], any>;
 type InferAtomTuples<T> = {
   [K in keyof T]: T[K] extends readonly [infer A, unknown]
-    ? A extends WritableAtom<unknown, infer Args, any>
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      A extends WritableAtom<unknown, infer Args, any>
       ? readonly [A, Args[0]]
       : T[K]
     : never;

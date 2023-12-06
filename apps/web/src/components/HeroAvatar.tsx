@@ -9,7 +9,7 @@ export interface HeroAvatarProps extends Omit<AvatarProps, 'src'> {
 }
 
 export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
-  (props, ref) => {
+  function HeroAvatar(props, ref) {
     const { hero, sx = [], ...other } = props;
     const graph = useAtomValue(graphAtom);
     const getCommunityColor = useGetCommunityColor();

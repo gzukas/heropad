@@ -1,3 +1,4 @@
 {
+  "**/*.{ts,tsx}": ["turbo run lint -- --fix"],
   "**/*.{ts,tsx,md}": ["prettier --write"]
 }

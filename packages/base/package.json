@@ -6,6 +6,9 @@
   "license": "MIT",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint ."
+  },
   "dependencies": {
     "jotai": "^2.6.0"
   },

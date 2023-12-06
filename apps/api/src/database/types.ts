@@ -9,7 +9,7 @@ export interface HeroTable {
   id: Generated<number>;
   username: string;
   name: string;
-  search: string;
+  search: Generated<string>;
 }
 
 export interface AwardTable {
@@ -18,7 +18,7 @@ export interface AwardTable {
   description: string;
   fromId: number;
   toId: number;
-  search: string;
+  search: Generated<string>;
 }
 
 export type Hero = Selectable<HeroTable>;

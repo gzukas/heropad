@@ -24,13 +24,13 @@ export interface HeroAwardsProps {
 }
 
 export const HeroAwards = React.forwardRef<HTMLElement, HeroAwardsProps>(
-  (props, ref) => {
+  function HeroAwards(props, ref) {
     const {
       virtualizerOptions,
       children,
       renderAward = ({ award, virtualAward }, props) => (
         <ListItem key={virtualAward.index} {...props}>
-          <ListItemAward award={award} loading={!Boolean(award)} />
+          <ListItemAward award={award} loading={!award} />
         </ListItem>
       )
     } = props;

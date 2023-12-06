@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path=".snaplet/snaplet.d.ts" />
 
 import { defineConfig } from 'snaplet';

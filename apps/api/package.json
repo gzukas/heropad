@@ -6,6 +6,7 @@
     "dev": "dotenv tsx watch src/server.ts",
     "build": "tsc --build",
     "start": "dotenv node dist/server.js",
+    "lint": "eslint .",
     "db:start": "supabase start --ignore-health-check",
     "db:reset": "supabase db reset",
     "db:stop": "supabase stop",
@@ -27,6 +28,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@heropad/eslint-config": "*",
     "@heropad/tsconfig": "*",
     "@snaplet/copycat": "^0.18.1",
     "@tsconfig/node18": "^18.2.2",

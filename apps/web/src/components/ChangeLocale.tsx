@@ -9,7 +9,6 @@ import {
 import TranslateIcon from '@mui/icons-material/Translate';
 import CheckIcon from '@mui/icons-material/Check';
 import { Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 import {
   usePopupState,
