@@ -1,6 +1,6 @@
 import { List } from '@mui/material';
 import { useAtomValue } from 'jotai';
-import { type SearchSuggestion } from '~/atoms/searchSuggestionsAtom';
+import type { SearchSuggestion } from '~/types';
 import { searchSuggestionsByKindAtom } from '~/atoms/searchSuggestionsByKindAtom';
 import { HeroSuggestionList } from './HeroSuggestionList';
 import { AwardSuggestionList } from './AwardSuggestionList';

@@ -5,11 +5,12 @@ import type {
   RoutePaths
 } from '@tanstack/react-router';
 
-export type Extract<T> = T extends (infer K)[]
-  ? K
-  : T extends Map<infer K, infer V>
-  ? [K, V]
-  : never;
+export type {
+  Award,
+  AwardInput,
+  AwardsInput,
+  SearchSuggestion
+} from '../../api/src/trpc/appRouter';
 
 export interface RouterLinkComponent<TElement extends React.ElementType> {
   <
@@ -20,10 +21,4 @@ export interface RouterLinkComponent<TElement extends React.ElementType> {
     props: React.ComponentProps<TElement> &
       MakeLinkOptions<TRouteTree, TFrom, TTo>
   ): React.ReactNode;
-}
-
-export interface Node {
-  name: string;
-  community?: number;
-  image?: string;
 }

@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemAvatar, ListSubheader } from '@mui/material';
 import { Trans } from '@lingui/macro';
-import { type SearchSuggestion } from '~/atoms/searchSuggestionsAtom';
+import type { SearchSuggestion } from '~/types';
 import { ListItemLink } from '~/components/ListItemLink';
 import { AwardAvatar } from '../AwardAvatar';
 import { SearchSuggestionText } from './SearchSuggestionText';
