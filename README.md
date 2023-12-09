@@ -27,7 +27,6 @@ The API is crafted with:
 - [kysely](https://kysely.dev) for typesafe database querying
 - [zod](https://zod.dev/) for input validation
 - [DiceBear](https://www.dicebear.com/) for avatar generation
-- [Snaplet](https://www.snaplet.dev) for Postgres data seeding
 
 For the web application, the following is used:
 
