@@ -1,4 +1,4 @@
-import { Generated, Selectable } from 'kysely';
+import { Generated } from 'kysely';
 
 export interface Database {
   hero: HeroTable;
@@ -20,6 +20,3 @@ export interface AwardTable {
   toId: number;
   search: Generated<string>;
 }
-
-export type Hero = Selectable<HeroTable>;
-export type Award = Selectable<AwardTable>;
