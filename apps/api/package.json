@@ -11,7 +11,7 @@
     "db:reset": "supabase db reset",
     "db:stop": "supabase stop",
     "db:push": "supabase db push",
-    "db:seed": "dotenv npx snaplet generate"
+    "db:seed": "dotenv tsx scripts/seed.ts"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
@@ -33,9 +33,8 @@
     "@snaplet/copycat": "^0.18.1",
     "@tsconfig/node18": "^18.2.2",
     "@types/pg": "^8.10.9",
-    "graphology": "^0.25.4",
     "graphology-generators": "^0.11.2",
     "supabase": "^1.113.3",
-    "tsx": "^4.5.0"
+    "tsx": "^4.6.2"
   }
 }

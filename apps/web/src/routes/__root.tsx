@@ -49,6 +49,7 @@ const Content = styled('div', { label: 'Content' })<{
 }));
 
 export const rootRoute = rootRouteWithContext<AppRouterContext>()({
+  wrapInSuspense: true,
   loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
     const { hero } = useParams({ from: '/$hero' });
@@ -90,12 +91,9 @@ export const rootRoute = rootRouteWithContext<AppRouterContext>()({
           open={Boolean(hero)}
           variant={isMdUp ? 'persistent' : 'temporary'}
           anchor="right"
-          ModalProps={{
-            keepMounted: true
-          }}
-          sx={{
-            width: drawerWidth,
-            '& .MuiDrawer-paper': {
+          ModalProps={{ keepMounted: true }}
+          PaperProps={{
+            sx: {
               width: drawerWidth
             }
           }}

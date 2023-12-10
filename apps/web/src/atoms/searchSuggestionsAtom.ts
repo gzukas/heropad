@@ -1,7 +1,5 @@
-import { ExtractAtomValue } from 'jotai';
 import { DISABLED } from 'jotai-trpc';
 import { api } from '~/utils/api';
-import { Extract } from '~/types';
 import { debouncedSearchTermAtom } from './searchTermAtom';
 
 export const searchSuggestionsAtom = api.search.getSuggestions.atomWithQuery(
@@ -13,7 +11,3 @@ export const searchSuggestionsAtom = api.search.getSuggestions.atomWithQuery(
     disabledOutput: []
   }
 );
-
-export type SearchSuggestion = Extract<
-  Awaited<ExtractAtomValue<typeof searchSuggestionsAtom>>
->;

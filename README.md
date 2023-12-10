@@ -25,15 +25,15 @@ The API is crafted with:
 - [Fastify](https://fastify.dev), [tRPC](https://trpc.io), and [superjson](https://github.com/blitz-js/superjson) for running an end-to-end typesafe server
 - [Supabase](https://supabase.com) as the database
 - [kysely](https://kysely.dev) for typesafe database querying
+- [zod](https://zod.dev/) for input validation
 - [DiceBear](https://www.dicebear.com/) for avatar generation
-- [Snaplet](https://www.snaplet.dev) for Postgres data seeding
 
 For the web application, the following is used:
 
 - [React](https://react.dev)
 - [Material UI](https://mui.com)
 - [Vite](https://vitejs.dev) as frontend tooling
-- [Jotai](https://jotai.org) with [Bunshi](https://www.bunshi.org/) for state management
+- [Jotai](https://jotai.org) for state management
 - [Graphology](https://graphology.github.io) as graph data structure
 - [Sigma.js](https://www.sigmajs.org), with the helping hand of [React Sigma](https://sim51.github.io/react-sigma), for graph rendering
 - [Lingui](https://lingui.dev) as internationalization framework
