@@ -45,6 +45,10 @@ msgstr "Atkurti mastelį"
 msgid "Search"
 msgstr "Ieškoti"
 
+#: src/components/Search/SearchDialog.tsx
+msgid "Search for heroes and awards..."
+msgstr "Ieškokite herojų ir apdovanojimų..."
+
 #: src/components/ChangeColorScheme.tsx
 msgid "Turn off the light"
 msgstr "Išjungti šviesą"

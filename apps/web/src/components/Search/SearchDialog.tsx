@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
-import { Stack, InputBase, Chip, Dialog } from '@mui/material';
+import { Stack, InputBase, Dialog } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useLingui } from '@lingui/react';
+import { msg } from '@lingui/macro';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
@@ -10,6 +12,7 @@ import { SearchSuggestions } from './SearchSuggestions';
 import { useCloseSearch } from './useCloseSearch';
 
 export function SearchDialog() {
+  const { _ } = useLingui();
   const searchTerm = useAtomValue(searchTermAtom);
   const setDebouncedSearchTerm = useSetAtom(debouncedSearchTermAtom);
   const resetDebouncedSearchTerm = useResetAtom(debouncedSearchTermAtom);
@@ -41,16 +44,11 @@ export function SearchDialog() {
       >
         <SearchIcon />
         <InputBase
+          placeholder={_(msg`Search for heroes and awards...`)}
           sx={{ flex: 1 }}
           value={searchTerm}
           onChange={handleInputChange}
           autoFocus
-        />
-        <Chip
-          size="small"
-          label="esc"
-          variant="outlined"
-          onClick={closeSearch}
         />
       </Stack>
       <Suspense>

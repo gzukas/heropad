@@ -45,6 +45,10 @@ msgstr "Reset zoom"
 msgid "Search"
 msgstr "Search"
 
+#: src/components/Search/SearchDialog.tsx
+msgid "Search for heroes and awards..."
+msgstr ""
+
 #: src/components/ChangeColorScheme.tsx
 msgid "Turn off the light"
 msgstr ""
