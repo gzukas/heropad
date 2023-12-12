@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -34,7 +35,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      lodash: 'src/utils/lodash.ts'
+      lodash: path.resolve(__dirname, './src/utils/lodash.ts')
     }
   },
   server: {
