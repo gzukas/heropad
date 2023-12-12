@@ -1,7 +1,8 @@
 import * as React from 'react';
+import clsx from 'clsx';
 import { Settings } from 'sigma/settings';
 import getNodeProgramImage from 'sigma/rendering/webgl/programs/node.image';
-import clsx from 'clsx';
+import EdgeCurveProgram from '@yomguithereal/sigma-experiments-renderers/edge/edge.curve';
 import { SigmaContainer } from '@react-sigma/core';
 import { useWorkerLayoutForceAtlas2 } from '@react-sigma/layout-forceatlas2';
 import { useAtomValue } from 'jotai';
@@ -18,7 +19,10 @@ const defaultGraphSettings: Partial<Settings> = {
   nodeProgramClasses: {
     image: getNodeProgramImage()
   },
-  defaultEdgeType: 'arrow',
+  edgeProgramClasses: {
+    curve: EdgeCurveProgram
+  },
+  defaultEdgeType: 'curve',
   defaultNodeType: 'image',
   labelFont: 'Roboto, sans-serif',
   zIndex: true
