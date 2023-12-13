@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Outlet, useSearch } from '@tanstack/react-router';
+import { Outlet, RouteApi } from '@tanstack/react-router';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
@@ -13,19 +13,21 @@ import {
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { Hero } from '~/types';
 import { HeroAvatar } from '~/components/HeroAvatar';
 import { IconButtonLink } from '~/components/IconButtonLink';
 import { ListItemAward } from '~/components/ListItemAward';
 import { ListItemLink } from '~/components/ListItemLink';
 import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
-import { heroRoute } from '..';
 import { HeroAwards } from './HeroAwards';
 import { TabLink } from './TabLink';
 
+const routeApi = new RouteApi({ id: '/$hero' });
+
 export function Hero() {
   const { _ } = useLingui();
-  const { direction } = useSearch({ from: heroRoute.id });
-  const { name, username } = heroRoute.useLoaderData();
+  const { direction } = routeApi.useSearch();
+  const { name, username } = routeApi.useLoaderData<Hero>();
   const awardsRef = useRef<HTMLElement>(null);
   const matchesChildRoute = useMatchesChildRoute();
 

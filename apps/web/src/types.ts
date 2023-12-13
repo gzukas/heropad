@@ -6,6 +6,7 @@ import type {
 } from '@tanstack/react-router';
 
 export type {
+  Hero,
   Award,
   AwardInput,
   AwardsInput,

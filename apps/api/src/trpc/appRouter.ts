@@ -17,6 +17,8 @@ export type AppRouter = typeof appRouter;
 type RouterInput = inferRouterInputs<AppRouter>;
 type RouterOutput = inferRouterOutputs<AppRouter>;
 
+export type Hero = RouterOutput['hero']['getHero'];
+
 export type Award = RouterOutput['award']['getAward'];
 export type AwardInput = RouterInput['award']['getAward'];
 export type AwardsInput = RouterInput['award']['getAwards'];
