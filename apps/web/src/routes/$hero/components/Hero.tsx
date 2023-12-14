@@ -13,7 +13,7 @@ import {
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Hero } from '~/types';
+import { Hero as GetHero } from '~/types';
 import { HeroAvatar } from '~/components/HeroAvatar';
 import { IconButtonLink } from '~/components/IconButtonLink';
 import { ListItemAward } from '~/components/ListItemAward';
@@ -27,7 +27,7 @@ const routeApi = new RouteApi({ id: '/$hero' });
 export function Hero() {
   const { _ } = useLingui();
   const { direction } = routeApi.useSearch();
-  const { name, username } = routeApi.useLoaderData<Hero>();
+  const { name, username } = routeApi.useLoaderData<GetHero>();
   const awardsRef = useRef<HTMLElement>(null);
   const matchesChildRoute = useMatchesChildRoute();
 
@@ -101,19 +101,14 @@ export function Hero() {
       >
         <Slide
           appear={false}
-          direction="down"
           in={matchesChildRoute}
           container={awardsRef.current}
         >
           <Paper
             square
-            variant="outlined"
             sx={{
               position: 'sticky',
-              top: 0,
-              width: '100%',
-              borderWidth: 0,
-              borderBottomWidth: 1
+              top: 0
             }}
           >
             <Outlet />
