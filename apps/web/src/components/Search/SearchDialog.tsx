@@ -31,28 +31,42 @@ export function SearchDialog() {
       maxWidth="sm"
       disableRestoreFocus
       fullWidth
+      PaperProps={{ elevation: 3 }}
       sx={{
         '.MuiDialog-container': {
-          alignItems: 'flex-start'
+          alignItems: 'flex-start',
+          pt: 7.5
         }
       }}
     >
       <Stack
-        sx={{ display: 'flex', alignItems: 'center', m: 1 }}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          px: 2,
+          py: 1
+        }}
         direction="row"
-        spacing={1}
+        spacing={1.5}
       >
         <SearchIcon />
         <InputBase
           placeholder={_(msg`Search for heroes and awards...`)}
-          sx={{ flex: 1 }}
+          sx={{ flex: 1, fontSize: '1.2rem' }}
           value={searchTerm}
           onChange={handleInputChange}
           autoFocus
         />
       </Stack>
       <Suspense>
-        <SearchSuggestions />
+        <SearchSuggestions
+          sx={{
+            borderWidth: 0,
+            borderStyle: 'solid',
+            borderTopWidth: 'thin',
+            borderColor: 'divider'
+          }}
+        />
       </Suspense>
     </Dialog>
   );

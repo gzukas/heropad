@@ -33,6 +33,10 @@ msgstr "Davė"
 msgid "Heroes"
 msgstr "Herojai"
 
+#: src/components/Search/SearchSuggestions.tsx
+msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
+msgstr "Nerasta jokių rezultatų užklausai \"<0>{debouncedSearchTerm}</0>\"."
+
 #: src/routes/$hero/components/Hero.tsx
 msgid "Received"
 msgstr "Gavo"

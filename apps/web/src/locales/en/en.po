@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/components/Search/AwardSuggestionList.tsx
 msgid "Awards"
-msgstr "Awards"
+msgstr ""
 
 #: src/components/ChangeLocale.tsx
 msgid "Change language"
@@ -27,23 +27,27 @@ msgstr ""
 
 #: src/routes/$hero/components/Hero.tsx
 msgid "Given"
-msgstr "Given"
+msgstr ""
 
 #: src/components/Search/HeroSuggestionList.tsx
 msgid "Heroes"
-msgstr "Heroes"
+msgstr ""
+
+#: src/components/Search/SearchSuggestions.tsx
+msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
+msgstr ""
 
 #: src/routes/$hero/components/Hero.tsx
 msgid "Received"
-msgstr "Received"
+msgstr ""
 
 #: src/components/Camera.tsx
 msgid "Reset zoom"
-msgstr "Reset zoom"
+msgstr ""
 
 #: src/components/Search/SearchButton.tsx
 msgid "Search"
-msgstr "Search"
+msgstr ""
 
 #: src/components/Search/SearchDialog.tsx
 msgid "Search for heroes and awards..."
@@ -63,8 +67,8 @@ msgstr ""
 
 #: src/components/Camera.tsx
 msgid "Zoom in"
-msgstr "Zoom in"
+msgstr ""
 
 #: src/components/Camera.tsx
 msgid "Zoom out"
-msgstr "Zoom out"
+msgstr ""

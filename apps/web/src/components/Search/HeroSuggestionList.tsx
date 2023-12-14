@@ -15,7 +15,7 @@ export function HeroSuggestionList(props: HeroSuggestionListProps) {
   return (
     <List
       subheader={
-        <ListSubheader>
+        <ListSubheader sx={{ bgcolor: 'inherit' }}>
           <Trans>Heroes</Trans>
         </ListSubheader>
       }

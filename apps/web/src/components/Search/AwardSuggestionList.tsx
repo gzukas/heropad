@@ -15,7 +15,7 @@ export function AwardSuggestionList(props: AwardSuggestionListProps) {
   return (
     <List
       subheader={
-        <ListSubheader>
+        <ListSubheader sx={{ bgcolor: 'inherit' }}>
           <Trans>Awards</Trans>
         </ListSubheader>
       }
