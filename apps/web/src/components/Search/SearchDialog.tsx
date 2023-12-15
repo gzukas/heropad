@@ -33,6 +33,7 @@ export function SearchDialog() {
       fullWidth
       PaperProps={{ elevation: 3 }}
       sx={{
+        zIndex: 'drawer',
         '.MuiDialog-container': {
           alignItems: 'flex-start',
           pt: 7.5
