@@ -3,7 +3,8 @@ import { Theme, styled, useColorScheme } from '@mui/material/styles';
 import {
   useParams,
   rootRouteWithContext,
-  Outlet
+  Outlet,
+  useNavigate
 } from '@tanstack/react-router';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
 import { useHydrateAndSyncAtoms } from '@heropad/base';
@@ -54,8 +55,13 @@ export const rootRoute = rootRouteWithContext<AppRouterContext>()({
   component: function Root() {
     const { hero } = useParams({ from: '/$hero' });
     const { colorScheme } = useColorScheme();
+    const navigate = useNavigate();
     const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
     const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
+
+    const handleDrawerClose = () => {
+      navigate({ to: '/' });
+    };
 
     useHydrateAndSyncAtoms([[selectedNodeAtom, hero]]);
 
@@ -89,9 +95,9 @@ export const rootRoute = rootRouteWithContext<AppRouterContext>()({
         </Content>
         <Drawer
           open={Boolean(hero)}
+          onClose={handleDrawerClose}
           variant={isMdUp ? 'persistent' : 'temporary'}
           anchor="right"
-          ModalProps={{ keepMounted: true }}
           PaperProps={{
             sx: {
               width: drawerWidth
