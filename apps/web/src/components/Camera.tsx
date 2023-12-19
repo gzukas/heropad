@@ -11,6 +11,7 @@ export function Camera<C extends React.ElementType>(
 ) {
   const { _ } = useLingui();
   const { zoomIn, zoomOut, reset } = useCamera();
+
   return (
     <Paper {...props}>
       <ButtonGroup

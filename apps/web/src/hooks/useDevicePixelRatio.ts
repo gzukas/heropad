@@ -5,6 +5,9 @@ function getDevicePixelRatio() {
   return window.devicePixelRatio;
 }
 
+/**
+ * A hook for tracking and retrieving the current device pixel ratio.
+ */
 export function useDevicePixelRatio() {
   const [dpr, setDpr] = useState(getDevicePixelRatio());
   const matches = useMediaQuery(`screen and (resolution: ${dpr}dppx)`);

@@ -1,4 +1,4 @@
-import { Box, Drawer, Stack, useMediaQuery } from '@mui/material';
+import { Drawer, Stack, useMediaQuery } from '@mui/material';
 import { Theme, styled, useColorScheme } from '@mui/material/styles';
 import {
   useParams,
@@ -14,14 +14,14 @@ import { ChangeColorScheme } from '~/components/ChangeColorScheme';
 import { Search } from '~/components/Search/Search';
 import { Absolute } from '~/components/Absolute';
 import { Sociogram } from '~/components/Sociogram/Sociogram';
+import { useAccumulatedContentShift } from '~/hooks/useAccumulatedContentShift';
+import { usePrevious } from '~/hooks/usePrevious';
 import { graphAtom } from '~/atoms/graphAtom';
 import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
-import { AppRouterContext } from '~/router';
-
-const drawerWidth = 400;
+import type { AppRouterContext } from '~/router';
 
 const Content = styled('div', { label: 'Content' })<{
-  shift?: boolean;
+  shift?: number;
 }>(({ theme, shift }) => ({
   position: 'relative',
   transition: theme.transitions.create('margin', {
@@ -30,7 +30,7 @@ const Content = styled('div', { label: 'Content' })<{
   }),
   ...(shift && {
     [theme.breakpoints.up('md')]: {
-      marginRight: drawerWidth,
+      marginRight: shift,
       transition: theme.transitions.create(['margin'], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
@@ -50,14 +50,15 @@ const Content = styled('div', { label: 'Content' })<{
 }));
 
 export const rootRoute = rootRouteWithContext<AppRouterContext>()({
-  wrapInSuspense: true,
   loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
-    const { hero } = useParams({ from: '/$hero' });
+    const { hero } = useParams({ from: '/$hero', strict: true });
     const { colorScheme } = useColorScheme();
-    const navigate = useNavigate();
     const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
     const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
+    const navigate = useNavigate();
+    const shiftContentBy = useAccumulatedContentShift();
+    const previousShiftContentBy = usePrevious(shiftContentBy);
 
     const handleDrawerClose = () => {
       navigate({ to: '/' });
@@ -66,47 +67,41 @@ export const rootRoute = rootRouteWithContext<AppRouterContext>()({
     useHydrateAndSyncAtoms([[selectedNodeAtom, hero]]);
 
     return (
-      <Box>
-        <Content shift={Boolean(hero)}>
-          <Sociogram>
-            <Camera
-              component={Absolute}
-              placement="bottom-right"
-              gutters={24}
-            />
-          </Sociogram>
-          <Stack
-            component={Absolute}
-            placement={isXs ? 'top' : 'top-right'}
-            gap={1}
-            direction="row"
-            sx={theme => ({
-              display: 'flex',
-              alignItems: 'center',
-              padding: theme.spacing(0, 2),
-              ...theme.mixins.toolbar
-            })}
+      <Content shift={shiftContentBy}>
+        <Sociogram>
+          <Camera component={Absolute} placement="bottom-right" gutters={24} />
+          <Drawer
+            open={shiftContentBy > 0}
+            onClose={handleDrawerClose}
+            variant={isMdUp ? 'persistent' : 'temporary'}
+            anchor="right"
+            PaperProps={{
+              sx: {
+                width: shiftContentBy || previousShiftContentBy
+              }
+            }}
           >
-            <Search />
-            <ChangeLocale />
-            <ChangeColorScheme />
-          </Stack>
-          <JotaiDevTools theme={colorScheme} />
-        </Content>
-        <Drawer
-          open={Boolean(hero)}
-          onClose={handleDrawerClose}
-          variant={isMdUp ? 'persistent' : 'temporary'}
-          anchor="right"
-          PaperProps={{
-            sx: {
-              width: drawerWidth
-            }
-          }}
+            <Outlet />
+          </Drawer>
+        </Sociogram>
+        <Stack
+          component={Absolute}
+          placement={isXs ? 'top' : 'top-right'}
+          gap={1}
+          direction="row"
+          sx={theme => ({
+            display: 'flex',
+            alignItems: 'center',
+            px: 2,
+            ...theme.mixins.toolbar
+          })}
         >
-          <Outlet />
-        </Drawer>
-      </Box>
+          <Search />
+          <ChangeLocale />
+          <ChangeColorScheme />
+        </Stack>
+        <JotaiDevTools theme={colorScheme} />
+      </Content>
     );
   }
 });

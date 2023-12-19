@@ -26,7 +26,6 @@ export function AwardSuggestionList(props: AwardSuggestionListProps) {
             to="/$hero/$awardId"
             params={{ hero: from, awardId: id }}
             search={{ direction: 'given' }}
-            {...props}
           >
             <ListItemAvatar>
               <AwardAvatar from={from} to={to} />

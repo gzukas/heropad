@@ -24,7 +24,7 @@
     "@react-sigma/core": "^3.4.2",
     "@react-sigma/layout-core": "^3.4.2",
     "@react-sigma/layout-forceatlas2": "^3.4.2",
-    "@tanstack/react-router": "^0.0.1-beta.266",
+    "@tanstack/react-router": "^0.0.1-beta.279",
     "@tanstack/react-virtual": "3.0.1",
     "@trpc/client": "^10.44.1",
     "@yomguithereal/sigma-experiments-renderers": "^0.2.2",

@@ -9,16 +9,16 @@ interface HeroSearch {
 export const heroRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '$hero',
-  wrapInSuspense: true,
-  loader: ({ context: { store }, params }) =>
-    store.get(heroFamily(params.hero)),
-  validateSearch: ({ direction }: Record<string, unknown>): HeroSearch => {
-    return {
-      direction:
-        direction === 'received' || direction === 'given'
-          ? direction
-          : 'received'
-    };
+  beforeLoad: ({ context }): typeof context => ({
+    ...context,
+    shiftContentBy: 400
+  }),
+  loader: ({ context: { store }, params }) => {
+    return store.get(heroFamily(params.hero));
   },
+  validateSearch: ({ direction }: Record<string, unknown>): HeroSearch => ({
+    direction:
+      direction === 'received' || direction === 'given' ? direction : 'received'
+  }),
   component: lazyRouteComponent(() => import('./components/Hero'), 'Hero')
 });

@@ -1,6 +1,6 @@
 import type {
   AnyRoute,
-  MakeLinkOptions,
+  LinkOptions,
   RegisteredRouter,
   RoutePaths
 } from '@tanstack/react-router';
@@ -19,7 +19,6 @@ export interface RouterLinkComponent<TElement extends React.ElementType> {
     TFrom extends RoutePaths<TRouteTree> = '/',
     TTo extends string = ''
   >(
-    props: React.ComponentProps<TElement> &
-      MakeLinkOptions<TRouteTree, TFrom, TTo>
+    props: React.ComponentProps<TElement> & LinkOptions<TRouteTree, TFrom, TTo>
   ): React.ReactNode;
 }

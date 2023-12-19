@@ -22,7 +22,7 @@ export function HeroSuggestionList(props: HeroSuggestionListProps) {
     >
       {props.suggestions.map(({ id, text, nodes: [[hero]] }) => (
         <ListItem key={id} onClick={closeSearch} disablePadding>
-          <ListItemLink to="/$hero" params={{ hero }} {...props}>
+          <ListItemLink to="/$hero" params={{ hero }}>
             <ListItemAvatar>
               <HeroAvatar hero={hero} />
             </ListItemAvatar>

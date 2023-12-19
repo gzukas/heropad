@@ -7,6 +7,7 @@ import { awardRoute } from './routes/$hero/$awardId';
 
 export interface AppRouterContext {
   store: ReturnType<typeof getDefaultStore>;
+  shiftContentBy?: number;
 }
 
 const routeTree = rootRoute.addChildren([
@@ -16,7 +17,9 @@ const routeTree = rootRoute.addChildren([
 
 export const router = new Router({
   routeTree,
-  context: { store: getDefaultStore() }
+  context: {
+    store: getDefaultStore()
+  }
 });
 
 declare module '@tanstack/react-router' {

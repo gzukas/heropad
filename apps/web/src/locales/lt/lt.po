@@ -26,6 +26,10 @@ msgid "Close"
 msgstr "Uždaryti"
 
 #: src/routes/$hero/components/Hero.tsx
+msgid "Focus on me"
+msgstr "Fokusuoti mane"
+
+#: src/routes/$hero/components/Hero.tsx
 msgid "Given"
 msgstr "Davė"
 

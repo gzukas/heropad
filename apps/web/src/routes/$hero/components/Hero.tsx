@@ -4,20 +4,24 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
   AppBar,
+  Badge,
+  IconButton,
   ListItem,
   Paper,
   Slide,
   Stack,
   Tabs,
   Toolbar,
+  Tooltip,
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Hero as GetHero } from '~/types';
+import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import { HeroAvatar } from '~/components/HeroAvatar';
 import { IconButtonLink } from '~/components/IconButtonLink';
 import { ListItemAward } from '~/components/ListItemAward';
 import { ListItemLink } from '~/components/ListItemLink';
+import { useCamera } from '~/hooks/useCamera';
 import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
 import { HeroAwards } from './HeroAwards';
 import { TabLink } from './TabLink';
@@ -25,30 +29,39 @@ import { TabLink } from './TabLink';
 const routeApi = new RouteApi({ id: '/$hero' });
 
 export function Hero() {
-  const { _ } = useLingui();
   const { direction } = routeApi.useSearch();
-  const { name, username } = routeApi.useLoaderData<GetHero>();
+  const { name, username } = routeApi.useLoaderData();
+  const { _ } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
   const matchesChildRoute = useMatchesChildRoute();
+  const camera = useCamera();
+
+  const handleHeroClick = () => {
+    camera.goto(username);
+  };
 
   return (
     <>
       <AppBar
         position="relative"
         color="inherit"
-        sx={theme => ({
-          zIndex: theme.zIndex.appBar
-        })}
+        sx={{
+          zIndex: 'appBar'
+        }}
       >
-        <Toolbar
-          component={Stack}
-          gap={2}
-          direction="row"
-          disableGutters
-          sx={{ pl: 2, pr: 3 }}
-        >
-          <HeroAvatar hero={username} />
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Toolbar component={Stack} gap={2} direction="row">
+          <Tooltip title={_(msg`Focus on me`)}>
+            <IconButton onClick={handleHeroClick} edge="start">
+              <Badge
+                overlap="circular"
+                badgeContent={<CenterFocusStrongIcon fontSize="small" />}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              >
+                <HeroAvatar hero={username} sx={{ width: 32, height: 32 }} />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+          <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
             {name}
           </Typography>
           <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
