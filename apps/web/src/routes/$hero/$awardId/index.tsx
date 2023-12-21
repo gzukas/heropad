@@ -30,6 +30,7 @@ export const awardRoute = new Route({
           <IconButtonLink
             to="/$hero"
             params={{ hero }}
+            search={prev => prev}
             edge="end"
             sx={{ ml: 0.5 }}
           >
