@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import path from 'node:path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
@@ -32,6 +33,9 @@ export default defineConfig({
         })
       }
     }
+  },
+  test: {
+    globals: true
   },
   resolve: {
     alias: {

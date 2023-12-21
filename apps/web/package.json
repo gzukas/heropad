@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "test": "vitest run",
     "lint": "eslint .",
     "preview": "vite preview",
     "messages:extract": "lingui extract --clean",
@@ -62,6 +63,7 @@
     "@vitejs/plugin-react-swc": "3.5.0",
     "graphology-types": "^0.24.7",
     "vite": "^5.0.8",
-    "vite-tsconfig-paths": "^4.2.2"
+    "vite-tsconfig-paths": "^4.2.2",
+    "vitest": "^1.1.0"
   }
 }
