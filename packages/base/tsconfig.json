@@ -1,4 +1,0 @@
-{
-  "extends": ["@tsconfig/strictest", "@heropad/tsconfig"],
-  "include": ["src"]
-}

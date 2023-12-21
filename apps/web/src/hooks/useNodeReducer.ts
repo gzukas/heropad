@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Settings } from 'sigma/settings';
 import { NodeDisplayData } from 'sigma/types';
 import { useAtomValue } from 'jotai';
-import { useCommittedRef } from '@heropad/base';
+import { useCommittedRef } from '~/hooks/useCommittedRef';
 import { debouncedHoveredAtom } from '~/atoms/hoveredNodeAtom';
 import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
 import { focusedNodesAtom } from '~/atoms/focusedNodesAtom';

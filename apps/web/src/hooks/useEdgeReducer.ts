@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useAtomValue } from 'jotai';
 import { Settings } from 'sigma/settings';
 import { EdgeDisplayData } from 'sigma/types';
-import { useCommittedRef } from '@heropad/base';
+import { useCommittedRef } from '~/hooks/useCommittedRef';
 import { graphAtom } from '~/atoms/graphAtom';
 import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
 

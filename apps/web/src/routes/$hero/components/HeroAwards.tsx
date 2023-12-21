@@ -6,7 +6,7 @@ import {
   useVirtualizer
 } from '@tanstack/react-virtual';
 import { List, ListItem, useForkRef, ListItemProps } from '@mui/material';
-import { useDidUpdate } from '@heropad/base';
+import { useDidUpdate } from '~/hooks/useDidUpdate';
 import { ListItemAward } from '~/components/ListItemAward';
 import { atomsWithPagination } from '~/utils/atomsWithPagination';
 import { api } from '~/utils/api';

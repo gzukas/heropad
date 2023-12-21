@@ -7,13 +7,13 @@ import {
   useNavigate
 } from '@tanstack/react-router';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
-import { useHydrateAndSyncAtoms } from '@heropad/base';
 import { Camera } from '~/components/Camera';
 import { ChangeLocale } from '~/components/ChangeLocale';
 import { ChangeColorScheme } from '~/components/ChangeColorScheme';
 import { Search } from '~/components/Search/Search';
 import { Absolute } from '~/components/Absolute';
 import { Sociogram } from '~/components/Sociogram/Sociogram';
+import { useHydrateAndSyncAtoms } from '~/hooks/useHydrateAndSyncAtoms';
 import { useAccumulatedContentShift } from '~/hooks/useAccumulatedContentShift';
 import { usePrevious } from '~/hooks/usePrevious';
 import { graphAtom } from '~/atoms/graphAtom';
