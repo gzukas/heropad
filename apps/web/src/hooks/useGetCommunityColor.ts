@@ -29,7 +29,7 @@ export function useGetCommunityColor(
 
   invariant(
     communities < colors.length,
-    `Palette has ${colors.length} colors, but there are ${communities} communities in the graph.`
+    `Palette has ${colors.length} color(s), but there are ${communities} community(ies) in the graph.`
   );
 
   return useCallback(

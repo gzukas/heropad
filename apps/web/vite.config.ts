@@ -35,7 +35,8 @@ export default defineConfig({
     }
   },
   test: {
-    globals: true
+    globals: true,
+    environment: 'happy-dom'
   },
   resolve: {
     alias: {
