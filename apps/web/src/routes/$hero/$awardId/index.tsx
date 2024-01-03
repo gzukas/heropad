@@ -12,8 +12,10 @@ const routeApi = new RouteApi({ id: '/$hero/$awardId' });
 export const awardRoute = new Route({
   getParentRoute: () => heroRoute,
   path: '$awardId',
-  loader: ({ context: { store }, params }) => {
-    return store.get(awardFamily(params.awardId));
+  loader: ({ context: { store }, params, abortController }) => {
+    return store.get(
+      awardFamily({ id: params.awardId, signal: abortController.signal })
+    );
   },
   pendingComponent: () => (
     <ListItem>

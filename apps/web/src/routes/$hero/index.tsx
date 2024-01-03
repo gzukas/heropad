@@ -13,8 +13,10 @@ export const heroRoute = new Route({
     ...context,
     shiftContentBy: 400
   }),
-  loader: ({ context: { store }, params }) => {
-    return store.get(heroFamily(params.hero));
+  loader: ({ context: { store }, params, abortController }) => {
+    return store.get(
+      heroFamily({ username: params.hero, signal: abortController.signal })
+    );
   },
   validateSearch: ({ direction }: Record<string, unknown>): HeroSearch => ({
     direction:
