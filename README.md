@@ -39,3 +39,9 @@ For the web application, the following is used:
 - [Lingui](https://lingui.dev) as internationalization framework
 - [Tanstack Router](https://tanstack.com/router) for routing
 - [Tanstack Virtual](https://tanstack.com/virtual) for virtualizing large award lists
+
+The following is utilized for testing purposes:
+
+- [vitest](https://vitest.dev) as the testing framework
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) is used for testing React components and hooks
+- [msw](https://mswjs.io) and [msw-trpc](https://github.com/maloguertin/msw-trpc) for mocking the API
