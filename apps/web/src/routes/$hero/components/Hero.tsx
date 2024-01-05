@@ -73,14 +73,14 @@ export function Hero() {
             label={_(msg`Received`)}
             value="received"
             to="/$hero"
-            params={prev => prev}
+            params={{ hero: username }}
             search={{ direction: 'received' }}
           />
           <TabLink
             label={_(msg`Given`)}
             value="given"
             to="/$hero"
-            params={prev => prev}
+            params={{ hero: username }}
             search={{ direction: 'given' }}
           />
         </Tabs>
@@ -101,7 +101,7 @@ export function Hero() {
             {award ? (
               <ListItemLink
                 to="/$hero/$awardId"
-                params={prev => ({ ...prev, awardId: award.id })}
+                params={{ hero: username, awardId: award.id }}
                 search={prev => prev}
               >
                 <ListItemAward award={award} />

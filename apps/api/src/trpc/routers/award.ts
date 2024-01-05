@@ -23,7 +23,7 @@ export const awardRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) =>
       selectAwards(ctx.db)
-        .where(eb => eb('award.id', '=', pqids(eb).decode(input.id)))
+        .where('award.id', '=', eb => pqids(eb).decode(input.id))
         .executeTakeFirstOrThrow()
     ),
   getAwards: dbProcedure

@@ -1,6 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env"],
+  "globalEnv": [
+    "HEROPAD_DB_URL",
+    "HEROPAD_CORS_ORIGIN",
+    "HEROPAD_HOST",
+    "HEROPAD_PORT",
+    "HEROPAD_PQIDS_SALT"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": [
@@ -10,13 +16,11 @@
         "dist/**"
       ]
     },
-    "lint": {
-      "outputs": []
-    },
     "dev": {
       "cache": false,
       "persistent": true
     },
+    "lint": {},
     "test": {}
   }
 }
