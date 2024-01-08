@@ -30,14 +30,14 @@ const routeApi = new RouteApi({ id: '/$hero' });
 
 export function Hero() {
   const { direction } = routeApi.useSearch();
-  const { name, username } = routeApi.useLoaderData();
+  const { hero, awardPaginationAtoms } = routeApi.useLoaderData();
   const { _ } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
   const matchesChildRoute = useMatchesChildRoute();
   const camera = useCamera();
 
   const handleHeroClick = () => {
-    camera.goto(username);
+    camera.goto(hero.username);
   };
 
   return (
@@ -57,12 +57,15 @@ export function Hero() {
                 badgeContent={<CenterFocusStrongIcon fontSize="small" />}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               >
-                <HeroAvatar hero={username} sx={{ width: 32, height: 32 }} />
+                <HeroAvatar
+                  hero={hero.username}
+                  sx={{ width: 32, height: 32 }}
+                />
               </Badge>
             </IconButton>
           </Tooltip>
           <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
-            {name}
+            {hero.name}
           </Typography>
           <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
             <CloseIcon />
@@ -73,22 +76,21 @@ export function Hero() {
             label={_(msg`Received`)}
             value="received"
             to="/$hero"
-            params={{ hero: username }}
+            params={{ hero: hero.username }}
             search={{ direction: 'received' }}
           />
           <TabLink
             label={_(msg`Given`)}
             value="given"
             to="/$hero"
-            params={{ hero: username }}
+            params={{ hero: hero.username }}
             search={{ direction: 'given' }}
           />
         </Tabs>
       </AppBar>
       <HeroAwards
-        hero={username}
-        direction={direction}
         ref={awardsRef}
+        awardPaginationAtoms={awardPaginationAtoms}
         virtualizerOptions={{
           paddingStart: matchesChildRoute ? 72 : 0
         }}
@@ -101,7 +103,7 @@ export function Hero() {
             {award ? (
               <ListItemLink
                 to="/$hero/$awardId"
-                params={{ hero: username, awardId: award.id }}
+                params={{ hero: hero.username, awardId: award.id }}
                 search={prev => prev}
               >
                 <ListItemAward award={award} />

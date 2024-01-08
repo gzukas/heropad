@@ -75,6 +75,7 @@ export const rootRoute = rootRouteWithContext<AppRouterContext>()({
             onClose={handleDrawerClose}
             variant={isMdUp ? 'persistent' : 'temporary'}
             anchor="right"
+            ModalProps={{ keepMounted: true }}
             PaperProps={{
               sx: {
                 width: shiftContentBy || previousShiftContentBy

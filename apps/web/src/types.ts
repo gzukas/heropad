@@ -8,8 +8,7 @@ import type {
 export type {
   Hero,
   Award,
-  AwardInput,
-  AwardsInput,
+  AwardsOutput,
   SearchSuggestion
 } from '../../api/src/trpc/appRouter';
 

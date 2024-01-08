@@ -1,5 +1,5 @@
-import React, { useMemo, useRef } from 'react';
-import { Atom, useAtom, useAtomValue } from 'jotai';
+import React, { useRef } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import {
   VirtualItem,
   VirtualizerOptions,
@@ -8,17 +8,16 @@ import {
 import { List, ListItem, useForkRef, ListItemProps } from '@mui/material';
 import { useDidUpdate } from '~/hooks/useDidUpdate';
 import { ListItemAward } from '~/components/ListItemAward';
-import { atomsWithPagination } from '~/utils/atomsWithPagination';
-import { api } from '~/utils/api';
-import type { Award, AwardsInput } from '~/types';
+import { AtomsWithPaginationResult } from '~/utils/atomsWithPagination';
+import type { Award, AwardsOutput } from '~/types';
 
 export type RenderAwardFunction = (
   options: { award?: Award; virtualAward: VirtualItem },
   props: ListItemProps
 ) => React.ReactNode;
 
-export interface HeroAwardsProps
-  extends Pick<AwardsInput, 'hero' | 'direction'> {
+export interface HeroAwardsProps {
+  awardPaginationAtoms: AtomsWithPaginationResult<AwardsOutput>;
   virtualizerOptions?: Partial<VirtualizerOptions<HTMLElement, Element>>;
   renderAward?: RenderAwardFunction;
   children?: React.ReactNode;
@@ -27,8 +26,7 @@ export interface HeroAwardsProps
 export const HeroAwards = React.forwardRef<HTMLElement, HeroAwardsProps>(
   function HeroAwards(props, ref) {
     const {
-      hero,
-      direction,
+      awardPaginationAtoms: { pagesAtom, fetchNextPageAtom, loadableQueryAtom },
       virtualizerOptions,
       children,
       renderAward = ({ award, virtualAward }, props) => (
@@ -40,20 +38,6 @@ export const HeroAwards = React.forwardRef<HTMLElement, HeroAwardsProps>(
 
     const listRef = useRef<HTMLElement>(null);
     const handleListRef = useForkRef(listRef, ref);
-
-    const { pagesAtom, fetchNextPageAtom, loadableQueryAtom } = useMemo(
-      () =>
-        atomsWithPagination({
-          getQueryAtom: (givenSinceAtom: Atom<Date | undefined>) =>
-            api.award.getAwards.atomWithQuery(get => ({
-              givenSince: get(givenSinceAtom),
-              hero,
-              direction
-            })),
-          getNextPageParam: lastPage => lastPage?.nextGivenAt
-        }),
-      [hero, direction]
-    );
 
     const pages = useAtomValue(pagesAtom);
     const awards = pages.flatMap(page => page?.rows);
