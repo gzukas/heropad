@@ -197,13 +197,13 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
       '@lingui/cli':
-        specifier: ^4.6.0
+        specifier: ^4.7.0
         version: 4.7.0(typescript@5.3.3)
       '@lingui/swc-plugin':
         specifier: 4.0.4
         version: 4.0.4(@lingui/macro@4.7.0)
       '@lingui/vite-plugin':
-        specifier: ^4.6.0
+        specifier: ^4.7.0
         version: 4.7.0(typescript@5.3.3)(vite@5.0.11)
       '@swc-jotai/debug-label':
         specifier: ^0.1.0
@@ -5045,6 +5045,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}

@@ -50,9 +50,9 @@
   "devDependencies": {
     "@heropad/eslint-config": "workspace:*",
     "@heropad/tsconfig": "workspace:*",
-    "@lingui/cli": "^4.6.0",
+    "@lingui/cli": "^4.7.0",
     "@lingui/swc-plugin": "4.0.4",
-    "@lingui/vite-plugin": "^4.6.0",
+    "@lingui/vite-plugin": "^4.7.0",
     "@swc-jotai/debug-label": "^0.1.0",
     "@swc-jotai/react-refresh": "^0.1.0",
     "@testing-library/react": "^14.1.2",
