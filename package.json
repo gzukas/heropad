@@ -18,9 +18,9 @@
     "turbo": "latest",
     "typescript": "^5.3.3"
   },
-  "overrides": {
-    "@react-sigma/core": {
-      "sigma": "3.0.0-alpha3"
+  "pnpm": {
+    "overrides": {
+      "@react-sigma/core>sigma": "3.0.0-alpha3"
     }
   },
   "packageManager": "pnpm@8.14.0",

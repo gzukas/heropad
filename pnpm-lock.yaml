@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@react-sigma/core>sigma': 3.0.0-alpha3
+
 importers:
 
   .:
@@ -2112,7 +2115,7 @@ packages:
       graphology: ^0.25.1
       lodash: ^4.17.21
       react: ^17.0.0 || ^18.0.0
-      sigma: ^2.4.0
+      sigma: 3.0.0-alpha3
     dependencies:
       graphology: 0.25.4(graphology-types@0.24.7)
       lodash: 4.17.21
