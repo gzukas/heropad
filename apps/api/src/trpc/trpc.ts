@@ -2,7 +2,7 @@ import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 import { NoResultError } from 'kysely';
-import { db } from '../database/index.js';
+import { db } from '../database/db.js';
 
 export function createContext() {
   return {
