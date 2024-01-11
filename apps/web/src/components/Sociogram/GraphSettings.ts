@@ -14,8 +14,8 @@ export function GraphSettings() {
     () =>
       recomposeColor(
         blendAlpha(
-          decomposeColor(palette.background.default),
           decomposeColor(palette.action.selected),
+          decomposeColor(palette.background.default),
           palette.action.selectedOpacity
         )
       ),
