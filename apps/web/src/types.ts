@@ -12,12 +12,12 @@ export type {
   SearchSuggestion
 } from '../../api/src/trpc/appRouter';
 
-export interface RouterLinkComponent<TElement extends React.ElementType> {
+export interface RouterLinkComponent<TProps> {
   <
     TRouteTree extends AnyRoute = RegisteredRouter['routeTree'],
     TFrom extends RoutePaths<TRouteTree> = '/',
     TTo extends string = ''
   >(
-    props: React.ComponentProps<TElement> & LinkOptions<TRouteTree, TFrom, TTo>
+    props: LinkOptions<TRouteTree, TFrom, TTo> & TProps
   ): React.ReactNode;
 }
