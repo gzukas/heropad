@@ -33,6 +33,7 @@
     "@snaplet/copycat": "^1.2.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/pg": "^8.10.9",
+    "graphology": "0.25.4",
     "graphology-generators": "^0.11.2",
     "supabase": "^1.131.4",
     "tsx": "^4.7.0"
