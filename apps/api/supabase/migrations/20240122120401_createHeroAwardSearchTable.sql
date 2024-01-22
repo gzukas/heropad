@@ -3,7 +3,7 @@ SELECT
   "hero"."id" AS "id",
   "name" AS "text",
   "hero"."search" AS "search",
-  ARRAY [["username", "name"]] AS "nodes",
+  ARRAY[["username", "name"]] AS "nodes",
   'hero' AS "kind"
 FROM
   "hero"
