@@ -12,7 +12,7 @@ const server = fastify({
 });
 
 await server.register(cors, {
-  origin: process.env.HEROPAD_CORS_ORIGIN || '*'
+  origin: process.env.HEROPAD_CORS_ORIGIN?.split(',') ?? '*'
 });
 await server.register(compress);
 await server.register(avatarRoutes);
