@@ -1,6 +1,6 @@
 # Heropad
 
-Heropad ([heropad.onrender.com](https://heropad.onrender.com)) is an experimental full-stack application designed to visualize social links. It introduces an innovative way to explore and understand the dynamic network of relationships between heroes, providing insights into the awards they have earned.
+Heropad ([heropad.gzukas.lt](https://heropad.gzukas.lt)) is an experimental full-stack application designed to visualize social links. It introduces an innovative way to explore and understand the dynamic network of relationships between heroes, providing insights into the awards they have earned.
 
 Note that the generated hero names and awards are entirely fictional, with no intentional resemblance to the real world.
 
