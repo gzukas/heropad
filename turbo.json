@@ -7,7 +7,7 @@
     "HEROPAD_PORT",
     "HEROPAD_PQIDS_SALT"
   ],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": [
         "^build"
