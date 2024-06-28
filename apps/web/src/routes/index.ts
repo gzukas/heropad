@@ -1,7 +1,7 @@
-import { Route } from '@tanstack/react-router';
+import { createRoute } from '@tanstack/react-router';
 import { rootRoute } from './__root';
 
-export const indexRoute = new Route({
+export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/'
 });

@@ -10,18 +10,13 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "dotenv-cli": "^7.3.0",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^8.56.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
-    "prettier": "3.2.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "3.3.2",
     "turbo": "^2.0.5",
-    "typescript": "^5.3.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "@react-sigma/core>sigma": "3.0.0-alpha3"
-    }
+    "typescript": "^5.5.2"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

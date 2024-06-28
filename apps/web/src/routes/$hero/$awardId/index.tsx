@@ -1,15 +1,14 @@
-import { ListItem, Tooltip } from '@mui/material';
+import { IconButton, ListItem, Tooltip } from '@mui/material';
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { Route, RouteApi } from '@tanstack/react-router';
+import { Link, createRoute, getRouteApi } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { awardFamily } from '~/atoms/awardFamily';
 import { ListItemAward } from '~/components/ListItemAward';
-import { IconButtonLink } from '~/components/IconButtonLink';
 import { heroRoute } from '../index';
 
-const routeApi = new RouteApi({ id: '/$hero/$awardId' });
+const routeApi = getRouteApi('/$hero/$awardId');
 
-export const awardRoute = new Route({
+export const awardRoute = createRoute({
   getParentRoute: () => heroRoute,
   path: '$awardId',
   loader: ({ context: { store }, params, abortController }) => {
@@ -29,7 +28,8 @@ export const awardRoute = new Route({
       <ListItem>
         <ListItemAward award={award} />
         <Tooltip title={<Trans>Unpin award</Trans>}>
-          <IconButtonLink
+          <IconButton
+            component={Link}
             to="/$hero"
             params={{ hero }}
             search={prev => prev}
@@ -37,7 +37,7 @@ export const awardRoute = new Route({
             sx={{ ml: 0.5 }}
           >
             <PushPinIcon />
-          </IconButtonLink>
+          </IconButton>
         </Tooltip>
       </ListItem>
     );

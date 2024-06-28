@@ -1,7 +1,13 @@
-import { List, ListItem, ListItemAvatar, ListSubheader } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListSubheader
+} from '@mui/material';
 import { Trans } from '@lingui/macro';
+import { Link } from '@tanstack/react-router';
 import type { SearchSuggestion } from '~/types';
-import { ListItemLink } from '~/components/ListItemLink';
 import { HeroAvatar } from '../HeroAvatar';
 import { SearchSuggestionText } from './SearchSuggestionText';
 import { useCloseSearch } from './useCloseSearch';
@@ -22,12 +28,12 @@ export function HeroSuggestionList(props: HeroSuggestionListProps) {
     >
       {props.suggestions.map(({ id, text, nodes: [[hero]] }) => (
         <ListItem key={id} onClick={closeSearch} disablePadding>
-          <ListItemLink to="/$hero" params={{ hero }}>
+          <ListItemButton component={Link} to="/$hero" params={{ hero }}>
             <ListItemAvatar>
               <HeroAvatar hero={hero} />
             </ListItemAvatar>
             <SearchSuggestionText text={text} />
-          </ListItemLink>
+          </ListItemButton>
         </ListItem>
       ))}
     </List>

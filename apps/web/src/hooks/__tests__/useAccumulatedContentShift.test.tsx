@@ -1,38 +1,39 @@
 import {
-  Route,
-  Router,
   RouterProvider,
   createMemoryHistory,
-  rootRouteWithContext
+  createRootRouteWithContext,
+  createRoute,
+  createRouter
 } from '@tanstack/react-router';
 import { render, screen } from '@testing-library/react';
-import { AppRouterContext } from '~/router';
 import { useAccumulatedContentShift } from '../useAccumulatedContentShift';
+import { AppRouterContext } from '~/router';
 
 describe('useAccumulatedContentShift', () => {
   it('should return accumulated content shift from route matches', async () => {
-    const rootRoute = rootRouteWithContext<Partial<AppRouterContext>>()({
-      beforeLoad: () => ({
+    const rootRoute = createRootRouteWithContext<AppRouterContext>()({
+      staticData: {
         shiftContentBy: 100
-      })
+      }
     });
-    const indexRoute = new Route({
+    const indexRoute = createRoute({
       getParentRoute: () => rootRoute,
-      beforeLoad: () => ({
-        shiftContentBy: 200
-      }),
+      staticData: {
+        shiftContentBy: 100
+      },
       path: '/',
       component: function Index() {
         const shift = useAccumulatedContentShift();
         return <>{shift}</>;
       }
     });
-    const router = new Router({
+    const router = createRouter({
       routeTree: rootRoute.addChildren([indexRoute]),
       history: createMemoryHistory()
     });
 
-    render(<RouterProvider router={router} />);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    render(<RouterProvider router={router as any} />);
 
     expect(await screen.findByText('300')).toBeDefined();
   });

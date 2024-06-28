@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import path from 'node:path';
+// import path from 'node:path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -37,11 +37,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom'
-  },
-  resolve: {
-    alias: {
-      lodash: path.resolve(__dirname, './src/utils/lodash.ts')
-    }
   },
   server: {
     port: 3000

@@ -2,9 +2,9 @@ import { Drawer, Stack, useMediaQuery } from '@mui/material';
 import { Theme, styled, useColorScheme } from '@mui/material/styles';
 import {
   useParams,
-  rootRouteWithContext,
   Outlet,
-  useNavigate
+  useNavigate,
+  createRootRouteWithContext
 } from '@tanstack/react-router';
 import { DevTools as JotaiDevTools } from 'jotai-devtools';
 import { Camera } from '~/components/Camera';
@@ -49,10 +49,10 @@ const Content = styled('div', { label: 'Content' })<{
   })
 }));
 
-export const rootRoute = rootRouteWithContext<AppRouterContext>()({
+export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
   loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
-    const { hero } = useParams({ from: '/$hero', strict: true });
+    const { hero } = useParams({ strict: false });
     const { colorScheme } = useColorScheme();
     const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
     const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));

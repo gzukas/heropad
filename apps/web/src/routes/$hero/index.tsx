@@ -1,4 +1,4 @@
-import { Route, lazyRouteComponent } from '@tanstack/react-router';
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
 import { rootRoute } from '../__root';
 import { heroFamily } from '~/atoms/heroFamily';
 import { atomsWithPagination } from '~/utils/atomsWithPagination';
@@ -9,13 +9,13 @@ interface HeroSearch {
   direction?: 'received' | 'given';
 }
 
-export const heroRoute = new Route({
+export const heroRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '$hero',
   shouldReload: false,
-  beforeLoad: () => ({
+  staticData: {
     shiftContentBy: 400
-  }),
+  },
   loaderDeps: ({ search: { direction } }) => ({ direction }),
   loader: async ({
     context: { store },

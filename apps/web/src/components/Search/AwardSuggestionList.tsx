@@ -1,7 +1,13 @@
-import { List, ListItem, ListItemAvatar, ListSubheader } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListSubheader
+} from '@mui/material';
 import { Trans } from '@lingui/macro';
+import { Link } from '@tanstack/react-router';
 import type { SearchSuggestion } from '~/types';
-import { ListItemLink } from '~/components/ListItemLink';
 import { AwardAvatar } from '../AwardAvatar';
 import { SearchSuggestionText } from './SearchSuggestionText';
 import { useCloseSearch } from './useCloseSearch';
@@ -22,7 +28,8 @@ export function AwardSuggestionList(props: AwardSuggestionListProps) {
     >
       {props.suggestions.map(({ id, text, nodes: [[from], [to]] }) => (
         <ListItem key={id} onClick={closeSearch} disablePadding>
-          <ListItemLink
+          <ListItemButton
+            component={Link}
             to="/$hero/$awardId"
             params={{ hero: from, awardId: id }}
             search={{ direction: 'given' }}
@@ -31,7 +38,7 @@ export function AwardSuggestionList(props: AwardSuggestionListProps) {
               <AwardAvatar from={from} to={to} />
             </ListItemAvatar>
             <SearchSuggestionText text={text} />
-          </ListItemLink>
+          </ListItemButton>
         </ListItem>
       ))}
     </List>

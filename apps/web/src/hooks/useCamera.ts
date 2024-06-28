@@ -1,5 +1,5 @@
 import { useSigma } from '@react-sigma/core';
-import { AnimateOptions } from 'sigma/utils/animate';
+import { AnimateOptions } from 'sigma/utils';
 import { useEventCallback } from './useEventCallback';
 import { useAccumulatedContentShift } from './useAccumulatedContentShift';
 

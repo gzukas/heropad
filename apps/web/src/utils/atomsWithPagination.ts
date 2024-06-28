@@ -25,10 +25,10 @@ export function atomsWithPagination<TPage, TNextPageParam>({
   const nextPageParamAtom = atom<TNextPageParam | undefined>(undefined);
   const queryAtom = getQueryAtom(nextPageParamAtom);
   const pagesAtom = unwrap(
-    selectAtom<Promise<TPage>, TPage[]>(queryAtom, (curr, prev = []) => [
-      ...prev,
-      curr
-    ]),
+    selectAtom<Awaited<TPage> | undefined, TPage[]>(
+      unwrap(queryAtom),
+      (curr, prev = []) => [...prev, ...(curr ? [curr] : [])]
+    ),
     prev => prev || []
   );
 

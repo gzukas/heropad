@@ -1,5 +1,5 @@
-import drawLabel from 'sigma/rendering/canvas/label';
-import drawHover from 'sigma/rendering/canvas/hover';
+// import drawLabel from 'sigma/rendering/canvas/label';
+import { NodeHoverDrawingFunction, drawDiscNodeLabel } from 'sigma/rendering';
 import { Settings } from 'sigma/settings';
 
 export interface CreateNodeHoverRendererOptions {
@@ -7,9 +7,9 @@ export interface CreateNodeHoverRendererOptions {
   labelColor?: Settings['labelColor'];
 }
 
-export function createNodeHoverRenderer(
+export function createNodeHoverDrawingFunction(
   options: CreateNodeHoverRendererOptions = {}
-): typeof drawHover {
+): NodeHoverDrawingFunction {
   const { hoverBackgroundColor = '#fff', labelColor } = options;
 
   return (context, data, settings) => {
@@ -43,7 +43,7 @@ export function createNodeHoverRenderer(
     context.closePath();
     context.fill();
 
-    drawLabel(context, data, {
+    drawDiscNodeLabel(context, data, {
       ...settings,
       labelColor: labelColor || settings.labelColor
     });

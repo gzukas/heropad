@@ -1,12 +1,5 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": [
-    "HEROPAD_DB_URL",
-    "HEROPAD_CORS_ORIGIN",
-    "HEROPAD_HOST",
-    "HEROPAD_PORT",
-    "HEROPAD_PQIDS_SALT"
-  ],
   "tasks": {
     "build": {
       "dependsOn": [
@@ -14,6 +7,17 @@
       ],
       "outputs": [
         "dist/**"
+      ]
+    },
+    "@heropad/api#build": {
+      "env": [
+        "HEROPAD_*"
+      ]
+    },
+    "@heropad/web#build": {
+      "env": [
+        "VITE_*",
+        "DEV"
       ]
     },
     "dev": {

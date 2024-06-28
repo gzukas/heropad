@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Outlet, RouteApi } from '@tanstack/react-router';
+import { Link, Outlet, getRouteApi } from '@tanstack/react-router';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
@@ -7,9 +7,11 @@ import {
   Badge,
   IconButton,
   ListItem,
+  ListItemButton,
   Paper,
   Slide,
   Stack,
+  Tab,
   Tabs,
   Toolbar,
   Tooltip,
@@ -18,15 +20,12 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import { HeroAvatar } from '~/components/HeroAvatar';
-import { IconButtonLink } from '~/components/IconButtonLink';
 import { ListItemAward } from '~/components/ListItemAward';
-import { ListItemLink } from '~/components/ListItemLink';
 import { useCamera } from '~/hooks/useCamera';
 import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
 import { HeroAwards } from './HeroAwards';
-import { TabLink } from './TabLink';
 
-const routeApi = new RouteApi({ id: '/$hero' });
+const routeApi = getRouteApi('/$hero');
 
 export function Hero() {
   const { direction } = routeApi.useSearch();
@@ -67,19 +66,26 @@ export function Hero() {
           <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
             {hero.name}
           </Typography>
-          <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
+          <IconButton
+            component={Link}
+            to="/"
+            edge="end"
+            aria-label={_(msg`Close`)}
+          >
             <CloseIcon />
-          </IconButtonLink>
+          </IconButton>
         </Toolbar>
         <Tabs value={direction} variant="fullWidth">
-          <TabLink
+          <Tab
+            component={Link}
             label={_(msg`Received`)}
             value="received"
             to="/$hero"
             params={{ hero: hero.username }}
             search={{ direction: 'received' }}
           />
-          <TabLink
+          <Tab
+            component={Link}
             label={_(msg`Given`)}
             value="given"
             to="/$hero"
@@ -101,13 +107,14 @@ export function Hero() {
             {...props}
           >
             {award ? (
-              <ListItemLink
+              <ListItemButton
+                component={Link}
                 to="/$hero/$awardId"
                 params={{ hero: hero.username, awardId: award.id }}
                 search={prev => prev}
               >
                 <ListItemAward award={award} />
-              </ListItemLink>
+              </ListItemButton>
             ) : (
               <ListItemAward loading />
             )}

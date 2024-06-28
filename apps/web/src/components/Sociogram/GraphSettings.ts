@@ -4,7 +4,7 @@ import { useSetSettings } from '@react-sigma/core';
 import { useEdgeReducer } from '~/hooks/useEdgeReducer';
 import { useNodeReducer } from '~/hooks/useNodeReducer';
 import { blendAlpha } from '~/utils/blendAlpha';
-import { createNodeHoverRenderer } from '~/utils/createNodeHoverRenderer';
+import { createNodeHoverDrawingFunction } from '~/utils/createNodeHoverDrawingFunction';
 
 export function GraphSettings() {
   const setSettings = useSetSettings();
@@ -36,7 +36,7 @@ export function GraphSettings() {
     setSettings({
       nodeReducer,
       edgeReducer,
-      hoverRenderer: createNodeHoverRenderer({
+      defaultDrawNodeHover: createNodeHoverDrawingFunction({
         hoverBackgroundColor: palette.primary.main,
         labelColor: { color: palette.primary.contrastText }
       }),
