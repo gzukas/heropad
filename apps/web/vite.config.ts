@@ -1,8 +1,7 @@
 /// <reference types="vitest" />
-// import path from 'node:path';
+import path from 'node:path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { lingui } from '@lingui/vite-plugin';
 
 function createManualChunks(chunks: Record<string, RegExp>) {
@@ -13,7 +12,6 @@ function createManualChunks(chunks: Record<string, RegExp>) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    tsconfigPaths(),
     react({
       plugins: [
         ['@lingui/swc-plugin', {}],
@@ -32,6 +30,11 @@ export default defineConfig({
             /\/sigma|@yomguithereal\/helpers|events|graphology|mnemonist|obliterator|pandemonium/
         })
       }
+    }
+  },
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, './src')
     }
   },
   test: {
