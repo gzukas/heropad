@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "test": "vitest run",
+    "test": "vitest",
     "lint": "eslint .",
     "preview": "vite preview",
     "messages:extract": "lingui extract --clean",

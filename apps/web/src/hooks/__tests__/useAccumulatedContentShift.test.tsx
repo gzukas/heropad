@@ -19,7 +19,7 @@ describe('useAccumulatedContentShift', () => {
     const indexRoute = createRoute({
       getParentRoute: () => rootRoute,
       staticData: {
-        shiftContentBy: 100
+        shiftContentBy: 200
       },
       path: '/',
       component: function Index() {
