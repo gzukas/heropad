@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
   "tasks": {
     "build": {
       "dependsOn": [
@@ -10,11 +11,13 @@
       ]
     },
     "@heropad/api#build": {
+      "dependsOn": ["^build"],
       "env": [
         "HEROPAD_*"
       ]
     },
     "@heropad/web#build": {
+      "dependsOn": ["^build"],
       "env": [
         "VITE_*",
         "DEV"

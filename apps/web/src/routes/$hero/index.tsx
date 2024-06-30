@@ -44,5 +44,5 @@ export const heroRoute = createRoute({
     direction:
       direction === 'received' || direction === 'given' ? direction : 'received'
   }),
-  component: lazyRouteComponent(() => import('./components/Hero'), 'Hero')
+  component: lazyRouteComponent(() => import('./Hero'), 'Hero')
 });

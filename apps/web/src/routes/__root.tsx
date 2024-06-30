@@ -1,5 +1,5 @@
 import { Drawer, Stack, useMediaQuery } from '@mui/material';
-import { Theme, styled, useColorScheme } from '@mui/material/styles';
+import { Theme, useColorScheme } from '@mui/material/styles';
 import {
   useParams,
   Outlet,
@@ -19,35 +19,7 @@ import { usePrevious } from '~/hooks/usePrevious';
 import { graphAtom } from '~/atoms/graphAtom';
 import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
 import type { AppRouterContext } from '~/router';
-
-const Content = styled('div', { label: 'Content' })<{
-  shift?: number;
-}>(({ theme, shift }) => ({
-  position: 'relative',
-  transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen
-  }),
-  ...(shift && {
-    [theme.breakpoints.up('md')]: {
-      marginRight: shift,
-      transition: theme.transitions.create(['margin'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    }
-  }),
-  '.sigma-container': {
-    width: '100dvw',
-    height: '100dvh'
-  },
-  '.Sociogram-nodeHovered .sigma-mouse': {
-    cursor: 'pointer'
-  },
-  ...(import.meta.env.DEV && {
-    '.jotai-devtools-shell': { position: 'absolute' }
-  })
-}));
+import { Layout } from './Layout';
 
 export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
   loader: ({ context: { store } }) => store.get(graphAtom),
@@ -67,7 +39,21 @@ export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
     useHydrateAndSyncAtoms([[selectedNodeAtom, hero]]);
 
     return (
-      <Content shift={shiftContentBy}>
+      <Layout
+        shift={shiftContentBy}
+        sx={{
+          '.sigma-container': {
+            width: '100dvw',
+            height: '100dvh'
+          },
+          '.Sociogram-nodeHovered .sigma-mouse': {
+            cursor: 'pointer'
+          },
+          ...(import.meta.env.DEV && {
+            '.jotai-devtools-shell': { position: 'absolute' }
+          })
+        }}
+      >
         <Sociogram>
           <Camera component={Absolute} placement="bottom-right" gutters={24} />
           <Drawer
@@ -102,7 +88,7 @@ export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
           <ChangeColorScheme />
         </Stack>
         <JotaiDevTools theme={colorScheme} />
-      </Content>
+      </Layout>
     );
   }
 });
