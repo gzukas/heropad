@@ -13,11 +13,7 @@ function createManualChunks(chunks: Record<string, RegExp>) {
 export default defineConfig({
   plugins: [
     react({
-      plugins: [
-        ['@lingui/swc-plugin', {}],
-        ['@swc-jotai/debug-label', {}],
-        ['@swc-jotai/react-refresh', {}]
-      ]
+      plugins: [['@lingui/swc-plugin', {}]]
     }),
     lingui(),
     splitVendorChunkPlugin()

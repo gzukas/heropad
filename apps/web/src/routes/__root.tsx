@@ -1,12 +1,11 @@
 import { Drawer, Stack, useMediaQuery } from '@mui/material';
-import { Theme, useColorScheme } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles';
 import {
   useParams,
   Outlet,
   useNavigate,
   createRootRouteWithContext
 } from '@tanstack/react-router';
-import { DevTools as JotaiDevTools } from 'jotai-devtools';
 import { Camera } from '~/components/Camera';
 import { ChangeLocale } from '~/components/ChangeLocale';
 import { ChangeColorScheme } from '~/components/ChangeColorScheme';
@@ -25,7 +24,6 @@ export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
   loader: ({ context: { store } }) => store.get(graphAtom),
   component: function Root() {
     const { hero } = useParams({ strict: false });
-    const { colorScheme } = useColorScheme();
     const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
     const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
     const navigate = useNavigate();
@@ -48,10 +46,7 @@ export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
           },
           '.Sociogram-nodeHovered .sigma-mouse': {
             cursor: 'pointer'
-          },
-          ...(import.meta.env.DEV && {
-            '.jotai-devtools-shell': { position: 'absolute' }
-          })
+          }
         }}
       >
         <Sociogram>
@@ -87,7 +82,6 @@ export const rootRoute = createRootRouteWithContext<AppRouterContext>()({
           <ChangeLocale />
           <ChangeColorScheme />
         </Stack>
-        <JotaiDevTools theme={colorScheme} />
       </Layout>
     );
   }
