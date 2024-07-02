@@ -2,11 +2,9 @@ import { IconButton, Tooltip } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/macro';
 
 export function ChangeColorScheme() {
-  const { _ } = useLingui();
   const { mode, setMode } = useColorScheme();
 
   const handleClick = () => {
@@ -16,7 +14,11 @@ export function ChangeColorScheme() {
   return (
     <Tooltip
       title={
-        mode === 'dark' ? _(msg`Turn on the light`) : _(msg`Turn off the light`)
+        mode === 'dark' ? (
+          <Trans>Turn on the light</Trans>
+        ) : (
+          <Trans>Turn off the light</Trans>
+        )
       }
     >
       <IconButton color="inherit" onClick={handleClick}>

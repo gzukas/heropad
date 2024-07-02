@@ -21,15 +21,15 @@ msgstr "Apdovanojimai"
 msgid "Change language"
 msgstr "Keisti kalbą"
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Close"
 msgstr "Uždaryti"
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Focus on me"
 msgstr "Fokusuoti mane"
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Given"
 msgstr "Davė"
 
@@ -41,7 +41,7 @@ msgstr "Herojai"
 msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
 msgstr "Nerasta jokių rezultatų užklausai \"<0>{debouncedSearchTerm}</0>\"."
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Received"
 msgstr "Gavo"
 
@@ -65,7 +65,7 @@ msgstr "Išjungti šviesą"
 msgid "Turn on the light"
 msgstr "Įjungti šviesą"
 
-#: src/routes/$hero/$awardId/index.tsx
+#: src/routes/(hero)/$hero.$awardId.tsx
 msgid "Unpin award"
 msgstr "Atsegti apdovanojimą"
 

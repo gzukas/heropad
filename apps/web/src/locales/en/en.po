@@ -21,15 +21,15 @@ msgstr ""
 msgid "Change language"
 msgstr ""
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Close"
 msgstr ""
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Focus on me"
 msgstr ""
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Given"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
 msgstr ""
 
-#: src/routes/$hero/components/Hero.tsx
+#: src/routes/(hero)/-components/Hero.tsx
 msgid "Received"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Turn on the light"
 msgstr ""
 
-#: src/routes/$hero/$awardId/index.tsx
+#: src/routes/(hero)/$hero.$awardId.tsx
 msgid "Unpin award"
 msgstr ""
 
