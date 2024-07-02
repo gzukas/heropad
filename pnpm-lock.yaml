@@ -196,6 +196,9 @@ importers:
       '@lingui/cli':
         specifier: ^4.11.1
         version: 4.11.1(typescript@5.5.2)
+      '@lingui/conf':
+        specifier: 4.11.1
+        version: 4.11.1(typescript@5.5.2)
       '@lingui/swc-plugin':
         specifier: 4.0.8
         version: 4.0.8(@lingui/macro@4.11.1(@lingui/react@4.11.1(react@18.3.1))(babel-plugin-macros@3.1.0)(typescript@5.5.2))

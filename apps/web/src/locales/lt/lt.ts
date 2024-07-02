@@ -1,4 +1,4 @@
   import type { Messages } from '@lingui/core';
 export const messages: Messages = JSON.parse(
-  '{"oosprE":"Apdovanojimai","+DEogc":"Keisti kalbą","yz7wBu":"Uždaryti","nBSpV8":"Fokusuoti mane","6DGeau":"Davė","kKi2Hf":"Herojai","EpWWC+":["Nerasta jokių rezultatų užklausai \\"<0>",["debouncedSearchTerm"],"</0>\\"."],"fZ5Vnu":"Gavo","jKibyt":"Atkurti mastelį","A1taO8":"Ieškoti","v78bJh":"Ieškokite herojų ir apdovanojimų...","ozu0F0":"Išjungti šviesą","nD+TME":"Įjungti šviesą","gcARWC":"Atsegti apdovanojimą","AWOSPo":"Priartinti","FjkaiT":"Nutolinti"}'
+  '{"oosprE":"Awards","+DEogc":"Change language","yz7wBu":"Close","nBSpV8":"Focus on me","6DGeau":"Given","kKi2Hf":"Heroes","EpWWC+":["No results have been found for \\"<0>",["debouncedSearchTerm"],"</0>\\"."],"fZ5Vnu":"Received","jKibyt":"Reset zoom","A1taO8":"Search","v78bJh":"Search for heroes and awards...","ozu0F0":"Turn off the light","nD+TME":"Turn on the light","gcARWC":"Unpin award","AWOSPo":"Zoom in","FjkaiT":"Zoom out"}'
 );

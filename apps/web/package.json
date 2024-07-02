@@ -49,6 +49,7 @@
     "@heropad/eslint-config": "workspace:*",
     "@heropad/tsconfig": "workspace:*",
     "@lingui/cli": "^4.11.1",
+    "@lingui/conf": "^4.11.1",
     "@lingui/swc-plugin": "4.0.8",
     "@lingui/vite-plugin": "^4.11.1",
     "@tanstack/router-plugin": "^1.43.1",
