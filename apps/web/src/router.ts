@@ -1,18 +1,10 @@
 import { createRouter } from '@tanstack/react-router';
 import { getDefaultStore } from 'jotai';
-import { rootRoute } from './routes/__root';
-import { indexRoute } from './routes';
-import { heroRoute } from './routes/$hero';
-import { awardRoute } from './routes/$hero/$awardId';
+import { routeTree } from './routeTree.gen';
 
 export interface AppRouterContext {
   store: ReturnType<typeof getDefaultStore>;
 }
-
-const routeTree = rootRoute.addChildren([
-  indexRoute,
-  heroRoute.addChildren([awardRoute])
-]);
 
 export const router = createRouter({
   routeTree,
