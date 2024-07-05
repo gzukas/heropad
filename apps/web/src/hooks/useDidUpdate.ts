@@ -4,21 +4,14 @@ export function useDidUpdate(
   fn: React.EffectCallback,
   dependencies?: React.DependencyList
 ) {
-  const mounted = useRef(false);
-
-  useEffect(
-    () => () => {
-      mounted.current = false;
-    },
-    []
-  );
+  const mountRef = useRef(false);
 
   useEffect(() => {
-    if (mounted.current) {
+    if (mountRef.current) {
       return fn();
     }
-
-    mounted.current = true;
-    return undefined;
-  }, dependencies);
+    mountRef.current = true;
+    return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dependencies]);
 }
