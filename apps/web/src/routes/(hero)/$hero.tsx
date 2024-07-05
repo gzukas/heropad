@@ -39,7 +39,7 @@ export const Route = createFileRoute('/(hero)/$hero')({
   },
   validateSearch: ({ direction }: Record<string, unknown>): HeroSearch => ({
     direction:
-      direction === 'received' || direction === 'given' ? direction : 'received'
+      direction === 'received' || direction === 'given' ? direction : undefined
   }),
   component: lazyRouteComponent(() => import('./-components/Hero'), 'Hero')
 });
