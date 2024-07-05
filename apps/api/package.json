@@ -31,7 +31,7 @@
     "@heropad/eslint-config": "workspace:*",
     "@heropad/tsconfig": "workspace:*",
     "@snaplet/copycat": "^5.0.0",
-    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/node20": "^20.1.4",
     "@types/pg": "^8.11.6",
     "graphology": "0.25.4",
     "graphology-generators": "^0.11.2",
