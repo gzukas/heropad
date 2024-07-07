@@ -3,15 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "dotenv tsx watch src/server.ts",
+    "dev": "tsx watch --env-file=.env src/server.ts",
     "build": "tsc --build",
-    "start": "dotenv node dist/server.js",
+    "start": "node --env-file=.env dist/server.js",
     "lint": "eslint .",
     "db:start": "supabase start --ignore-health-check",
     "db:reset": "supabase db reset",
     "db:stop": "supabase stop",
     "db:push": "supabase db push",
-    "db:seed": "dotenv tsx scripts/seed.ts"
+    "db:seed": "tsx --env-file=.env scripts/seed.ts"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
