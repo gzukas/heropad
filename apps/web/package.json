@@ -20,7 +20,6 @@
     "@lingui/react": "^4.11.2",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
-    "@mui/system": "^5.16.0",
     "@react-sigma/core": "^4.0.2",
     "@react-sigma/layout-core": "^4.0.2",
     "@react-sigma/layout-forceatlas2": "^4.0.2",
