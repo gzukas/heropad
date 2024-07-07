@@ -28,7 +28,7 @@ import { HeroAwards } from './HeroAwards';
 const routeApi = getRouteApi('/$hero');
 
 export function Hero() {
-  const { direction } = routeApi.useSearch();
+  const { direction = 'received' } = routeApi.useSearch();
   const { hero, awardPaginationAtoms } = routeApi.useLoaderData();
   const { _ } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
