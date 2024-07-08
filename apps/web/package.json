@@ -54,6 +54,7 @@
     "@lingui/vite-plugin": "^4.11.2",
     "@tanstack/router-plugin": "^1.43.12",
     "@testing-library/dom": "^10.3.1",
+    "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@tsconfig/vite-react": "^3.0.2",
     "@types/autosuggest-highlight": "^3.2.3",
