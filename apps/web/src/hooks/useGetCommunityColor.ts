@@ -19,11 +19,8 @@ export function useGetCommunityColor(
 
   const communities = useMemo(
     () =>
-      new Set(
-        communityGraph.mapNodes(
-          (_node, attributes) => attributes.community ?? 0
-        )
-      ).size,
+      new Set(communityGraph.mapNodes((_, { community }) => community ?? 0))
+        .size,
     [communityGraph]
   );
 

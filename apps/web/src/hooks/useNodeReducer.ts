@@ -33,20 +33,13 @@ export function useNodeReducer(
       const highlighted =
         node === selectedNode || node === debouncedHoveredNode;
       const focused = focusedNodes.has(node);
-      const label = focused || highlighted ? data['name'] : null;
-      const color = getCommunityColor(node);
-      const size = 24 / devicePixelRatio;
-
       return {
         ...data,
-        color,
-        size,
-        zIndex: 1,
-        ...(!focused && {
-          zIndex: 0,
-          image: null
-        }),
-        label,
+        color: getCommunityColor(node),
+        size: 24 / devicePixelRatio,
+        zIndex: focused ? 1 : 0,
+        image: focused ? data.image : null,
+        label: focused || highlighted ? data.name : null,
         highlighted
       };
     },
