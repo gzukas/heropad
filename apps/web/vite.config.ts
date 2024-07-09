@@ -17,8 +17,8 @@ export default defineConfig({
     react({
       plugins: [['@lingui/swc-plugin', {}]]
     }),
-    lingui(),
-    splitVendorChunkPlugin()
+    splitVendorChunkPlugin(),
+    lingui()
   ],
   build: {
     rollupOptions: {
@@ -37,7 +37,8 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'happy-dom'
+    environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.ts']
   },
   server: {
     port: 3000

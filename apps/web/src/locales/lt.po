@@ -5,68 +5,74 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: lt\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/Search/AwardSuggestionList.tsx
 msgid "Awards"
-msgstr ""
+msgstr "Apdovanojimai"
 
 #: src/components/ChangeLocale.tsx
 msgid "Change language"
-msgstr ""
+msgstr "Keisti kalbą"
 
 #: src/routes/(hero)/-components/Hero.tsx
 msgid "Close"
-msgstr ""
+msgstr "Uždaryti"
 
 #: src/routes/(hero)/-components/Hero.tsx
 msgid "Focus on me"
-msgstr ""
+msgstr "Fokusuoti mane"
 
 #: src/routes/(hero)/-components/Hero.tsx
 msgid "Given"
-msgstr ""
+msgstr "Davė"
 
 #: src/components/Search/HeroSuggestionList.tsx
 msgid "Heroes"
-msgstr ""
+msgstr "Herojai"
 
 #: src/components/Search/SearchSuggestions.tsx
 msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
-msgstr ""
+msgstr "Nerasta jokių rezultatų užklausai \"<0>{debouncedSearchTerm}</0>\"."
 
 #: src/routes/(hero)/-components/Hero.tsx
 msgid "Received"
-msgstr ""
+msgstr "Gavo"
 
 #: src/components/Camera.tsx
 msgid "Reset zoom"
-msgstr ""
+msgstr "Atkurti mastelį"
 
 #: src/components/Search/SearchButton.tsx
 msgid "Search"
-msgstr ""
+msgstr "Ieškoti"
 
 #: src/components/Search/SearchDialog.tsx
 msgid "Search for heroes and awards..."
-msgstr ""
+msgstr "Ieškokite herojų ir apdovanojimų..."
 
 #: src/components/ChangeColorScheme.tsx
 msgid "Turn off the light"
-msgstr ""
+msgstr "Išjungti šviesą"
 
 #: src/components/ChangeColorScheme.tsx
 msgid "Turn on the light"
-msgstr ""
+msgstr "Įjungti šviesą"
 
 #: src/routes/(hero)/$hero.$awardId.tsx
 msgid "Unpin award"
-msgstr ""
+msgstr "Atsegti apdovanojimą"
 
 #: src/components/Camera.tsx
 msgid "Zoom in"
-msgstr ""
+msgstr "Priartinti"
 
 #: src/components/Camera.tsx
 msgid "Zoom out"
-msgstr ""
+msgstr "Nutolinti"
