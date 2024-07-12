@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 
 describe('useMatchesChildRoute', () => {
   it('should return `true` when when parent route renders a child route', async () => {
-    const matches = vi.fn<[boolean]>();
+    const matches = vi.fn();
     const rootRoute = createRootRoute({
       component: function Root() {
         const matchesChildRoute = useMatchesChildRoute();

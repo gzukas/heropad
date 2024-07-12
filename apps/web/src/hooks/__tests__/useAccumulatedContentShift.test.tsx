@@ -1,17 +1,16 @@
 import {
   RouterProvider,
   createMemoryHistory,
-  createRootRouteWithContext,
+  createRootRoute,
   createRoute,
   createRouter
 } from '@tanstack/react-router';
 import { render, screen } from '@testing-library/react';
 import { useAccumulatedContentShift } from '../useAccumulatedContentShift';
-import { AppRouterContext } from '~/router';
 
 describe('useAccumulatedContentShift', () => {
   it('should return accumulated content shift from route matches', async () => {
-    const rootRoute = createRootRouteWithContext<AppRouterContext>()({
+    const rootRoute = createRootRoute({
       staticData: {
         shiftContentBy: 100
       }
