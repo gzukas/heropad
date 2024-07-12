@@ -7,7 +7,9 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "format": "prettier --write \"\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "api": "pnpm --filter=api",
+    "web": "pnpm --filter=web"
   },
   "devDependencies": {
     "eslint": "^9.6.0",
