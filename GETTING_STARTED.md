@@ -18,9 +18,7 @@ Follow these steps to set up and run Heropad locally:
    ```sh
    cp apps/api/.env.example apps/api/.env.local && cp apps/web/.env.example apps/web/.env.local
    ```
-
-> [!NOTE]
-   > The `.env` files are intentionnaly not tracked, to avoid accidentally commiting secrets.
+   > The `.env` files are intentionally not tracked to avoid committing secrets by accident.
 
 3. Start the Supabase locally.
 
