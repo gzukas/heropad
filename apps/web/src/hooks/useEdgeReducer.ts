@@ -28,6 +28,6 @@ export function useEdgeReducer(
         }),
         ...data
       }),
-    [selectedNode, graph]
+    [edgeReducerRef, selectedNode, graph]
   );
 }

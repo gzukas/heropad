@@ -12,7 +12,7 @@ import { AtomsWithPaginationResult } from '~/utils/atomsWithPagination';
 import type { Award, AwardsOutput } from '~/types';
 
 export type RenderAwardFunction = (
-  options: { award?: Award; virtualAward: VirtualItem },
+  options: { award?: Award; virtualAward: VirtualItem<Element> },
   props: ListItemProps
 ) => React.ReactNode;
 

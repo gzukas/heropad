@@ -27,7 +27,7 @@ export function GraphEvents() {
         navigate({ to: '/' });
       }
     });
-  }, [registerEvents]);
+  }, [registerEvents, navigate, setDebouncedHoveredNode]);
 
   return null;
 }

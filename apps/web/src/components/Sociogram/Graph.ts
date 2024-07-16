@@ -9,7 +9,7 @@ export function Graph() {
 
   useEffect(() => {
     loadGraph(communityGraph);
-  }, [communityGraph]);
+  }, [loadGraph, communityGraph]);
 
   return null;
 }

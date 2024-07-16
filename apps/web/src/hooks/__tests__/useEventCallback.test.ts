@@ -10,7 +10,7 @@ describe('useEventCallback', () => {
         const callback = useEventCallback(y => fn(y));
         useEffect(() => {
           callback(x);
-        }, [x]);
+        }, [callback, x]);
       },
       { initialProps: 0 }
     );

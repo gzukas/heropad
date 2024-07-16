@@ -28,24 +28,20 @@ export function useNodeReducer(
   const debouncedHoveredNode = useAtomValue(debouncedHoveredAtom);
   const devicePixelRatio = useDevicePixelRatio();
 
-  return useCallback<NodeReducer>(
+  const getNodeSettings = useCallback<NodeReducer>(
     (node, data) => {
       const highlighted =
         node === selectedNode || node === debouncedHoveredNode;
       const focused = focusedNodes.has(node);
-      const label = focused || highlighted ? data['name'] : null;
-      return nodeReducerRef.current(node, {
+      return {
         ...data,
         color: getCommunityColor(node),
         size: 24 / devicePixelRatio,
-        zIndex: 1,
-        ...(!focused && {
-          zIndex: 0,
-          image: null
-        }),
-        label,
+        zIndex: focused ? 1 : 0,
+        image: focused ? data.image : null,
+        label: focused || highlighted ? data.name : null,
         highlighted
-      });
+      };
     },
     [
       selectedNode,
@@ -54,5 +50,10 @@ export function useNodeReducer(
       getCommunityColor,
       devicePixelRatio
     ]
+  );
+
+  return useCallback<NodeReducer>(
+    (node, data) => nodeReducerRef.current(node, getNodeSettings(node, data)),
+    [nodeReducerRef, getNodeSettings]
   );
 }

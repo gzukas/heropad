@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Box } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { amber } from '@mui/material/colors';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';

@@ -19,7 +19,13 @@ export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
         ref={ref}
         src={image}
         alt={name}
-        imgProps={{ crossOrigin: 'anonymous' }}
+        slotProps={{
+          ...props.slotProps,
+          img: {
+            crossOrigin: 'anonymous',
+            ...props.slotProps?.img
+          }
+        }}
         sx={[
           {
             bgcolor: getCommunityColor(hero)

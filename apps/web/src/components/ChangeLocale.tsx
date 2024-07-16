@@ -17,7 +17,7 @@ import {
   bindMenu
 } from 'material-ui-popup-state/hooks';
 import { localeAtom } from '~/atoms/localeAtom';
-import { locales } from '~/locales';
+import { locales } from '~/locales/locales';
 
 export function ChangeLocale() {
   const { _ } = useLingui();
@@ -31,20 +31,6 @@ export function ChangeLocale() {
     setCurrentLocale(locale);
   };
 
-  const renderLocaleMenuItem = ([locale, text]: [string, string]) => {
-    const checked = currentLocale === locale;
-    return (
-      <MenuItem key={locale} onClick={handleMenuItemClick(locale)}>
-        {checked && (
-          <ListItemIcon>
-            <CheckIcon />
-          </ListItemIcon>
-        )}
-        <ListItemText inset={!checked}>{text}</ListItemText>
-      </MenuItem>
-    );
-  };
-
   return (
     <>
       <Tooltip title={_(msg`Change language`)}>
@@ -53,7 +39,19 @@ export function ChangeLocale() {
         </IconButton>
       </Tooltip>
       <Menu {...bindMenu(menuState)}>
-        {Object.entries(locales).map(renderLocaleMenuItem)}
+        {Object.entries(locales).map(([locale, text]) => {
+          const checked = currentLocale === locale;
+          return (
+            <MenuItem key={locale} onClick={handleMenuItemClick(locale)}>
+              {checked && (
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+              )}
+              <ListItemText inset={!checked}>{text}</ListItemText>
+            </MenuItem>
+          );
+        })}
       </Menu>
     </>
   );

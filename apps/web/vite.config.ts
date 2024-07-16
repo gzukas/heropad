@@ -2,8 +2,8 @@
 import path from 'node:path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { lingui } from '@lingui/vite-plugin';
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 function createManualChunks(chunks: Record<string, RegExp>) {
   const chunkEntries = Object.entries(chunks);
@@ -13,16 +13,12 @@ function createManualChunks(chunks: Record<string, RegExp>) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    tsconfigPaths(),
+    TanStackRouterVite(),
     react({
-      plugins: [
-        ['@lingui/swc-plugin', {}],
-        ['@swc-jotai/debug-label', {}],
-        ['@swc-jotai/react-refresh', {}]
-      ]
+      plugins: [['@lingui/swc-plugin', {}]]
     }),
-    lingui(),
-    splitVendorChunkPlugin()
+    splitVendorChunkPlugin(),
+    lingui()
   ],
   build: {
     rollupOptions: {
@@ -34,14 +30,15 @@ export default defineConfig({
       }
     }
   },
-  test: {
-    globals: true,
-    environment: 'happy-dom'
-  },
   resolve: {
     alias: {
-      lodash: path.resolve(__dirname, './src/utils/lodash.ts')
+      '~': path.resolve(__dirname, './src')
     }
+  },
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.ts']
   },
   server: {
     port: 3000

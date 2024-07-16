@@ -2,12 +2,11 @@ import { useCallback, useRef, useEffect } from 'react';
 import { WritableAtom } from 'jotai';
 import { useHydrateAtoms, useAtomCallback } from 'jotai/utils';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyWritableAtom = WritableAtom<unknown, any[], any>;
+type AnyWritableAtom = WritableAtom<unknown, never[], unknown>;
 type InferAtomTuples<T> = {
   [K in keyof T]: T[K] extends readonly [infer A, unknown]
-    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      A extends WritableAtom<unknown, infer Args, any>
+    ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      A extends WritableAtom<unknown, infer Args, infer _Result>
       ? readonly [A, Args[0]]
       : T[K]
     : never;
@@ -23,7 +22,7 @@ export function useHydrateAndSyncAtoms<
     useCallback(
       (_get, set) => {
         for (const [a, v] of values) {
-          set(a, v);
+          set(a, v as never);
         }
       },
       [values]
