@@ -3,15 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file=.env src/server.ts",
+    "dev": "dotenv tsx watch src/server.ts",
     "build": "tsc --build",
-    "start": "node --env-file=.env dist/server.js",
+    "start": "dotenv node dist/server.js",
     "lint": "eslint .",
     "db:start": "supabase start --ignore-health-check",
     "db:reset": "supabase db reset",
     "db:stop": "supabase stop",
     "db:push": "supabase db push",
-    "db:seed": "tsx --env-file=.env scripts/seed.ts"
+    "db:seed": "dotenv tsx scripts/seed.ts"
   },
   "author": "Gediminas Zukas",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "@snaplet/copycat": "^5.0.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/pg": "^8.11.6",
+    "dotenv-cli": "^7.4.2",
     "graphology": "0.25.4",
     "graphology-generators": "^0.11.2",
     "supabase": "^1.183.5",
