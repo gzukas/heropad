@@ -7,16 +7,16 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "format": "prettier --write \"\"",
-    "prepare": "husky install",
+    "prepare": "husky",
     "api": "pnpm --filter=api",
     "web": "pnpm --filter=web"
   },
   "devDependencies": {
-    "eslint": "^9.6.0",
-    "husky": "^9.0.11",
+    "eslint": "^9.7.0",
+    "husky": "^9.1.1",
     "lint-staged": "^15.2.7",
-    "prettier": "3.3.2",
-    "turbo": "^2.0.6",
+    "prettier": "3.3.3",
+    "turbo": "^2.0.8",
     "typescript": "^5.5.3"
   },
   "packageManager": "pnpm@9.0.0",
