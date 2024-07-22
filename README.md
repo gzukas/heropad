@@ -14,7 +14,7 @@ Note that the generated hero names and awards are entirely fictional, with no in
 
 ## 📺 Preview
 
-![Heropad screenshot](./docs/images/screenshot.jpg?raw=true)
+![Heropad screenshot](./docs/images/screenshot.png?raw=true)
 
 ## Built With
 
