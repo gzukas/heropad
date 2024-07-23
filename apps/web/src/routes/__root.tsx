@@ -35,7 +35,7 @@ const Content = styled('div', { label: 'Content' })<{
   ...(shift && {
     [theme.breakpoints.up('md')]: {
       marginRight: shift,
-      transition: theme.transitions.create(['margin'], {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
       })

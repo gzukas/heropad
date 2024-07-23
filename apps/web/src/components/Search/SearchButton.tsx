@@ -6,10 +6,7 @@ import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
 
 const Placeholder = styled('span')(({ theme }) => ({
   color: 'currentcolor',
-  opacity:
-    theme.vars?.opacity.inputPlaceholder ?? theme.palette.mode === 'light'
-      ? 0.42
-      : 0.5,
+  opacity: theme.vars.opacity.inputPlaceholder,
   transition: theme.transitions.create('opacity', {
     duration: theme.transitions.duration.shorter
   })
