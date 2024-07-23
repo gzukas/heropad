@@ -10,53 +10,53 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as IndexImport } from './routes/index';
-import { Route as heroHeroImport } from './routes/(hero)/$hero';
-import { Route as heroHeroAwardIdImport } from './routes/(hero)/$hero.$awardId';
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as heroHeroImport } from './routes/(hero)/$hero'
+import { Route as heroHeroAwardIdImport } from './routes/(hero)/$hero.$awardId'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute
-} as any);
+  getParentRoute: () => rootRoute,
+} as any)
 
 const heroHeroRoute = heroHeroImport.update({
   path: '/$hero',
-  getParentRoute: () => rootRoute
-} as any);
+  getParentRoute: () => rootRoute,
+} as any)
 
 const heroHeroAwardIdRoute = heroHeroAwardIdImport.update({
   path: '/$awardId',
-  getParentRoute: () => heroHeroRoute
-} as any);
+  getParentRoute: () => heroHeroRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/(hero)/$hero': {
-      id: '/$hero';
-      path: '/$hero';
-      fullPath: '/$hero';
-      preLoaderRoute: typeof heroHeroImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/$hero'
+      path: '/$hero'
+      fullPath: '/$hero'
+      preLoaderRoute: typeof heroHeroImport
+      parentRoute: typeof rootRoute
+    }
     '/(hero)/$hero/$awardId': {
-      id: '/$hero/$awardId';
-      path: '/$awardId';
-      fullPath: '/$hero/$awardId';
-      preLoaderRoute: typeof heroHeroAwardIdImport;
-      parentRoute: typeof heroHeroImport;
-    };
+      id: '/$hero/$awardId'
+      path: '/$awardId'
+      fullPath: '/$hero/$awardId'
+      preLoaderRoute: typeof heroHeroAwardIdImport
+      parentRoute: typeof heroHeroImport
+    }
   }
 }
 
@@ -64,8 +64,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  heroHeroRoute: heroHeroRoute.addChildren({ heroHeroAwardIdRoute })
-});
+  heroHeroRoute: heroHeroRoute.addChildren({ heroHeroAwardIdRoute }),
+})
 
 /* prettier-ignore-end */
 
