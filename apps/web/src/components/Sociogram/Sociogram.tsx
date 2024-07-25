@@ -1,8 +1,8 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { Settings } from 'sigma/settings';
-import { createNodeImageProgram } from '@sigma/node-image';
-import { createEdgeCurveProgram } from '@sigma/edge-curve';
+import { NodeImageProgram } from '@sigma/node-image';
+import EdgeCurveProgram from '@sigma/edge-curve';
 import { SigmaContainer } from '@react-sigma/core';
 import { useWorkerLayoutForceAtlas2 } from '@react-sigma/layout-forceatlas2';
 import { useAtomValue } from 'jotai';
@@ -17,10 +17,10 @@ import { Graph } from './Graph';
 
 const defaultGraphSettings: Partial<Settings> = {
   nodeProgramClasses: {
-    image: createNodeImageProgram()
+    image: NodeImageProgram
   },
   edgeProgramClasses: {
-    curve: createEdgeCurveProgram()
+    curve: EdgeCurveProgram
   },
   defaultEdgeType: 'curve',
   defaultNodeType: 'image',

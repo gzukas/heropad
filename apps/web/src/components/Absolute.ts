@@ -4,34 +4,41 @@ type Vertical = 'top' | 'bottom';
 type Horizontal = 'left' | 'right';
 type Placement = Vertical | `${Vertical}-${Horizontal}`;
 
+type Positions = Pick<React.CSSProperties, 'top' | 'right' | 'bottom' | 'left'>;
+
+function getPositionStyles(
+  placement: Placement,
+  spacing: Positions[keyof Positions],
+  {
+    left = spacing,
+    right = spacing,
+    top = spacing,
+    bottom = spacing
+  }: Positions = {}
+): React.CSSProperties {
+  switch (placement) {
+    case 'top':
+      return { top, left, right };
+    case 'top-left':
+      return { top, left };
+    case 'top-right':
+      return { top, right };
+    case 'bottom-left':
+      return { bottom, left };
+    case 'bottom-right':
+      return { bottom, right };
+    default:
+      return {};
+  }
+}
+
 export interface AbsoluteProps {
   placement: Placement;
-  gutters?: number;
 }
 
 export const Absolute = styled('div', { label: 'Absolute' })<AbsoluteProps>(
-  ({ placement, gutters = 0 }) => ({
+  ({ placement }) => ({
     position: 'absolute',
-    ...(placement === 'top' && {
-      top: gutters,
-      left: gutters,
-      right: gutters
-    }),
-    ...(placement === 'top-left' && {
-      top: gutters,
-      left: gutters
-    }),
-    ...(placement === 'top-right' && {
-      top: gutters,
-      right: gutters
-    }),
-    ...(placement === 'bottom-left' && {
-      bottom: gutters,
-      left: gutters
-    }),
-    ...(placement === 'bottom-right' && {
-      bottom: gutters,
-      right: gutters
-    })
+    ...getPositionStyles(placement, 'var(--Absolute-gutters, 0)')
   })
 );

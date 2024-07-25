@@ -24,23 +24,19 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
   component: Root
 });
 
-const Content = styled('div', { label: 'Content' })<{
-  shift?: number;
-}>(({ theme, shift }) => ({
+const Content = styled('div', { label: 'Content' })(({ theme }) => ({
   position: 'relative',
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
-  ...(shift && {
-    [theme.breakpoints.up('md')]: {
-      marginRight: shift,
-      transition: theme.transitions.create(['margin'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    }
-  })
+  [theme.breakpoints.up('md')]: {
+    marginRight: 'var(--Content-shift, 0)',
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  }
 }));
 
 function Root() {
@@ -48,8 +44,8 @@ function Root() {
   const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
   const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
   const navigate = useNavigate();
-  const shiftContentBy = useAccumulatedContentShift();
-  const previousShiftContentBy = usePrevious(shiftContentBy);
+  const shift = useAccumulatedContentShift();
+  const previousShift = usePrevious(shift);
 
   const handleDrawerClose = () => {
     navigate({ to: '/' });
@@ -59,7 +55,7 @@ function Root() {
 
   return (
     <Content
-      shift={shiftContentBy}
+      style={{ '--Content-shift': `${shift}px` } as React.CSSProperties}
       sx={{
         '.sigma-container': {
           width: '100dvw',
@@ -71,16 +67,20 @@ function Root() {
       }}
     >
       <Sociogram>
-        <Camera component={Absolute} placement="bottom-right" gutters={24} />
+        <Camera
+          component={Absolute}
+          placement="bottom-right"
+          style={{ '--Absolute-gutters': '24px' } as React.CSSProperties}
+        />
         <Drawer
-          open={shiftContentBy > 0}
+          open={shift > 0}
           onClose={handleDrawerClose}
           variant={isMdUp ? 'persistent' : 'temporary'}
           anchor="right"
           ModalProps={{ keepMounted: true }}
           PaperProps={{
             sx: {
-              width: shiftContentBy || previousShiftContentBy
+              width: shift || previousShift
             }
           }}
         >
