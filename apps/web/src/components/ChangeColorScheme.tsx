@@ -7,20 +7,23 @@ import { useLingui } from '@lingui/react';
 
 export function ChangeColorScheme() {
   const { _ } = useLingui();
-  const { mode, setMode } = useColorScheme();
+  const { mode, systemMode, setMode } = useColorScheme();
+  const colorScheme = systemMode ?? mode;
 
   const handleClick = () => {
-    setMode(mode === 'dark' ? 'light' : 'dark');
+    setMode(colorScheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
     <Tooltip
       title={
-        mode === 'dark' ? _(msg`Turn on the light`) : _(msg`Turn off the light`)
+        colorScheme === 'dark'
+          ? _(msg`Turn on the light`)
+          : _(msg`Turn off the light`)
       }
     >
       <IconButton color="inherit" onClick={handleClick}>
-        {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+        {colorScheme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
       </IconButton>
     </Tooltip>
   );

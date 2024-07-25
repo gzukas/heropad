@@ -16,29 +16,20 @@ function getPositionStyles(
     bottom = spacing
   }: Positions = {}
 ): React.CSSProperties {
-  return {
-    ...(placement === 'top' && {
-      top,
-      left,
-      right
-    }),
-    ...(placement === 'top-left' && {
-      top,
-      left
-    }),
-    ...(placement === 'top-right' && {
-      top,
-      right
-    }),
-    ...(placement === 'bottom-left' && {
-      bottom,
-      left
-    }),
-    ...(placement === 'bottom-right' && {
-      bottom,
-      right
-    })
-  };
+  switch (placement) {
+    case 'top':
+      return { top, left, right };
+    case 'top-left':
+      return { top, left };
+    case 'top-right':
+      return { top, right };
+    case 'bottom-left':
+      return { bottom, left };
+    case 'bottom-right':
+      return { bottom, right };
+    default:
+      return {};
+  }
 }
 
 export interface AbsoluteProps {

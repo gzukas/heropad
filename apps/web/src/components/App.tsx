@@ -9,6 +9,8 @@ import { router } from '~/router';
 import { localeEffect } from '~/atoms/localeEffect';
 
 const theme = extendTheme({
+  colorSchemes: { light: true, dark: true },
+  colorSchemeSelector: 'class',
   components: {
     MuiUseMediaQuery: {
       defaultProps: {
@@ -27,7 +29,11 @@ export function App() {
   useAtom(localeEffect);
 
   return (
-    <CssVarsProvider theme={theme}>
+    <CssVarsProvider
+      theme={theme}
+      disableTransitionOnChange
+      disableNestedContext
+    >
       <CssBaseline enableColorScheme />
       <I18nProvider i18n={i18n}>
         <RouterProvider router={router} />
