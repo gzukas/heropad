@@ -12,14 +12,14 @@
     "web": "pnpm --filter=web"
   },
   "devDependencies": {
-    "eslint": "^9.8.0",
-    "husky": "^9.1.4",
-    "lint-staged": "^15.2.8",
+    "eslint": "^9.9.1",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
     "prettier": "3.3.3",
-    "turbo": "^2.0.11",
+    "turbo": "^2.1.0",
     "typescript": "^5.5.4"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.9.0",
   "engines": {
     "node": ">=20.0.0"
   }
