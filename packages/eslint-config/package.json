@@ -16,10 +16,10 @@
     "@eslint/js": "^9.9.1",
     "@types/eslint__js": "^8.42.3",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-config-turbo": "^2.1.0",
-    "eslint-plugin-react-hooks": "^5.1.0-rc-76002254-20240724",
+    "eslint-config-turbo": "^2.1.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc-4c58fce7-20240904",
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
-    "typescript-eslint": "8.3.0"
+    "typescript-eslint": "8.4.0"
   }
 }

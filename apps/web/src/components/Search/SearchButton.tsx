@@ -4,7 +4,7 @@ import { Trans } from '@lingui/macro';
 import { useSetAtom } from 'jotai';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
 
-const Placeholder = styled('span')(({ theme }) => ({
+const Placeholder = styled('div')(({ theme }) => ({
   color: 'currentcolor',
   opacity: theme.vars.opacity.inputPlaceholder,
   transition: theme.transitions.create('opacity', {
@@ -21,20 +21,19 @@ export function SearchButton() {
 
   return (
     <Paper
+      component={ButtonBase}
+      onClick={handleClick}
+      elevation={2}
       sx={{
-        flex: 1,
         width: 296,
         justifyContent: 'left',
         font: 'inherit',
         p: 1
       }}
-      component={ButtonBase}
-      onClick={handleClick}
-      elevation={2}
     >
       <Stack direction="row" alignItems="center" spacing={1}>
-        <SearchIcon />
-        <Placeholder>
+        <SearchIcon sx={{ color: 'action.active' }} />
+        <Placeholder sx={{ flex: 1 }}>
           <Trans>Search</Trans>
         </Placeholder>
       </Stack>

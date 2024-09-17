@@ -1,6 +1,1 @@
-export type {
-  Hero,
-  Award,
-  AwardsOutput,
-  SearchSuggestion
-} from '../../api/src/trpc/appRouter';
+export type { Hero, Award, AwardsOutput } from '../../api/src/trpc/appRouter';

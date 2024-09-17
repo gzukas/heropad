@@ -34,7 +34,6 @@ function Award() {
           params={{ hero }}
           search={prev => prev}
           edge="end"
-          sx={{ ml: 0.5 }}
         >
           <PushPinIcon />
         </IconButton>
