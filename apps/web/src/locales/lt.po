@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/Search/AwardSuggestionList.tsx
+#: src/components/Search/Search.tsx
 msgid "Awards"
 msgstr "Apdovanojimai"
 
@@ -33,13 +33,13 @@ msgstr "Fokusuoti mane"
 msgid "Given"
 msgstr "Davė"
 
-#: src/components/Search/HeroSuggestionList.tsx
+#: src/components/Search/Search.tsx
 msgid "Heroes"
 msgstr "Herojai"
 
-#: src/components/Search/SearchSuggestions.tsx
-msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
-msgstr "Nerasta jokių rezultatų užklausai \"<0>{debouncedSearchTerm}</0>\"."
+#: src/components/Search/Search.tsx
+msgid "No results found"
+msgstr ""
 
 #: src/routes/(hero)/-components/Hero.tsx
 msgid "Received"
@@ -53,7 +53,7 @@ msgstr "Atkurti mastelį"
 msgid "Search"
 msgstr "Ieškoti"
 
-#: src/components/Search/SearchDialog.tsx
+#: src/components/Search/Search.tsx
 msgid "Search for heroes and awards..."
 msgstr "Ieškokite herojų ir apdovanojimų..."
 
