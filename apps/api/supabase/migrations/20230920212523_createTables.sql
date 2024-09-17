@@ -22,6 +22,14 @@ ALTER TABLE
 ALTER TABLE
   "award" ENABLE ROW LEVEL SECURITY;
 
+CREATE POLICY "Enable read access for all users" ON "public"."hero" AS PERMISSIVE FOR
+SELECT
+  TO public USING (true);
+
+CREATE POLICY "Enable read access for all users" ON "public"."award" AS PERMISSIVE FOR
+SELECT
+  TO public USING (true);
+
 CREATE INDEX "hero_username" ON "hero" ("username");
 
 CREATE INDEX "award_givenAt" ON "award" ("givenAt");
