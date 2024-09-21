@@ -2,9 +2,12 @@ import { styled } from '@mui/material/styles';
 
 type Vertical = 'top' | 'bottom';
 type Horizontal = 'left' | 'right';
-type Placement = Vertical | `${Vertical}-${Horizontal}`;
 
-type Positions = Pick<React.CSSProperties, 'top' | 'right' | 'bottom' | 'left'>;
+export type Placement = Vertical | `${Vertical}-${Horizontal}`;
+export type Positions = Pick<
+  React.CSSProperties,
+  'top' | 'right' | 'bottom' | 'left'
+>;
 
 function getPositionStyles(
   placement: Placement,

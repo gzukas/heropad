@@ -3,7 +3,7 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 import { Link, createFileRoute, getRouteApi } from '@tanstack/react-router';
 import { Trans } from '@lingui/macro';
 import { awardFamily } from '~/atoms/awardFamily';
-import { ListItemAward } from '~/components/ListItemAward';
+import { ListItemAward } from './-components/ListItemAward';
 
 const routeApi = getRouteApi('/$hero/$awardId');
 

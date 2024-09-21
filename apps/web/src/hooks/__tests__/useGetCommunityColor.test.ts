@@ -1,7 +1,6 @@
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useGetCommunityColor } from '../useGetCommunityColor';
-import { setupServer } from '~/__mocks__/setupServer';
+import { setupServer } from '~/testing/setupServer';
 
 describe('useGetCommunityColor', () => {
   setupServer(trpcMsw => [
@@ -24,7 +23,6 @@ describe('useGetCommunityColor', () => {
     const { result, rerender } = renderHook(
       name => useGetCommunityColor()(name),
       {
-        wrapper: CssVarsProvider,
         initialProps: 'foo'
       }
     );
@@ -43,9 +41,7 @@ describe('useGetCommunityColor', () => {
           useGetCommunityColor({
             palette: { dark: ['#fff'], light: ['#000'] }
           })('foo'),
-        {
-          wrapper: CssVarsProvider
-        }
+        {}
       )
     ).toThrowError('Palette has 1 color(s), but there are 2 community(ies)');
   });

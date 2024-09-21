@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material';
-import { setupServer } from '~/__mocks__/setupServer';
+import { setupServer } from '~/testing/setupServer';
 import { HeroAvatar } from '../HeroAvatar';
 
 describe('HeroAvatar', () => {
@@ -12,7 +11,7 @@ describe('HeroAvatar', () => {
   ]);
 
   it('should render an avatar image', async () => {
-    render(<HeroAvatar hero="foo" />, { wrapper: CssVarsProvider });
+    render(<HeroAvatar hero="foo" />);
     const img = (await screen.findByAltText('Foo')) as HTMLImageElement;
     expect(img.src).toMatch(/foo.svg$/);
   });
