@@ -20,10 +20,10 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import { HeroAvatar } from '~/components/HeroAvatar';
-import { ListItemAward } from '~/components/ListItemAward';
 import { useCamera } from '~/hooks/useCamera';
 import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
 import { HeroAwards } from './HeroAwards';
+import { ListItemAward } from './ListItemAward';
 
 const routeApi = getRouteApi('/$hero');
 

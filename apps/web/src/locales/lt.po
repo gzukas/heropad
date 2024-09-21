@@ -13,66 +13,66 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/Search/AwardSuggestionList.tsx
+#: components/Search/Search.tsx
 msgid "Awards"
 msgstr "Apdovanojimai"
 
-#: src/components/ChangeLocale.tsx
+#: components/ChangeLocale.tsx
 msgid "Change language"
 msgstr "Keisti kalbą"
 
-#: src/routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/Hero.tsx
 msgid "Close"
 msgstr "Uždaryti"
 
-#: src/routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/Hero.tsx
 msgid "Focus on me"
 msgstr "Fokusuoti mane"
 
-#: src/routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/Hero.tsx
 msgid "Given"
 msgstr "Davė"
 
-#: src/components/Search/HeroSuggestionList.tsx
+#: components/Search/Search.tsx
 msgid "Heroes"
 msgstr "Herojai"
 
-#: src/components/Search/SearchSuggestions.tsx
-msgid "No results have been found for \"<0>{debouncedSearchTerm}</0>\"."
-msgstr "Nerasta jokių rezultatų užklausai \"<0>{debouncedSearchTerm}</0>\"."
+#: components/Search/Search.tsx
+msgid "No results found"
+msgstr ""
 
-#: src/routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/Hero.tsx
 msgid "Received"
 msgstr "Gavo"
 
-#: src/components/Camera.tsx
+#: components/Camera.tsx
 msgid "Reset zoom"
 msgstr "Atkurti mastelį"
 
-#: src/components/Search/SearchButton.tsx
+#: components/Search/SearchButton.tsx
 msgid "Search"
 msgstr "Ieškoti"
 
-#: src/components/Search/SearchDialog.tsx
+#: components/Search/Search.tsx
 msgid "Search for heroes and awards..."
 msgstr "Ieškokite herojų ir apdovanojimų..."
 
-#: src/components/ChangeColorScheme.tsx
+#: components/ChangeColorScheme.tsx
 msgid "Turn off the light"
 msgstr "Išjungti šviesą"
 
-#: src/components/ChangeColorScheme.tsx
+#: components/ChangeColorScheme.tsx
 msgid "Turn on the light"
 msgstr "Įjungti šviesą"
 
-#: src/routes/(hero)/$hero.$awardId.tsx
+#: routes/(hero)/$hero.$awardId.tsx
 msgid "Unpin award"
 msgstr "Atsegti apdovanojimą"
 
-#: src/components/Camera.tsx
+#: components/Camera.tsx
 msgid "Zoom in"
 msgstr "Priartinti"
 
-#: src/components/Camera.tsx
+#: components/Camera.tsx
 msgid "Zoom out"
 msgstr "Nutolinti"

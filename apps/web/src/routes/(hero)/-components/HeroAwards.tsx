@@ -7,9 +7,9 @@ import {
 } from '@tanstack/react-virtual';
 import { List, ListItem, useForkRef, ListItemProps } from '@mui/material';
 import { useDidUpdate } from '~/hooks/useDidUpdate';
-import { ListItemAward } from '~/components/ListItemAward';
 import { AtomsWithPaginationResult } from '~/utils/atomsWithPagination';
 import type { Award, AwardsOutput } from '~/types';
+import { ListItemAward } from './ListItemAward';
 
 export type RenderAwardFunction = (
   options: { award?: Award; virtualAward: VirtualItem },

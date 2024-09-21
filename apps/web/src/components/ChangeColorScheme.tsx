@@ -7,11 +7,10 @@ import { useLingui } from '@lingui/react';
 
 export function ChangeColorScheme() {
   const { _ } = useLingui();
-  const { mode, systemMode, setMode } = useColorScheme();
-  const colorScheme = systemMode ?? mode;
+  const { setColorScheme, colorScheme } = useColorScheme();
 
   const handleClick = () => {
-    setMode(colorScheme === 'dark' ? 'light' : 'dark');
+    setColorScheme(colorScheme === 'dark' ? 'light' : 'dark');
   };
 
   return (

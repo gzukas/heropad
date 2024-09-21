@@ -1,4 +1,4 @@
-CREATE VIEW "hero_award_search" AS
+CREATE VIEW "hero_award_search" WITH (security_invoker = true) AS
 SELECT
   "hero"."id" AS "id",
   "name" AS "text",

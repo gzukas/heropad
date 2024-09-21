@@ -19,4 +19,3 @@ type RouterOutput = inferRouterOutputs<AppRouter>;
 export type Hero = RouterOutput['hero']['getHero'];
 export type Award = RouterOutput['award']['getAward'];
 export type AwardsOutput = RouterOutput['award']['getAwards'];
-export type SearchSuggestion = RouterOutput['search']['getSuggestions'][number];
