@@ -38,7 +38,24 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
-    setupFiles: ['./vitest.setup.ts']
+    environmentOptions: {
+      happyDOM: {
+        settings: {
+          device: {
+            prefersColorScheme: 'dark'
+          }
+        }
+      }
+    },
+    setupFiles: ['./src/testing/setupTests.ts'],
+    onConsoleLog(log, type) {
+      if (
+        type === 'stderr' &&
+        log.includes('Consider adding an error boundary')
+      ) {
+        return false;
+      }
+    }
   },
   server: {
     port: 3000
