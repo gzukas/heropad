@@ -4,6 +4,7 @@ import { i18n } from '@lingui/core';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { localeEffect } from '~/atoms/localeEffect';
+import { Suspense } from 'react';
 
 const theme = createTheme({
   colorSchemes: { dark: true },
@@ -28,9 +29,11 @@ export function AppProvider({ children }: React.PropsWithChildren<unknown>) {
   useAtom(localeEffect);
 
   return (
-    <ThemeProvider theme={theme} disableTransitionOnChange>
-      <CssBaseline enableColorScheme />
-      <I18nProvider i18n={i18n}>{children}</I18nProvider>
-    </ThemeProvider>
+    <Suspense>
+      <ThemeProvider theme={theme} disableTransitionOnChange>
+        <CssBaseline enableColorScheme />
+        <I18nProvider i18n={i18n}>{children}</I18nProvider>
+      </ThemeProvider>
+    </Suspense>
   );
 }
