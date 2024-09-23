@@ -1,25 +1,20 @@
-name: Build, Lint and Test
+name: PR
 
 on:
-  push:
-    branches: [main]
   pull_request:
-    types: [opened, synchronize]
 
 jobs:
-  build-test-lint:
+  pr:
+    name: PR
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9.10.0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
       - run: pnpm lint
+      - run: pnpm build
       - run: pnpm test
