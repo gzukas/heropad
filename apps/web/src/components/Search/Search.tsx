@@ -8,7 +8,7 @@ import {
 import { Link } from '@tanstack/react-router';
 import { useLingui } from '@lingui/react';
 import { msg, Trans } from '@lingui/macro';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
 import { debouncedSearchTermAtom } from '~/atoms/searchTermAtom';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
@@ -26,8 +26,7 @@ import { searchSuggestionsByKindAtom } from '~/atoms/searchSuggestionsByKindAtom
 export function Search() {
   const { _ } = useLingui();
   const resetDebouncedSearchTerm = useResetAtom(debouncedSearchTermAtom);
-  const isSearchOpen = useAtomValue(isSearchOpenAtom);
-  const toggleSearch = useSetAtom(isSearchOpenAtom);
+  const [isSearchOpen, toggleSearch] = useAtom(isSearchOpenAtom);
 
   const handleCloseClick = () => toggleSearch(false);
 

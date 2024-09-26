@@ -1,8 +1,10 @@
-import { Paper, styled, Stack, ButtonBase } from '@mui/material';
+import { Paper, styled, ButtonBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Trans } from '@lingui/macro';
 import { useSetAtom } from 'jotai';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
+import { Shortcut } from '../Shortcut';
+import { KeyModifier, useHotkey } from '~/hooks/useHotkey';
 
 const Placeholder = styled('div')(({ theme }) => ({
   color: 'currentcolor',
@@ -14,6 +16,11 @@ const Placeholder = styled('div')(({ theme }) => ({
 
 export function SearchButton() {
   const toggleSearch = useSetAtom(isSearchOpenAtom);
+  const macOS = window.navigator.userAgent.toLowerCase().includes('mac');
+
+  useHotkey('K', KeyModifier.CTRL, () => {
+    toggleSearch();
+  });
 
   const handleClick = () => {
     toggleSearch(true);
@@ -26,17 +33,18 @@ export function SearchButton() {
       elevation={2}
       sx={{
         width: 296,
-        justifyContent: 'left',
+        textAlign: 'left',
         font: 'inherit',
-        p: 1
+        p: 1,
+        px: 1.75,
+        gap: 1
       }}
     >
-      <Stack direction="row" alignItems="center" spacing={1}>
-        <SearchIcon sx={{ color: 'action.active' }} />
-        <Placeholder sx={{ flex: 1 }}>
-          <Trans>Search</Trans>
-        </Placeholder>
-      </Stack>
+      <SearchIcon sx={{ color: 'action.active' }} />
+      <Placeholder sx={{ flexGrow: 1 }}>
+        <Trans>Search</Trans>
+      </Placeholder>
+      <Shortcut aria-hidden="true">{macOS ? '⌘' : 'Ctrl+'}K</Shortcut>
     </Paper>
   );
 }
