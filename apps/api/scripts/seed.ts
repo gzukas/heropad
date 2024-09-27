@@ -8,7 +8,7 @@ import { db } from '../src/database/db.js';
 type NewHero = Insertable<HeroTable>;
 type NewAward = Insertable<AwardTable>;
 
-function run() {
+async function run() {
   const sourceGraph = girvanNewman(Graph, {
     zOut: 5
   });
@@ -36,14 +36,16 @@ function run() {
     }
   );
 
-  return db.transaction().execute(async trx => {
-    await sql`truncate "award", "hero" cascade`.execute(trx);
+  await db.transaction().execute(async trx => {
+    await sql`truncate "award", "hero" restart identity cascade`.execute(trx);
     await trx
       .insertInto('hero')
       .values([...heroesByNode.values()])
       .execute();
     await trx.insertInto('award').values(awards).execute();
   });
+
+  db.destroy();
 }
 
 await run();
