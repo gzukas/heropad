@@ -35,6 +35,9 @@ importers:
       '@dicebear/core':
         specifier: ^9.2.2
         version: 9.2.2
+      '@fastify/autoload':
+        specifier: ^6.0.1
+        version: 6.0.1
       '@fastify/compress':
         specifier: ^8.0.1
         version: 8.0.1
@@ -47,6 +50,12 @@ importers:
       fastify:
         specifier: ^5.0.0
         version: 5.0.0
+      fastify-plugin:
+        specifier: ^5.0.1
+        version: 5.0.1
+      fastify-type-provider-zod:
+        specifier: ^3.0.0
+        version: 3.0.0(fastify@5.0.0)(zod@3.23.8)
       kysely:
         specifier: ^0.27.4
         version: 0.27.4
@@ -84,12 +93,18 @@ importers:
       graphology-generators:
         specifier: ^0.11.2
         version: 0.11.2(graphology-types@0.24.7)
+      picocolors:
+        specifier: ^1.1.0
+        version: 1.1.0
       supabase:
         specifier: ^1.200.3
         version: 1.200.3
       tsx:
         specifier: ^4.19.1
         version: 4.19.1
+      yocto-spinner:
+        specifier: ^0.1.0
+        version: 0.1.0
 
   apps/web:
     dependencies:
@@ -1108,6 +1123,9 @@ packages:
 
   '@fastify/ajv-compiler@4.0.0':
     resolution: {integrity: sha512-dt0jyLAlay14LpIn4Fg1SY7V5NJ9KH0YFDpYVQY5cgIVBvdI8908AMx5zQ0bBYPGT6Wh+bM3f2caMmOXLP3QsQ==}
+
+  '@fastify/autoload@6.0.1':
+    resolution: {integrity: sha512-NVVu/g9yUFkv4nNxsDHhNKz37jINXlPxwNYbA4Hu8pnho6sDVeKo24pt+dnax1SeUapxxs/yulXukbUai6Aebw==}
 
   '@fastify/compress@8.0.1':
     resolution: {integrity: sha512-yWNfKhvL4orfN45LKCHCo8Fcsbj1kdNgwyShw2xpdHfzPf4A3MESmgSfUm3TCKQwgqDdrPnLfy1E+3I/DVP+BQ==}
@@ -2398,8 +2416,14 @@ packages:
   fast-uri@3.0.1:
     resolution: {integrity: sha512-MWipKbbYiYI0UC7cl8m/i/IWTqfC8YXsqjzybjddLsFjStroQzsHXkc73JutMvBiXmOvapk+axIl79ig5t55Bw==}
 
-  fastify-plugin@5.0.0:
-    resolution: {integrity: sha512-0725fmH/yYi8ugsjszLci+lLnGBK6cG+WSxM7edY2OXJEU7gr2JiGBoieL2h9mhTych1vFsEfXsAsGGDJ/Rd5w==}
+  fastify-plugin@5.0.1:
+    resolution: {integrity: sha512-HCxs+YnRaWzCl+cWRYFnHmeRFyR5GVnJTAaCJQiYzQSDwK9MgJdyAsuL3nh0EWRCYMgQ5MeziymvmAhUHYHDUQ==}
+
+  fastify-type-provider-zod@3.0.0:
+    resolution: {integrity: sha512-7zU+leWpPC5r8vQotPbkfUZhU144ScsQRkkQjgTGjwKGhNMEj6/bPO/yerSFJU9YCGQfSwao33RPFm1HXJUR5g==}
+    peerDependencies:
+      fastify: ^5.0.0
+      zod: ^3.14.2
 
   fastify@5.0.0:
     resolution: {integrity: sha512-Qe4dU+zGOzg7vXjw4EvcuyIbNnMwTmcuOhlOrOJsgwzvjEZmsM/IeHulgJk+r46STjdJS/ZJbxO8N70ODXDMEQ==}
@@ -3177,6 +3201,9 @@ packages:
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
+  picocolors@1.1.0:
+    resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
+
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
@@ -3936,6 +3963,19 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  yocto-spinner@0.1.0:
+    resolution: {integrity: sha512-sBra0N4uhNn5UibnOz/HJxB1a0tzZ5zXbqnDe+tfRR3BGy+BmOrzrnQCZRJI7C++JiSZaPygPeNon4QCUmMQ4g==}
+    engines: {node: '>=18.19'}
+
+  yoctocolors@2.1.1:
+    resolution: {integrity: sha512-GQHQqAopRhwU8Kt1DDM8NjibDXHC8eoh1erhGAJPEyveY9qqVeXvVikNKrDz69sHowPMorbPUrH/mx8c50eiBQ==}
+    engines: {node: '>=18'}
+
+  zod-to-json-schema@3.23.3:
+    resolution: {integrity: sha512-TYWChTxKQbRJp5ST22o/Irt9KC5nj7CdBKYB/AosCRdj/wxEMvv4NNaj9XVUHDOIp53ZxArGhnw5HMZziPFjog==}
+    peerDependencies:
+      zod: ^3.23.3
+
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
@@ -4597,10 +4637,12 @@ snapshots:
       ajv-formats: 3.0.1(ajv@8.16.0)
       fast-uri: 3.0.1
 
+  '@fastify/autoload@6.0.1': {}
+
   '@fastify/compress@8.0.1':
     dependencies:
       '@fastify/accept-negotiator': 2.0.0
-      fastify-plugin: 5.0.0
+      fastify-plugin: 5.0.1
       mime-db: 1.52.0
       minipass: 7.1.2
       peek-stream: 1.1.3
@@ -4610,7 +4652,7 @@ snapshots:
 
   '@fastify/cors@10.0.1':
     dependencies:
-      fastify-plugin: 5.0.0
+      fastify-plugin: 5.0.1
       mnemonist: 0.39.8
 
   '@fastify/error@4.0.0': {}
@@ -6068,7 +6110,13 @@ snapshots:
 
   fast-uri@3.0.1: {}
 
-  fastify-plugin@5.0.0: {}
+  fastify-plugin@5.0.1: {}
+
+  fastify-type-provider-zod@3.0.0(fastify@5.0.0)(zod@3.23.8):
+    dependencies:
+      fastify: 5.0.0
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.3(zod@3.23.8)
 
   fastify@5.0.0:
     dependencies:
@@ -6820,6 +6868,8 @@ snapshots:
 
   picocolors@1.0.1: {}
 
+  picocolors@1.1.0: {}
+
   picomatch@2.3.1: {}
 
   pidtree@0.6.0: {}
@@ -7533,5 +7583,15 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@0.1.0: {}
+
+  yocto-spinner@0.1.0:
+    dependencies:
+      yoctocolors: 2.1.1
+
+  yoctocolors@2.1.1: {}
+
+  zod-to-json-schema@3.23.3(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8
 
   zod@3.23.8: {}

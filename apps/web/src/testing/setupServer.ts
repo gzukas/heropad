@@ -2,9 +2,9 @@ import { setupServer as setupServerMsw, SetupServer } from 'msw/node';
 import { RequestHandler } from 'msw';
 import { createTRPCMsw } from 'msw-trpc';
 import superjson from 'superjson';
-import type { AppRouter } from '../../../api/src/trpc/appRouter';
+import type { TrpcRouter } from '../../../api/src/types';
 
-const _trpcMsw = createTRPCMsw<AppRouter>({
+const _trpcMsw = createTRPCMsw<TrpcRouter>({
   transformer: { input: superjson, output: superjson }
 });
 

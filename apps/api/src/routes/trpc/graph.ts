@@ -1,4 +1,4 @@
-import { createTRPCRouter, dbProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 import { db } from '../../database/db.js';
 
 const compiledNodesQuery = db

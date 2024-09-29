@@ -1,9 +1,9 @@
 import { httpBatchLink } from '@trpc/client';
 import { createTRPCJotai } from 'jotai-trpc';
 import superjson from 'superjson';
-import { type AppRouter } from '../../../api/src/trpc/appRouter';
+import { type TrpcRouter } from '../../../api/src/types';
 
-export const api = createTRPCJotai<AppRouter>({
+export const api = createTRPCJotai<TrpcRouter>({
   transformer: superjson,
   links: [
     httpBatchLink({

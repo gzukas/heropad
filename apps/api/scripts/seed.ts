@@ -2,8 +2,7 @@ import { sql, Insertable } from 'kysely';
 import { copycat } from '@snaplet/copycat';
 import Graph from 'graphology';
 import girvanNewman from 'graphology-generators/random/girvan-newman';
-import type { HeroTable, AwardTable } from '../src/database/types.js';
-import { db } from '../src/database/db.js';
+import { db, type HeroTable, type AwardTable } from '../src/database/db.js';
 
 type NewHero = Insertable<HeroTable>;
 type NewAward = Insertable<AwardTable>;
@@ -45,7 +44,7 @@ async function run() {
     await trx.insertInto('award').values(awards).execute();
   });
 
-  db.destroy();
+  await db.destroy();
 }
 
 await run();
