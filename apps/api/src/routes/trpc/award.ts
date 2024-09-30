@@ -1,5 +1,6 @@
-import { z } from 'zod';
 import { Kysely, sql } from 'kysely';
+import { Type } from '@sinclair/typebox';
+import { wrap } from '@typeschema/typebox';
 import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 import { pqids } from '../../utils/pqids.js';
 import { Database } from '../../database/db.js';
@@ -18,25 +19,32 @@ function selectAwards(db: Kysely<Database>) {
     ]);
 }
 
+const GetAwardsSchema = Type.Object({
+  hero: Type.String(),
+  direction: Type.Optional(
+    Type.Union([Type.Literal('received'), Type.Literal('given')])
+  ),
+  limit: Type.Optional(
+    Type.Number({
+      minimum: 1,
+      maximum: 100
+    })
+  ),
+  givenSince: Type.Optional(Type.Date())
+});
+
 export const awardRouter = createTRPCRouter({
   getAward: dbProcedure
-    .input(z.object({ id: z.string() }))
+    .input(wrap(Type.Object({ id: Type.String() })))
     .query(({ ctx, input }) =>
       selectAwards(ctx.db)
         .where('award.id', '=', eb => pqids(eb).decode(input.id))
         .executeTakeFirstOrThrow()
     ),
   getAwards: dbProcedure
-    .input(
-      z.object({
-        hero: z.string(),
-        direction: z.enum(['received', 'given']).default('received'),
-        limit: z.number().min(1).max(100).default(10),
-        givenSince: z.date().optional()
-      })
-    )
+    .input(wrap(GetAwardsSchema))
     .query(async ({ ctx, input }) => {
-      const { hero, direction, limit, givenSince } = input;
+      const { hero, direction = 'received', limit = 10, givenSince } = input;
       const rows = await selectAwards(ctx.db)
         .$if(direction === 'received', qb => qb.where('to.username', '=', hero))
         .$if(direction === 'given', qb => qb.where('from.username', '=', hero))

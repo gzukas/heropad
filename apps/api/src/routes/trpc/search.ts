@@ -1,11 +1,12 @@
-import { z } from 'zod';
+import { Type } from '@sinclair/typebox';
+import { wrap } from '@typeschema/typebox';
 import { sql } from 'kysely';
 import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 import { pqids } from '../../utils/pqids.js';
 
 export const searchRouter = createTRPCRouter({
   getSuggestions: dbProcedure
-    .input(z.object({ query: z.string() }))
+    .input(wrap(Type.Object({ query: Type.String() })))
     .query(({ ctx, input }) =>
       ctx.db
         .selectFrom('hero_award_search')

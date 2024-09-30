@@ -1,20 +1,21 @@
 import { createAvatar } from '@dicebear/core';
 import { avataaars } from '@dicebear/collection';
-import { FastifyPluginAsync } from 'fastify';
-import { ZodTypeProvider } from 'fastify-type-provider-zod';
-import { z } from 'zod';
+import {
+  Type,
+  FastifyPluginAsyncTypebox
+} from '@fastify/type-provider-typebox';
 
-const avatarRoute: FastifyPluginAsync = async fastify => {
-  fastify.withTypeProvider<ZodTypeProvider>().get(
+const avatarRoute: FastifyPluginAsyncTypebox = async fastify => {
+  fastify.get(
     '/:hero.svg',
     {
       schema: {
-        params: z.object({
-          hero: z
-            .string()
-            .min(1, 'Hero name cannot be empty')
-            .max(64, 'Hero name is too long')
-            .regex(/^[a-zA-Z0-9_.-]+$/, 'Hero name contains invalid characters')
+        params: Type.Object({
+          hero: Type.String({
+            minLength: 1,
+            maxLength: 64,
+            pattern: '^[a-zA-Z0-9_.-]+$'
+          })
         })
       }
     },

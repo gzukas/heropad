@@ -1,6 +1,5 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
-import { ZodError } from 'zod';
 import { NoResultError } from 'kysely';
 import { TrpcContext } from '../types.js';
 
@@ -11,7 +10,8 @@ const t = initTRPC.context<TrpcContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null
+        errors:
+          error.cause instanceof AggregateError ? error.cause.errors : null
       }
     };
   }

@@ -1,9 +1,10 @@
-import { z } from 'zod';
+import { Type } from '@sinclair/typebox';
+import { wrap } from '@typeschema/typebox';
 import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 
 export const heroRouter = createTRPCRouter({
   getHero: dbProcedure
-    .input(z.object({ username: z.string() }))
+    .input(wrap(Type.Object({ username: Type.String() })))
     .query(({ ctx, input }) =>
       ctx.db
         .selectFrom('hero')
