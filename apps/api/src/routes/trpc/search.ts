@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { sql } from 'kysely';
-import { createTRPCRouter, dbProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 import { pqids } from '../../utils/pqids.js';
 
 export const searchRouter = createTRPCRouter({

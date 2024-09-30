@@ -2,15 +2,9 @@ import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 import { NoResultError } from 'kysely';
-import { db } from '../database/db.js';
+import { TrpcContext } from '../types.js';
 
-export function createContext() {
-  return {
-    db
-  };
-}
-
-const t = initTRPC.context<typeof createContext>().create({
+const t = initTRPC.context<TrpcContext>().create({
   transformer: superjson,
   errorFormatter({ shape, error }) {
     return {

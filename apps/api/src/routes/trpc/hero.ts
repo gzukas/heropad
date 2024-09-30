@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createTRPCRouter, dbProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 
 export const heroRouter = createTRPCRouter({
   getHero: dbProcedure

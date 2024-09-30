@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { Kysely, sql } from 'kysely';
-import { createTRPCRouter, dbProcedure } from '../trpc.js';
+import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 import { pqids } from '../../utils/pqids.js';
-import { Database } from '../../database/types.js';
+import { Database } from '../../database/db.js';
 
 function selectAwards(db: Kysely<Database>) {
   return db

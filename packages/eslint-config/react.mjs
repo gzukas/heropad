@@ -10,7 +10,6 @@ import reactHooks from 'eslint-plugin-react-hooks';
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-  // @ts-ignore
   prettierConfig,
   {
     languageOptions: {
