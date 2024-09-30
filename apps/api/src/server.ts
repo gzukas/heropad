@@ -1,11 +1,25 @@
-import fastify from 'fastify';
+import fastify, { FastifyServerOptions } from 'fastify';
 import fp from 'fastify-plugin';
 import closeWithGrace from 'close-with-grace';
 import { app } from './app.js';
 import { db } from './database/db.js';
 
+function getLogger(): FastifyServerOptions['logger'] {
+  if (process.stdout.isTTY) {
+    return {
+      level: process.env.HEROPAD_LOG_LEVEL ?? 'info',
+      transport: {
+        target: 'pino-pretty'
+      }
+    };
+  }
+  return {
+    level: process.env.HEROPAD_LOG_LEVEL ?? 'silent'
+  };
+}
+
 const server = fastify({
-  logger: true,
+  logger: getLogger(),
   maxParamLength: 5000
 });
 
