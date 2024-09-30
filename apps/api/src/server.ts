@@ -1,6 +1,8 @@
 import fastify from 'fastify';
 import fp from 'fastify-plugin';
+import closeWithGrace from 'close-with-grace';
 import { app } from './app.js';
+import { db } from './database/db.js';
 
 const server = fastify({
   logger: true,
@@ -9,6 +11,14 @@ const server = fastify({
 
 async function start() {
   server.register(fp(app));
+
+  closeWithGrace({ delay: 500 }, async ({ err }) => {
+    if (err) {
+      server.log.error(err);
+    }
+    await server.close();
+    await db.destroy();
+  });
 
   try {
     await server.listen({
