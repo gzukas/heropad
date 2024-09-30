@@ -7,7 +7,7 @@ import { db, type HeroTable, type AwardTable } from '../src/database/db.js';
 type NewHero = Insertable<HeroTable>;
 type NewAward = Insertable<AwardTable>;
 
-async function run() {
+async function seed() {
   const sourceGraph = girvanNewman(Graph, {
     zOut: 5
   });
@@ -23,14 +23,14 @@ async function run() {
   let edgeId = 0;
   const awards = sourceGraph.mapEdges<NewAward>(
     (edge, _attributes, source, target) => {
-      const { id: fromId } = heroesByNode.get(source)!;
-      const { id: toId } = heroesByNode.get(target)!;
+      const fromId = heroesByNode.get(source)!.id!;
+      const toId = heroesByNode.get(target)!.id!;
       return {
         id: ++edgeId,
         givenAt: new Date(copycat.dateString(edge)),
         description: copycat.sentence(edge),
-        fromId: fromId!,
-        toId: toId!
+        fromId,
+        toId
       };
     }
   );
@@ -47,4 +47,4 @@ async function run() {
   await db.destroy();
 }
 
-await run();
+await seed();
