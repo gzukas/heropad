@@ -1,17 +1,13 @@
 import { Suspense } from 'react';
-import {
-  Dialog,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton
-} from '@mui/material';
-import { Link } from '@tanstack/react-router';
+import { Dialog, ListItem, ListItemAvatar } from '@mui/material';
 import { useLingui } from '@lingui/react';
 import { msg, Trans } from '@lingui/macro';
 import { useAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
 import { debouncedSearchTermAtom } from '~/atoms/searchTermAtom';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
+import { searchSuggestionsByKindAtom } from '~/atoms/searchSuggestionsByKindAtom';
+import { ListItemButtonLink } from '~/components/ListItemButtonLink';
 import { AwardAvatar } from '~/components/AwardAvatar';
 import { HeroAvatar } from '~/components/HeroAvatar';
 import { SearchInput } from './SearchInput';
@@ -21,7 +17,6 @@ import { SearchList } from './SearchList';
 import { SearchGroup } from './SearchGroup';
 import { SearchText } from './SearchText';
 import { UseAtomValue } from '../UseAtomValue';
-import { searchSuggestionsByKindAtom } from '~/atoms/searchSuggestionsByKindAtom';
 
 export function Search() {
   const { _ } = useLingui();
@@ -75,10 +70,9 @@ export function Search() {
                         .get('award')
                         ?.map(({ id, text, nodes: [[from], [to]] }) => (
                           <ListItem disablePadding>
-                            <ListItemButton
+                            <ListItemButtonLink
                               key={id}
                               onClick={handleCloseClick}
-                              component={Link}
                               to="/$hero/$awardId"
                               params={{ hero: from, awardId: id }}
                               search={{ direction: 'given' }}
@@ -87,7 +81,7 @@ export function Search() {
                                 <AwardAvatar from={from} to={to} />
                               </ListItemAvatar>
                               <SearchText>{text}</SearchText>
-                            </ListItemButton>
+                            </ListItemButtonLink>
                           </ListItem>
                         ))}
                     </SearchGroup>
@@ -98,10 +92,9 @@ export function Search() {
                         .get('hero')
                         ?.map(({ id, text, nodes: [[hero]] }) => (
                           <ListItem disablePadding>
-                            <ListItemButton
+                            <ListItemButtonLink
                               key={id}
                               onClick={handleCloseClick}
-                              component={Link}
                               to="/$hero"
                               params={{ hero }}
                             >
@@ -109,7 +102,7 @@ export function Search() {
                                 <HeroAvatar hero={hero} />
                               </ListItemAvatar>
                               <SearchText>{text}</SearchText>
-                            </ListItemButton>
+                            </ListItemButtonLink>
                           </ListItem>
                         ))}
                     </SearchGroup>
