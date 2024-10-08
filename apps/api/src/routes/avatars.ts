@@ -5,9 +5,9 @@ import {
   FastifyPluginAsyncTypebox
 } from '@fastify/type-provider-typebox';
 
-const avatarRoute: FastifyPluginAsyncTypebox = async fastify => {
+const avatarsRoute: FastifyPluginAsyncTypebox = async fastify => {
   fastify.get(
-    '/:hero.svg',
+    '/avatars/:hero.svg',
     {
       schema: {
         params: Type.Object({
@@ -32,4 +32,4 @@ const avatarRoute: FastifyPluginAsyncTypebox = async fastify => {
   );
 };
 
-export default avatarRoute;
+export default avatarsRoute;

@@ -1,8 +1,7 @@
 import fastify, { FastifyServerOptions } from 'fastify';
 import fp from 'fastify-plugin';
 import closeWithGrace from 'close-with-grace';
-import { app } from './app.js';
-import { db } from './database/db.js';
+import app from './app.js';
 
 function getLogger(): FastifyServerOptions['logger'] {
   if (process.stdout.isTTY) {
@@ -31,7 +30,6 @@ async function start() {
       server.log.error(err);
     }
     await server.close();
-    await db.destroy();
   });
 
   try {

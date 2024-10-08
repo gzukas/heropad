@@ -1,8 +1,8 @@
 import path from 'node:path';
-import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import { type FastifyInstance, FastifyPluginOptions } from 'fastify';
 import fastifyAutoload from '@fastify/autoload';
 
-export async function app(
+export default async function app(
   fastify: FastifyInstance,
   options: FastifyPluginOptions
 ) {
@@ -13,7 +13,6 @@ export async function app(
 
   await fastify.register(fastifyAutoload, {
     dir: path.join(import.meta.dirname, 'routes'),
-    routeParams: true,
     ignoreFilter: /trpc/,
     options: { ...options }
   });
