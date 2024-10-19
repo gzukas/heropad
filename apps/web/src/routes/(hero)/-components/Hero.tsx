@@ -26,7 +26,7 @@ import { HeroAvatar } from '~/components/HeroAvatar';
 import { HeroAwards } from './HeroAwards';
 import { ListItemAward } from './ListItemAward';
 
-const routeApi = getRouteApi('/$hero');
+const routeApi = getRouteApi('/(hero)/$hero');
 
 export function Hero() {
   const { direction = 'received' } = routeApi.useSearch();

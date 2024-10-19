@@ -7,7 +7,7 @@ import { awardFamily } from '~/atoms/awardFamily';
 import { ListItemAward } from './-components/ListItemAward';
 import { IconButtonLink } from '~/components/IconButtonLink';
 
-const routeApi = getRouteApi('/$hero/$awardId');
+const routeApi = getRouteApi('/(hero)/$hero/$awardId');
 
 export const Route = createFileRoute('/(hero)/$hero/$awardId')({
   loader: ({ context: { store }, params, abortController }) => {

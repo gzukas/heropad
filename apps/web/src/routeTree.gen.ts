@@ -18,16 +18,19 @@ import { Route as heroHeroAwardIdImport } from './routes/(hero)/$hero.$awardId';
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute
 } as any);
 
 const heroHeroRoute = heroHeroImport.update({
+  id: '/(hero)/$hero',
   path: '/$hero',
   getParentRoute: () => rootRoute
 } as any);
 
 const heroHeroAwardIdRoute = heroHeroAwardIdImport.update({
+  id: '/$awardId',
   path: '/$awardId',
   getParentRoute: () => heroHeroRoute
 } as any);
@@ -44,14 +47,14 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof rootRoute;
     };
     '/(hero)/$hero': {
-      id: '/$hero';
+      id: '/(hero)/$hero';
       path: '/$hero';
       fullPath: '/$hero';
       preLoaderRoute: typeof heroHeroImport;
       parentRoute: typeof rootRoute;
     };
     '/(hero)/$hero/$awardId': {
-      id: '/$hero/$awardId';
+      id: '/(hero)/$hero/$awardId';
       path: '/$awardId';
       fullPath: '/$hero/$awardId';
       preLoaderRoute: typeof heroHeroAwardIdImport;
@@ -89,8 +92,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   '/': typeof IndexRoute;
-  '/$hero': typeof heroHeroRouteWithChildren;
-  '/$hero/$awardId': typeof heroHeroAwardIdRoute;
+  '/(hero)/$hero': typeof heroHeroRouteWithChildren;
+  '/(hero)/$hero/$awardId': typeof heroHeroAwardIdRoute;
 }
 
 export interface FileRouteTypes {
@@ -98,7 +101,7 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/$hero' | '/$hero/$awardId';
   fileRoutesByTo: FileRoutesByTo;
   to: '/' | '/$hero' | '/$hero/$awardId';
-  id: '__root__' | '/' | '/$hero' | '/$hero/$awardId';
+  id: '__root__' | '/' | '/(hero)/$hero' | '/(hero)/$hero/$awardId';
   fileRoutesById: FileRoutesById;
 }
 
@@ -125,21 +128,21 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/$hero"
+        "/(hero)/$hero"
       ]
     },
     "/": {
       "filePath": "index.ts"
     },
-    "/$hero": {
+    "/(hero)/$hero": {
       "filePath": "(hero)/$hero.tsx",
       "children": [
-        "/$hero/$awardId"
+        "/(hero)/$hero/$awardId"
       ]
     },
-    "/$hero/$awardId": {
+    "/(hero)/$hero/$awardId": {
       "filePath": "(hero)/$hero.$awardId.tsx",
-      "parent": "/$hero"
+      "parent": "/(hero)/$hero"
     }
   }
 }
