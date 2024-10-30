@@ -31,7 +31,7 @@
     "fastify-plugin": "^5.0.1",
     "kysely": "^0.27.4",
     "nanospinner": "^1.1.0",
-    "pg": "^8.13.0",
+    "pg": "^8.13.1",
     "superjson": "^2.2.1"
   },
   "devDependencies": {
@@ -45,6 +45,6 @@
     "graphology-generators": "^0.11.2",
     "pino-pretty": "^11.3.0",
     "supabase": "^1.207.9",
-    "tsx": "^4.19.1"
+    "tsx": "^4.19.2"
   }
 }
