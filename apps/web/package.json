@@ -25,7 +25,7 @@
     "@react-sigma/layout-forceatlas2": "^4.0.3",
     "@sigma/edge-curve": "3.0.0-beta.16",
     "@sigma/node-image": "3.0.0-beta.16",
-    "@tanstack/react-router": "^1.81.4",
+    "@tanstack/react-router": "^1.82.1",
     "@tanstack/react-virtual": "3.10.9",
     "@trpc/client": "^10.45.2",
     "autosuggest-highlight": "^3.3.4",
@@ -52,7 +52,7 @@
     "@lingui/conf": "^4.14.0",
     "@lingui/swc-plugin": "4.1.0",
     "@lingui/vite-plugin": "^4.14.0",
-    "@tanstack/router-plugin": "^1.79.0",
+    "@tanstack/router-plugin": "^1.81.9",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -63,8 +63,8 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react-swc": "3.7.1",
     "graphology-types": "^0.24.7",
-    "happy-dom": "^15.11.4",
-    "msw": "^2.6.4",
+    "happy-dom": "^15.11.6",
+    "msw": "^2.6.5",
     "msw-trpc": "^2.0.0-beta.1"
   }
 }
