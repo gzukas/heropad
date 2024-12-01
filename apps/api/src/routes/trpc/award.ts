@@ -4,6 +4,7 @@ import { wrap } from '@typeschema/typebox';
 import { createTRPCRouter, dbProcedure } from '../../utils/trpc.js';
 import { pqids } from '../../utils/pqids.js';
 import { Database } from '../../database/db.js';
+import { parseOrderBy } from '../../utils/parseOrderBy.js';
 
 function selectAwards(db: Kysely<Database>) {
   return db
@@ -30,7 +31,10 @@ const GetAwardsSchema = Type.Object({
       maximum: 100
     })
   ),
-  givenSince: Type.Optional(Type.Date())
+  givenSince: Type.Optional(Type.Date()),
+  sort: Type.Optional(
+    Type.Union([Type.Literal('givenAt'), Type.Literal('-givenAt')])
+  )
 });
 
 export const awardRouter = createTRPCRouter({
@@ -44,22 +48,26 @@ export const awardRouter = createTRPCRouter({
   getAwards: dbProcedure
     .input(wrap(GetAwardsSchema))
     .query(async ({ ctx, input }) => {
-      const { hero, direction = 'received', limit = 10, givenSince } = input;
+      const {
+        hero,
+        direction = 'received',
+        limit = 10,
+        givenSince,
+        sort = '-givenAt'
+      } = input;
+      const [orderBy, orderByDirection] = parseOrderBy(sort);
       const rows = await selectAwards(ctx.db)
         .$if(direction === 'received', qb => qb.where('to.username', '=', hero))
         .$if(direction === 'given', qb => qb.where('from.username', '=', hero))
         .$if(Boolean(givenSince), qb =>
           qb.where(
             eb =>
-              eb.fn('date_trunc', [
-                sql.lit('millisecond'),
-                eb.ref('award.givenAt')
-              ]),
-            '<=',
+              eb.fn('date_trunc', [sql.lit('millisecond'), eb.ref('givenAt')]),
+            orderByDirection === 'desc' ? '<=' : '>=',
             givenSince!
           )
         )
-        .orderBy('award.givenAt', 'desc')
+        .orderBy(orderBy, orderByDirection)
         .limit(limit + 1)
         .execute();
 

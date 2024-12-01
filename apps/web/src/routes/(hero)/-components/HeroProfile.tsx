@@ -10,6 +10,7 @@ import {
   Paper,
   Slide,
   Stack,
+  styled,
   Tabs,
   Toolbar,
   Tooltip,
@@ -17,6 +18,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
+import SortIcon from '@mui/icons-material/Sort';
 import { useCamera } from '~/hooks/useCamera';
 import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
 import { ListItemButtonLink } from '~/components/ListItemButtonLink';
@@ -26,10 +28,14 @@ import { HeroAvatar } from '~/components/HeroAvatar';
 import { HeroAwards } from './HeroAwards';
 import { ListItemAward } from './ListItemAward';
 
+const FlippedSortIcon = styled(SortIcon)({
+  transform: 'scaleY(-1)'
+});
+
 const routeApi = getRouteApi('/(hero)/$hero');
 
-export function Hero() {
-  const { direction = 'received' } = routeApi.useSearch();
+export function HeroProfile() {
+  const { direction = 'received', sort = '-givenAt' } = routeApi.useSearch();
   const { hero, awardPaginationAtoms } = routeApi.useLoaderData();
   const { _ } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
@@ -67,6 +73,24 @@ export function Hero() {
           <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
             {hero.name}
           </Typography>
+          <IconButtonLink
+            to="/$hero"
+            params={{ hero: hero.username }}
+            search={({ sort, ...other }) => ({
+              sort: sort === 'givenAt' ? '-givenAt' : 'givenAt',
+              ...other
+            })}
+          >
+            {sort === '-givenAt' ? (
+              <Tooltip title={_(msg`Show oldest first`)}>
+                <FlippedSortIcon />
+              </Tooltip>
+            ) : (
+              <Tooltip title={_(msg`Show latest first`)}>
+                <SortIcon />
+              </Tooltip>
+            )}
+          </IconButtonLink>
           <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
             <CloseIcon />
           </IconButtonLink>
@@ -77,14 +101,14 @@ export function Hero() {
             value="received"
             to="/$hero"
             params={{ hero: hero.username }}
-            search={{ direction: 'received' }}
+            search={search => ({ ...search, direction: 'received' })}
           />
           <TabLink
             label={_(msg`Given`)}
             value="given"
             to="/$hero"
             params={{ hero: hero.username }}
-            search={{ direction: 'given' }}
+            search={search => ({ ...search, direction: 'given' })}
           />
         </Tabs>
       </AppBar>

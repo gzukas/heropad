@@ -21,15 +21,15 @@ msgstr "Apdovanojimai"
 msgid "Change language"
 msgstr "Keisti kalbą"
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Close"
 msgstr "Uždaryti"
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Focus on me"
 msgstr "Fokusuoti mane"
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Given"
 msgstr "Davė"
 
@@ -41,7 +41,7 @@ msgstr "Herojai"
 msgid "No results found"
 msgstr ""
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Received"
 msgstr "Gavo"
 
@@ -56,6 +56,14 @@ msgstr "Ieškoti"
 #: components/Search/Search.tsx
 msgid "Search for heroes and awards..."
 msgstr "Ieškokite herojų ir apdovanojimų..."
+
+#: routes/(hero)/-components/HeroProfile.tsx
+msgid "Show latest first"
+msgstr "Rodyti naujausius pirmiau"
+
+#: routes/(hero)/-components/HeroProfile.tsx
+msgid "Show oldest first"
+msgstr "Rodyti seniausius pirmiau"
 
 #: components/ChangeColorScheme.tsx
 msgid "Turn off the light"
