@@ -1,7 +1,5 @@
-import {
-  fastifyTRPCPlugin,
-  FastifyTRPCPluginOptions
-} from '@trpc/server/adapters/fastify';
+import { type FastifyInstance, FastifyPluginOptions } from 'fastify';
+import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
 import { db } from '../database/db.js';
 import { createTRPCRouter } from '../utils/trpc.js';
 import { awardRouter } from '../routes/trpc/award.js';
@@ -25,9 +23,16 @@ const router = createTRPCRouter({
 
 export type TrpcRouter = typeof router;
 
-export const autoConfig: FastifyTRPCPluginOptions<TrpcRouter> = {
-  prefix: '/trpc',
-  trpcOptions: { router, createContext }
-};
-
-export default fastifyTRPCPlugin;
+export default async function trpc(
+  fastify: FastifyInstance,
+  options: FastifyPluginOptions
+) {
+  await fastify.register(fastifyTRPCPlugin, {
+    prefix: '/trpc',
+    trpcOptions: { router, createContext },
+    ...options
+  });
+  fastify.addHook('onClose', async () => {
+    await db.destroy();
+  });
+}

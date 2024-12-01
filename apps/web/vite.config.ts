@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 import path from 'node:path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
@@ -18,7 +18,10 @@ export default defineConfig({
       plugins: [['@lingui/swc-plugin', {}]]
     }),
     splitVendorChunkPlugin(),
-    lingui()
+    lingui({
+      // Specify the config path as the Vitest VS Code extension uses a different CWD and may miss it otherwise.
+      configPath: path.join(__dirname, 'lingui.config.ts')
+    })
   ],
   build: {
     rollupOptions: {

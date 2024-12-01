@@ -50,7 +50,7 @@ export const HeroAwards = React.forwardRef<HTMLElement, HeroAwardsProps>(
     const virtualizer = useVirtualizer({
       count: hasMoreAwards ? awards.length + 1 : awards.length,
       getScrollElement: () => listRef.current,
-      estimateSize: () => 72,
+      estimateSize: () => 76,
       ...virtualizerOptions
     });
 
@@ -87,6 +87,7 @@ export const HeroAwards = React.forwardRef<HTMLElement, HeroAwardsProps>(
                   position: 'absolute',
                   top: 0,
                   left: 0,
+                  right: 0,
                   height: `${virtualAward.size}`,
                   transform: `translateY(${virtualAward.start}px)`
                 }

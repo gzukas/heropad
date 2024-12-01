@@ -1,5 +1,5 @@
 {
-  "extends": ["@tsconfig/node20", "@heropad/tsconfig"],
+  "extends": ["@tsconfig/node22", "@heropad/tsconfig"],
   "compilerOptions": {
     "moduleResolution": "NodeNext",
     "module": "NodeNext",

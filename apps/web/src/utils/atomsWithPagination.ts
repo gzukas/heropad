@@ -24,18 +24,14 @@ export function atomsWithPagination<TPage, TNextPageParam>({
 >): AtomsWithPaginationResult<TPage> {
   const nextPageParamAtom = atom<TNextPageParam | undefined>(undefined);
   const queryAtom = getQueryAtom(nextPageParamAtom);
-  const pagesAtom = unwrap(
-    selectAtom<Awaited<TPage> | undefined, TPage[]>(
-      unwrap(queryAtom),
-      (curr, prev = []) => [...prev, ...(curr ? [curr] : [])]
-    ),
-    prev => prev || []
+  const pagesAtom = selectAtom<TPage | undefined, TPage[]>(
+    unwrap(queryAtom),
+    (curr, prev = []) => (curr ? [...prev, curr] : prev)
   );
 
   const _nextPageParamAtom = atom(get =>
     getNextPageParam([...get(pagesAtom)].pop())
   );
-  _nextPageParamAtom.debugPrivate = true;
 
   const fetchNextPageAtom = atom(
     get => Boolean(get(_nextPageParamAtom)),

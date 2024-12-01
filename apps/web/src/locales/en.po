@@ -21,15 +21,15 @@ msgstr ""
 msgid "Change language"
 msgstr ""
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Close"
 msgstr ""
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Focus on me"
 msgstr ""
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Given"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: routes/(hero)/-components/Hero.tsx
+#: routes/(hero)/-components/HeroProfile.tsx
 msgid "Received"
 msgstr ""
 
@@ -55,6 +55,14 @@ msgstr ""
 
 #: components/Search/Search.tsx
 msgid "Search for heroes and awards..."
+msgstr ""
+
+#: routes/(hero)/-components/HeroProfile.tsx
+msgid "Show latest first"
+msgstr ""
+
+#: routes/(hero)/-components/HeroProfile.tsx
+msgid "Show oldest first"
 msgstr ""
 
 #: components/ChangeColorScheme.tsx

@@ -1,5 +1,4 @@
 import { Drawer, Stack, styled, useMediaQuery } from '@mui/material';
-import { Theme } from '@mui/material/styles';
 import {
   useParams,
   Outlet,
@@ -41,8 +40,8 @@ const Content = styled('div', { label: 'Content' })(({ theme }) => ({
 
 function Root() {
   const { hero } = useParams({ strict: false });
-  const isXs = useMediaQuery<Theme>(theme => theme.breakpoints.only('xs'));
-  const isMdUp = useMediaQuery<Theme>(theme => theme.breakpoints.up('md'));
+  const isXs = useMediaQuery(theme => theme.breakpoints.only('xs'));
+  const isMdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
   const navigate = useNavigate();
   const shift = useAccumulatedContentShift();
   const previousShift = usePrevious(shift);
@@ -77,10 +76,10 @@ function Root() {
           onClose={handleDrawerClose}
           variant={isMdUp ? 'persistent' : 'temporary'}
           anchor="right"
-          ModalProps={{ keepMounted: true }}
+          ModalProps={{ keepMounted: true, sx: {} }}
           PaperProps={{
             sx: {
-              width: shift || previousShift
+              width: isXs ? '100%' : shift || previousShift
             }
           }}
         >

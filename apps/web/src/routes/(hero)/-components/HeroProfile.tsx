@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Link, Outlet, getRouteApi } from '@tanstack/react-router';
+import { Outlet, getRouteApi } from '@tanstack/react-router';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
@@ -7,11 +7,10 @@ import {
   Badge,
   IconButton,
   ListItem,
-  ListItemButton,
   Paper,
   Slide,
   Stack,
-  Tab,
+  styled,
   Tabs,
   Toolbar,
   Tooltip,
@@ -19,16 +18,24 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
-import { HeroAvatar } from '~/components/HeroAvatar';
+import SortIcon from '@mui/icons-material/Sort';
 import { useCamera } from '~/hooks/useCamera';
 import { useMatchesChildRoute } from '~/hooks/useMatchesChildRoute';
+import { ListItemButtonLink } from '~/components/ListItemButtonLink';
+import { IconButtonLink } from '~/components/IconButtonLink';
+import { TabLink } from '~/components/TabLink';
+import { HeroAvatar } from '~/components/HeroAvatar';
 import { HeroAwards } from './HeroAwards';
 import { ListItemAward } from './ListItemAward';
 
-const routeApi = getRouteApi('/$hero');
+const FlippedSortIcon = styled(SortIcon)({
+  transform: 'scaleY(-1)'
+});
 
-export function Hero() {
-  const { direction = 'received' } = routeApi.useSearch();
+const routeApi = getRouteApi('/(hero)/$hero');
+
+export function HeroProfile() {
+  const { direction = 'received', sort = '-givenAt' } = routeApi.useSearch();
   const { hero, awardPaginationAtoms } = routeApi.useLoaderData();
   const { _ } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
@@ -66,31 +73,42 @@ export function Hero() {
           <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
             {hero.name}
           </Typography>
-          <IconButton
-            component={Link}
-            to="/"
-            edge="end"
-            aria-label={_(msg`Close`)}
+          <IconButtonLink
+            to="/$hero"
+            params={{ hero: hero.username }}
+            search={({ sort, ...other }) => ({
+              sort: sort === 'givenAt' ? '-givenAt' : 'givenAt',
+              ...other
+            })}
           >
+            {sort === '-givenAt' ? (
+              <Tooltip title={_(msg`Show oldest first`)}>
+                <FlippedSortIcon />
+              </Tooltip>
+            ) : (
+              <Tooltip title={_(msg`Show latest first`)}>
+                <SortIcon />
+              </Tooltip>
+            )}
+          </IconButtonLink>
+          <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
             <CloseIcon />
-          </IconButton>
+          </IconButtonLink>
         </Toolbar>
         <Tabs value={direction} variant="fullWidth">
-          <Tab
-            component={Link}
+          <TabLink
             label={_(msg`Received`)}
             value="received"
             to="/$hero"
             params={{ hero: hero.username }}
-            search={{ direction: 'received' }}
+            search={search => ({ ...search, direction: 'received' })}
           />
-          <Tab
-            component={Link}
+          <TabLink
             label={_(msg`Given`)}
             value="given"
             to="/$hero"
             params={{ hero: hero.username }}
-            search={{ direction: 'given' }}
+            search={search => ({ ...search, direction: 'given' })}
           />
         </Tabs>
       </AppBar>
@@ -107,14 +125,13 @@ export function Hero() {
             {...props}
           >
             {award ? (
-              <ListItemButton
-                component={Link}
+              <ListItemButtonLink
                 to="/$hero/$awardId"
                 params={{ hero: hero.username, awardId: award.id }}
                 search={prev => prev}
               >
                 <ListItemAward award={award} />
-              </ListItemButton>
+              </ListItemButtonLink>
             ) : (
               <ListItemAward loading />
             )}

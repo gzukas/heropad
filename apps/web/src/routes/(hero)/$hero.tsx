@@ -6,14 +6,18 @@ import { api } from '~/utils/api';
 
 interface HeroSearch {
   direction?: 'received' | 'given';
+  sort?: '-givenAt' | 'givenAt';
 }
 
 export const Route = createFileRoute('/(hero)/$hero')({
   shouldReload: false,
   staticData: {
-    shiftContentBy: 400
+    shiftContentBy: 486
   },
-  loaderDeps: ({ search: { direction } }) => ({ direction }),
+  loaderDeps: ({ search: { direction = 'received', sort = '-givenAt' } }) => ({
+    direction,
+    sort
+  }),
   loader: async ({
     context: { store },
     abortController: { signal },
@@ -37,9 +41,16 @@ export const Route = createFileRoute('/(hero)/$hero')({
       })
     };
   },
-  validateSearch: ({ direction }: Record<string, unknown>): HeroSearch => ({
+  validateSearch: ({
+    direction,
+    sort
+  }: Record<string, unknown>): HeroSearch => ({
     direction:
-      direction === 'received' || direction === 'given' ? direction : undefined
+      direction === 'received' || direction === 'given' ? direction : undefined,
+    sort: sort === '-givenAt' || sort === 'givenAt' ? sort : undefined
   }),
-  component: lazyRouteComponent(() => import('./-components/Hero'), 'Hero')
+  component: lazyRouteComponent(
+    () => import('./-components/HeroProfile'),
+    'HeroProfile'
+  )
 });
