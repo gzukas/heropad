@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { Outlet, getRouteApi } from '@tanstack/react-router';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react/macro';
 import {
   AppBar,
   Badge,
@@ -37,7 +36,7 @@ const routeApi = getRouteApi('/(hero)/$hero');
 export function HeroProfile() {
   const { direction = 'received', sort = '-givenAt' } = routeApi.useSearch();
   const { hero, awardPaginationAtoms } = routeApi.useLoaderData();
-  const { _ } = useLingui();
+  const { t } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
   const matchesChildRoute = useMatchesChildRoute();
   const camera = useCamera();
@@ -56,7 +55,7 @@ export function HeroProfile() {
         }}
       >
         <Toolbar component={Stack} gap={2} direction="row">
-          <Tooltip title={_(msg`Focus on me`)}>
+          <Tooltip title={t`Focus on me`}>
             <IconButton onClick={handleHeroClick} edge="start">
               <Badge
                 overlap="circular"
@@ -82,29 +81,29 @@ export function HeroProfile() {
             })}
           >
             {sort === '-givenAt' ? (
-              <Tooltip title={_(msg`Show oldest first`)}>
+              <Tooltip title={t`Show oldest first`}>
                 <FlippedSortIcon />
               </Tooltip>
             ) : (
-              <Tooltip title={_(msg`Show latest first`)}>
+              <Tooltip title={t`Show latest first`}>
                 <SortIcon />
               </Tooltip>
             )}
           </IconButtonLink>
-          <IconButtonLink to="/" edge="end" aria-label={_(msg`Close`)}>
+          <IconButtonLink to="/" edge="end" aria-label={t`Close`}>
             <CloseIcon />
           </IconButtonLink>
         </Toolbar>
         <Tabs value={direction} variant="fullWidth">
           <TabLink
-            label={_(msg`Received`)}
+            label={t`Received`}
             value="received"
             to="/$hero"
             params={{ hero: hero.username }}
             search={search => ({ ...search, direction: 'received' })}
           />
           <TabLink
-            label={_(msg`Given`)}
+            label={t`Given`}
             value="given"
             to="/$hero"
             params={{ hero: hero.username }}

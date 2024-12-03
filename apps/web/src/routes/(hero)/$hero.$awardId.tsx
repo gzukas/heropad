@@ -1,8 +1,7 @@
 import { ListItem, Tooltip } from '@mui/material';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import { createFileRoute, getRouteApi } from '@tanstack/react-router';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react/macro';
 import { awardFamily } from '~/atoms/awardFamily';
 import { ListItemAward } from './-components/ListItemAward';
 import { IconButtonLink } from '~/components/IconButtonLink';
@@ -26,12 +25,12 @@ export const Route = createFileRoute('/(hero)/$hero/$awardId')({
 function Award() {
   const { hero } = routeApi.useParams();
   const award = routeApi.useLoaderData();
-  const { _ } = useLingui();
+  const { t } = useLingui();
 
   return (
     <ListItem
       secondaryAction={
-        <Tooltip title={_(msg`Unpin award`)}>
+        <Tooltip title={t`Unpin award`}>
           <IconButtonLink
             to="/$hero"
             params={{ hero }}

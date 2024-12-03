@@ -1,6 +1,6 @@
+import { Trans } from '@lingui/react/macro';
 import { Paper, styled, ButtonBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { Trans } from '@lingui/macro';
 import { useSetAtom } from 'jotai';
 import { isSearchOpenAtom } from '~/atoms/isSearchOpenAtom';
 import { Shortcut } from '../Shortcut';

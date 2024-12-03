@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Dialog, ListItem, ListItemAvatar } from '@mui/material';
-import { useLingui } from '@lingui/react';
-import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import { useAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
 import { debouncedSearchTermAtom } from '~/atoms/searchTermAtom';
@@ -19,7 +19,7 @@ import { SearchText } from './SearchText';
 import { UseAtomValue } from '../UseAtomValue';
 
 export function Search() {
-  const { _ } = useLingui();
+  const { t } = useLingui();
   const resetDebouncedSearchTerm = useResetAtom(debouncedSearchTermAtom);
   const [isSearchOpen, toggleSearch] = useAtom(isSearchOpenAtom);
 
@@ -45,7 +45,7 @@ export function Search() {
         }}
       >
         <SearchInput
-          placeholder={_(msg`Search for heroes and awards...`)}
+          placeholder={t`Search for heroes and awards...`}
           autoFocus
         />
         <SearchList
