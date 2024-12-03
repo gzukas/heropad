@@ -1,6 +1,8 @@
 <p align="center">
-![Heropad (light mode)](./media/logo-light.png#gh-dark-mode-only)
-![Heropad (dark mode)](./media/logo-light.png#gh-light-mode-only)
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./media/logo-light.png">
+    <img alt="Heropad'" src="./media/light-dark.png">
+  </picture>
 </p>
 
 <h1 align="center">Heropad</h1>
