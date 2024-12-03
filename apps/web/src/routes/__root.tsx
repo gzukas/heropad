@@ -76,7 +76,7 @@ function Root() {
           onClose={handleDrawerClose}
           variant={isMdUp ? 'persistent' : 'temporary'}
           anchor="right"
-          ModalProps={{ keepMounted: true, sx: {} }}
+          ModalProps={{ keepMounted: true }}
           PaperProps={{
             sx: {
               width: isXs ? '100%' : shift || previousShift
