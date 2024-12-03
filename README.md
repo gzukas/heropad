@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./media/logo-light.png">
-    <img alt="Heropad'" src="./media/light-dark.png">
+    <img alt="Heropad'" src="./media/logo-dark.png">
   </picture>
 </p>
 
