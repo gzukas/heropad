@@ -1,13 +1,11 @@
+import { Atom } from 'jotai';
 import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router';
 import { heroFamily } from '~/atoms/heroFamily';
 import { atomsWithPagination } from '~/utils/atomsWithPagination';
-import { Atom } from 'jotai';
 import { api } from '~/utils/api';
+import { GetAwardsInput } from '~/types';
 
-interface HeroSearch {
-  direction?: 'received' | 'given';
-  sort?: '-givenAt' | 'givenAt';
-}
+type AwardSearch = Pick<GetAwardsInput, 'direction' | 'sort'>;
 
 export const Route = createFileRoute('/(hero)/$hero')({
   shouldReload: false,
@@ -44,7 +42,7 @@ export const Route = createFileRoute('/(hero)/$hero')({
   validateSearch: ({
     direction,
     sort
-  }: Record<string, unknown>): HeroSearch => ({
+  }: Record<string, unknown>): AwardSearch => ({
     direction:
       direction === 'received' || direction === 'given' ? direction : undefined,
     sort: sort === '-givenAt' || sort === 'givenAt' ? sort : undefined

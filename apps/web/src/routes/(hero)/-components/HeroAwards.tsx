@@ -8,7 +8,7 @@ import {
 import { List, ListItem, useForkRef, ListItemProps } from '@mui/material';
 import { useDidUpdate } from '~/hooks/useDidUpdate';
 import { AtomsWithPaginationResult } from '~/utils/atomsWithPagination';
-import type { Award, AwardsOutput } from '~/types';
+import type { Award, GetAwardsOutput } from '~/types';
 import { ListItemAward } from './ListItemAward';
 
 export type RenderAwardFunction = (
@@ -17,7 +17,7 @@ export type RenderAwardFunction = (
 ) => React.ReactNode;
 
 export interface HeroAwardsProps {
-  awardPaginationAtoms: AtomsWithPaginationResult<AwardsOutput>;
+  awardPaginationAtoms: AtomsWithPaginationResult<GetAwardsOutput>;
   virtualizerOptions?: Partial<VirtualizerOptions<HTMLElement, Element>>;
   renderAward?: RenderAwardFunction;
   children?: React.ReactNode;

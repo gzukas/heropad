@@ -1,1 +1,6 @@
-export type { Hero, Award, AwardsOutput } from '../../api/src/types';
+export type {
+  Hero,
+  Award,
+  GetAwardsInput,
+  GetAwardsOutput
+} from '../../api/src/types';
