@@ -10,13 +10,13 @@ import { searchSuggestionsByKindAtom } from '~/atoms/searchSuggestionsByKindAtom
 import { ListItemButtonLink } from '~/components/ListItemButtonLink';
 import { AwardAvatar } from '~/components/AwardAvatar';
 import { HeroAvatar } from '~/components/HeroAvatar';
+import { UseAtomValue } from '~/components/UseAtomValue';
 import { SearchInput } from './SearchInput';
 import { SearchEmpty } from './SearchEmpty';
 import { SearchButton } from './SearchButton';
 import { SearchList } from './SearchList';
 import { SearchGroup } from './SearchGroup';
 import { SearchText } from './SearchText';
-import { UseAtomValue } from '../UseAtomValue';
 
 export function Search() {
   const { t } = useLingui();

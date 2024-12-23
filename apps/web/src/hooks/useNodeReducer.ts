@@ -9,17 +9,43 @@ import { focusedNodesAtom } from '~/atoms/focusedNodesAtom';
 import { useGetCommunityColor } from './useGetCommunityColor';
 import { useDevicePixelRatio } from './useDevicePixelRatio';
 
+/**
+ * Defines the display data for an graph node in the sociogram.
+ */
 export interface SociogramNodeDisplayData extends Partial<NodeDisplayData> {
+  /**
+   * URL for a node image.
+   */
   image?: string | null;
 }
 
-type NodeReducer = NonNullable<Settings['nodeReducer']>;
+/**
+ * Represents a function type used to modify the data of graph node.
+ */
+export type NodeReducer = NonNullable<Settings['nodeReducer']>;
 
+/**
+ * A hook for managing node data in sociogram visualization.
+ *
+ * This hook provides a memoized function that applies the specified node reducer logic
+ * while enhancing it based on application state, such as selected, focused, or hovered nodes, and applies visual enhancments like color, size, and other.
+ *
+ * @param edgeReducer A function to apply additional modifications to the node data.
+ * Defaults to returning the original data.
+ *
+ * @example
+ * ```
+ * const nodeReducer = useNodeReducer((node, data) => ({
+ *   ...data,
+ *   label: `Node ${node}`
+ * }));
+ * ```
+ */
 export function useNodeReducer(
   nodeReducer: (
     node: string,
     data: SociogramNodeDisplayData
-  ) => Partial<SociogramNodeDisplayData> = (_node, data) => data
+  ) => SociogramNodeDisplayData = (_, data) => data
 ) {
   const nodeReducerRef = useCommittedRef(nodeReducer);
   const getCommunityColor = useGetCommunityColor();
@@ -30,9 +56,9 @@ export function useNodeReducer(
 
   const getNodeSettings = useCallback<NodeReducer>(
     (node, data) => {
+      const focused = focusedNodes.has(node);
       const highlighted =
         node === selectedNode || node === debouncedHoveredNode;
-      const focused = focusedNodes.has(node);
       return {
         ...data,
         color: getCommunityColor(node),
