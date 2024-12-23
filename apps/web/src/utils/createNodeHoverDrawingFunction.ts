@@ -1,4 +1,3 @@
-// import drawLabel from 'sigma/rendering/canvas/label';
 import { NodeHoverDrawingFunction, drawDiscNodeLabel } from 'sigma/rendering';
 import { Settings } from 'sigma/settings';
 
@@ -27,9 +26,9 @@ export function createNodeHoverDrawingFunction(
       const boxHeight = Math.round(labelSize + 2 * PADDING);
       const radius = Math.max(data.size, labelSize / 2) + PADDING;
 
-      const angleRadian = Math.asin(boxHeight / 2 / radius);
+      const angleRadian = Math.asin(boxHeight / (2 * radius));
       const xDeltaCoord = Math.sqrt(
-        Math.abs(Math.pow(radius, 2) - Math.pow(boxHeight / 2, 2))
+        Math.abs(radius ** 2 - (boxHeight / 2) ** 2)
       );
 
       context.moveTo(data.x + xDeltaCoord, data.y + boxHeight / 2);

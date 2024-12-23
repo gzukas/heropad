@@ -1,22 +1,33 @@
+import { Atom } from 'jotai';
 import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router';
 import { heroFamily } from '~/atoms/heroFamily';
 import { atomsWithPagination } from '~/utils/atomsWithPagination';
-import { Atom } from 'jotai';
 import { api } from '~/utils/api';
+import { GetAwardsInput } from '~/types';
 
-interface HeroSearch {
-  direction?: 'received' | 'given';
-  sort?: '-givenAt' | 'givenAt';
-}
+type AwardSearch = Pick<GetAwardsInput, 'direction' | 'sort'>;
+
+const defaultAwardSearch: AwardSearch = {
+  direction: 'received',
+  sort: '-givenAt'
+};
 
 export const Route = createFileRoute('/(hero)/$hero')({
   shouldReload: false,
   staticData: {
     shiftContentBy: 486
   },
-  loaderDeps: ({ search: { direction = 'received', sort = '-givenAt' } }) => ({
+  validateSearch: ({
     direction,
     sort
+  }: Record<string, unknown>): AwardSearch => ({
+    direction:
+      direction === 'received' || direction === 'given' ? direction : undefined,
+    sort: sort === '-givenAt' || sort === 'givenAt' ? sort : undefined
+  }),
+  loaderDeps: ({ search }) => ({
+    ...defaultAwardSearch,
+    ...search
   }),
   loader: async ({
     context: { store },
@@ -41,14 +52,6 @@ export const Route = createFileRoute('/(hero)/$hero')({
       })
     };
   },
-  validateSearch: ({
-    direction,
-    sort
-  }: Record<string, unknown>): HeroSearch => ({
-    direction:
-      direction === 'received' || direction === 'given' ? direction : undefined,
-    sort: sort === '-givenAt' || sort === 'givenAt' ? sort : undefined
-  }),
   component: lazyRouteComponent(
     () => import('./-components/HeroProfile'),
     'HeroProfile'
