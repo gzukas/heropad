@@ -7,11 +7,6 @@ import { GetAwardsInput } from '~/types';
 
 type AwardSearch = Pick<GetAwardsInput, 'direction' | 'sort'>;
 
-const defaultAwardSearch: AwardSearch = {
-  direction: 'received',
-  sort: '-givenAt'
-};
-
 export const Route = createFileRoute('/(hero)/$hero')({
   shouldReload: false,
   staticData: {
@@ -25,9 +20,9 @@ export const Route = createFileRoute('/(hero)/$hero')({
       direction === 'received' || direction === 'given' ? direction : undefined,
     sort: sort === '-givenAt' || sort === 'givenAt' ? sort : undefined
   }),
-  loaderDeps: ({ search }) => ({
-    ...defaultAwardSearch,
-    ...search
+  loaderDeps: ({ search: { direction = 'received', sort = '-givenAt' } }) => ({
+    direction,
+    sort
   }),
   loader: async ({
     context: { store },
@@ -35,6 +30,7 @@ export const Route = createFileRoute('/(hero)/$hero')({
     params,
     deps
   }) => {
+    console.log(deps);
     const hero = await store.get(heroFamily({ username: params.hero, signal }));
     return {
       hero,
