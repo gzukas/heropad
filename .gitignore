@@ -32,3 +32,5 @@ turbo-build.log*
 
 # typescript
 *.tsbuildinfo
+
+.vscode/
