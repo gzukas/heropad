@@ -30,7 +30,6 @@ export const Route = createFileRoute('/(hero)/$hero')({
     params,
     deps
   }) => {
-    console.log(deps);
     const hero = await store.get(heroFamily({ username: params.hero, signal }));
     return {
       hero,
