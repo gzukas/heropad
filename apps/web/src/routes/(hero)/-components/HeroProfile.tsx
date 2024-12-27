@@ -41,6 +41,8 @@ export function HeroProfile() {
   const matchesChildRoute = useMatchesChildRoute();
   const camera = useCamera();
 
+  const isSortDesc = sort === '-givenAt';
+
   const handleHeroClick = () => {
     camera.goto(hero.username);
   };
@@ -72,24 +74,21 @@ export function HeroProfile() {
           <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
             {hero.name}
           </Typography>
-          <IconButtonLink
-            to="/$hero"
-            params={{ hero: hero.username }}
-            search={({ sort, ...other }) => ({
-              sort: sort === 'givenAt' ? '-givenAt' : 'givenAt',
-              ...other
-            })}
+          <Tooltip
+            title={isSortDesc ? t`Show oldest first` : t`Show latest first`}
           >
-            {sort === '-givenAt' ? (
-              <Tooltip title={t`Show oldest first`}>
-                <FlippedSortIcon />
-              </Tooltip>
-            ) : (
-              <Tooltip title={t`Show latest first`}>
-                <SortIcon />
-              </Tooltip>
-            )}
-          </IconButtonLink>
+            <IconButtonLink
+              to="/$hero"
+              params={{ hero: hero.username }}
+              search={params => ({
+                ...params,
+                sort: isSortDesc ? 'givenAt' : '-givenAt'
+              })}
+            >
+              {isSortDesc ? <FlippedSortIcon /> : <SortIcon />}
+            </IconButtonLink>
+          </Tooltip>
+
           <IconButtonLink to="/" edge="end" aria-label={t`Close`}>
             <CloseIcon />
           </IconButtonLink>

@@ -39,7 +39,7 @@ const Content = styled('div', { label: 'Content' })(({ theme }) => ({
 }));
 
 function Root() {
-  const { hero } = useParams({ strict: false });
+  const hero = useParams({ strict: false, select: params => params.hero });
   const isXs = useMediaQuery(theme => theme.breakpoints.only('xs'));
   const isMdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
   const navigate = useNavigate();
@@ -47,6 +47,7 @@ function Root() {
   const previousShift = usePrevious(shift);
 
   const handleDrawerClose = () => {
+    console.log('hi');
     navigate({ to: '/' });
   };
 
