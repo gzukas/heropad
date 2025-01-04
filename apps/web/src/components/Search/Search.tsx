@@ -46,6 +46,9 @@ export function Search() {
       >
         <SearchInput
           placeholder={t`Search for heroes and awards...`}
+          name="search-input"
+          type="search"
+          autoComplete="off"
           autoFocus
         />
         <SearchList

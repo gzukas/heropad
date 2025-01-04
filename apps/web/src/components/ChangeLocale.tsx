@@ -1,9 +1,10 @@
 import {
-  IconButton,
+  ButtonBase,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
+  Paper,
   Tooltip
 } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -32,12 +33,22 @@ export function ChangeLocale() {
 
   return (
     <>
-      <Tooltip title={t`Change language`}>
-        <IconButton {...bindTrigger(menuState)}>
+      <Tooltip title={t`Change language`} placement="left">
+        <Paper component={ButtonBase} sx={{ p: 1 }} {...bindTrigger(menuState)}>
           <TranslateIcon />
-        </IconButton>
+        </Paper>
       </Tooltip>
-      <Menu {...bindMenu(menuState)}>
+      <Menu
+        {...bindMenu(menuState)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+      >
         {Object.entries(locales).map(([locale, text]) => {
           const checked = currentLocale === locale;
           return (

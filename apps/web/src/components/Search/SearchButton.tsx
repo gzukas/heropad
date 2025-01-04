@@ -32,6 +32,7 @@ export function SearchButton() {
       onClick={handleClick}
       elevation={2}
       sx={{
+        flex: 1,
         width: 296,
         textAlign: 'left',
         font: 'inherit',

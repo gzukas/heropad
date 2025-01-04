@@ -39,7 +39,7 @@ msgstr "Herojai"
 
 #: components/Search/Search.tsx
 msgid "No results found"
-msgstr ""
+msgstr "Rezultatų nerasta"
 
 #: routes/(hero)/-components/HeroProfile.tsx
 msgid "Received"
