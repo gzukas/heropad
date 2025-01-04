@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { MultiDirectedGraph } from 'graphology';
 import { api } from '~/utils/api';
 
-interface HeroNode {
+export interface HeroNode {
   name: string;
   community?: number;
   image?: string;

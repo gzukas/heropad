@@ -13,8 +13,10 @@ import {
   Tabs,
   Toolbar,
   Tooltip,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CloseIcon from '@mui/icons-material/Close';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import SortIcon from '@mui/icons-material/Sort';
@@ -34,12 +36,15 @@ const FlippedSortIcon = styled(SortIcon)({
 const routeApi = getRouteApi('/(hero)/$hero');
 
 export function HeroProfile() {
-  const { direction = 'received', sort = '-givenAt' } = routeApi.useSearch();
+  const { direction = 'received', sort = '-givenAt' } = routeApi.useSearch({
+    select: ({ direction, sort }) => ({ direction, sort })
+  });
   const { hero, awardPaginationAtoms } = routeApi.useLoaderData();
   const { t } = useLingui();
   const awardsRef = useRef<HTMLElement>(null);
   const matchesChildRoute = useMatchesChildRoute();
   const camera = useCamera();
+  const isXs = useMediaQuery(theme => theme.breakpoints.only('xs'));
 
   const isSortDesc = sort === '-givenAt';
 
@@ -56,21 +61,10 @@ export function HeroProfile() {
           zIndex: 'appBar'
         }}
       >
-        <Toolbar component={Stack} gap={2} direction="row">
-          <Tooltip title={t`Focus on me`}>
-            <IconButton onClick={handleHeroClick} edge="start">
-              <Badge
-                overlap="circular"
-                badgeContent={<CenterFocusStrongIcon fontSize="small" />}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              >
-                <HeroAvatar
-                  hero={hero.username}
-                  sx={{ width: 32, height: 32 }}
-                />
-              </Badge>
-            </IconButton>
-          </Tooltip>
+        <Toolbar component={Stack} gap={1.25} direction="row">
+          <IconButtonLink to="/" edge="start" aria-label={t`Close`}>
+            {isXs ? <ArrowBackIcon /> : <CloseIcon />}
+          </IconButtonLink>
           <Typography variant="h6" component="div" noWrap sx={{ flexGrow: 1 }}>
             {hero.name}
           </Typography>
@@ -88,10 +82,20 @@ export function HeroProfile() {
               {isSortDesc ? <FlippedSortIcon /> : <SortIcon />}
             </IconButtonLink>
           </Tooltip>
-
-          <IconButtonLink to="/" edge="end" aria-label={t`Close`}>
-            <CloseIcon />
-          </IconButtonLink>
+          <Tooltip title={t`Focus on me`}>
+            <IconButton onClick={handleHeroClick} edge="end">
+              <Badge
+                overlap="circular"
+                badgeContent={<CenterFocusStrongIcon fontSize="small" />}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              >
+                <HeroAvatar
+                  hero={hero.username}
+                  sx={{ width: 28, height: 28 }}
+                />
+              </Badge>
+            </IconButton>
+          </Tooltip>
         </Toolbar>
         <Tabs value={direction} variant="fullWidth">
           <TabLink
