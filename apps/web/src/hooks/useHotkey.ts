@@ -34,7 +34,6 @@ export function useHotkey(
         eventModifiers === modifiers
       ) {
         event.preventDefault();
-        console.log('hello');
         listener(event);
         break;
       }
