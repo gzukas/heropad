@@ -9,31 +9,34 @@ export const KeyModifier = {
 } as const;
 
 type KeyModifiers = number;
-type ListenerFn = (event: KeyboardEvent) => void;
+type KeyCombination = string | { key: string; modifiers?: KeyModifiers };
+type KeyListener = (event: KeyboardEvent) => void;
 
 export function useHotkey(
-  key: string,
-  modifiersOrListener: KeyModifiers | ListenerFn,
-  listenerMaybe?: ListenerFn
+  key: KeyCombination | KeyCombination[],
+  listener: KeyListener
 ) {
   const handleKeydown = useEventCallback((event: KeyboardEvent) => {
-    const [modifiers, listener] =
-      typeof modifiersOrListener === 'number'
-        ? [modifiersOrListener, listenerMaybe!]
-        : [0, modifiersOrListener];
-
     const eventModifiers =
       (event.ctrlKey ? KeyModifier.CTRL : 0) |
       (event.shiftKey ? KeyModifier.SHIFT : 0) |
       (event.altKey ? KeyModifier.ALT : 0) |
       (event.metaKey ? KeyModifier.META : 0);
 
-    if (
-      event.key.toLowerCase() === key.toLowerCase() &&
-      eventModifiers === modifiers
-    ) {
-      event.preventDefault();
-      listener(event);
+    const keyCombinations = Array.isArray(key) ? key : [key];
+
+    for (const combination of keyCombinations) {
+      const { key, modifiers = 0 } =
+        typeof combination === 'string' ? { key: combination } : combination;
+
+      if (
+        event.key.toLowerCase() === key.toLowerCase() &&
+        eventModifiers === modifiers
+      ) {
+        event.preventDefault();
+        listener(event);
+        break;
+      }
     }
   });
 

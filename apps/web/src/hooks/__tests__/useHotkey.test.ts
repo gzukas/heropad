@@ -34,11 +34,14 @@ describe('useHotkey', () => {
 
     renderHook(() =>
       useHotkey(
-        'a',
-        KeyModifier.ALT |
-          KeyModifier.CTRL |
-          KeyModifier.META |
-          KeyModifier.SHIFT,
+        {
+          key: 'a',
+          modifiers:
+            KeyModifier.ALT |
+            KeyModifier.CTRL |
+            KeyModifier.META |
+            KeyModifier.SHIFT
+        },
         listener
       )
     );
@@ -56,5 +59,26 @@ describe('useHotkey', () => {
         metaKey: true
       })
     );
+  });
+
+  it('should invoke the same listener for same key with different modifiers', async () => {
+    const listener = vi.fn();
+
+    renderHook(() => {
+      useHotkey(
+        [
+          { key: 'a', modifiers: KeyModifier.CTRL },
+          { key: 'a', modifiers: KeyModifier.META }
+        ],
+        listener
+      );
+    });
+
+    await user.keyboard('{Control>}{Meta>}a{/Control}{/Meta}');
+    expect(listener).not.toHaveBeenCalled();
+
+    await user.keyboard('{Control>}a{/Control}');
+    await user.keyboard('{Meta>}a{/Meta}');
+    expect(listener).toHaveBeenCalledTimes(2);
   });
 });

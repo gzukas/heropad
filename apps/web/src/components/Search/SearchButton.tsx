@@ -18,9 +18,15 @@ export function SearchButton() {
   const toggleSearch = useSetAtom(isSearchOpenAtom);
   const macOS = window.navigator.userAgent.toLowerCase().includes('mac');
 
-  useHotkey('K', KeyModifier.CTRL, () => {
-    toggleSearch();
-  });
+  useHotkey(
+    [
+      { key: 'K', modifiers: KeyModifier.CTRL },
+      { key: 'K', modifiers: KeyModifier.META }
+    ],
+    () => {
+      toggleSearch();
+    }
+  );
 
   const handleClick = () => {
     toggleSearch(true);
