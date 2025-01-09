@@ -7,7 +7,11 @@ export interface HeroFamilyParams {
 }
 
 export const heroFamily = atomFamily(
-  ({ username, signal }: HeroFamilyParams) =>
-    api.hero.getHero.atomWithQuery(() => ({ username }), { signal }),
+  ({ username, signal }: HeroFamilyParams) => {
+    signal?.addEventListener('abort', () => {
+      heroFamily.remove({ username });
+    });
+    return api.hero.getHero.atomWithQuery(() => ({ username }), { signal });
+  },
   (a, b) => a.username === b.username
 );

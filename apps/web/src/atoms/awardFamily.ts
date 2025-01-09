@@ -7,7 +7,11 @@ export interface AwardFamilyParams {
 }
 
 export const awardFamily = atomFamily(
-  ({ id, signal }: AwardFamilyParams) =>
-    api.award.getAward.atomWithQuery(() => ({ id }), { signal }),
+  ({ id, signal }: AwardFamilyParams) => {
+    signal?.addEventListener('abort', () => {
+      awardFamily.remove({ id });
+    });
+    return api.award.getAward.atomWithQuery(() => ({ id }), { signal });
+  },
   (a, b) => a.id === b.id
 );

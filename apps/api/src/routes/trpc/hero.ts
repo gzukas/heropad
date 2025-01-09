@@ -8,7 +8,7 @@ export const heroRouter = createTRPCRouter({
     .query(({ ctx, input }) =>
       ctx.db
         .selectFrom('hero')
-        .selectAll()
+        .select(['hero.id', 'hero.name', 'hero.username'])
         .where('hero.username', '=', input.username)
         .executeTakeFirstOrThrow()
     )
