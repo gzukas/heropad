@@ -72,7 +72,7 @@ export function Search() {
                       {suggestionsByKind
                         .get('award')
                         ?.map(({ id, text, nodes: [[from], [to]] }) => (
-                          <ListItem disablePadding>
+                          <ListItem key={id} disablePadding>
                             <ListItemButtonLink
                               key={id}
                               onClick={handleCloseClick}
@@ -94,7 +94,7 @@ export function Search() {
                       {suggestionsByKind
                         .get('hero')
                         ?.map(({ id, text, nodes: [[hero]] }) => (
-                          <ListItem disablePadding>
+                          <ListItem key={id} disablePadding>
                             <ListItemButtonLink
                               key={id}
                               onClick={handleCloseClick}

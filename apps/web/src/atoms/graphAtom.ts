@@ -1,6 +1,7 @@
 import { atom } from 'jotai';
 import { MultiDirectedGraph } from 'graphology';
 import { api } from '~/utils/api';
+import { loadable } from 'jotai/utils';
 
 export interface HeroNode {
   name: string;
@@ -24,3 +25,5 @@ export const graphAtom = atom(async get => {
   }
   return graph;
 });
+
+export const loadableGraphAtom = loadable(graphAtom);
