@@ -29,13 +29,6 @@ const Content = styled('div', { label: 'Content' })(({ theme }) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
     })
-  },
-  '.sigma-container': {
-    width: '100dvw',
-    height: '100dvh'
-  },
-  '.Sociogram-nodeHovered .sigma-mouse': {
-    cursor: 'pointer'
   }
 }));
 
@@ -65,43 +58,47 @@ function Root() {
       ref={contentRef}
       style={{ '--Content-shift': `${shift}px` } as React.CSSProperties}
     >
-      <Sociogram container={() => contentRef.current}>
-        <Stack
-          spacing={1}
-          sx={theme => ({
-            position: 'absolute',
-            top: theme.spacing(1.5),
-            right: theme.spacing(2),
-            bottom: theme.spacing(1.5),
-            justifyContent: 'center',
-            pointerEvents: 'none',
-            button: {
-              pointerEvents: 'all'
-            }
-          })}
-        >
-          <ChangeColorScheme />
-          <ChangeLocale />
-          {!isXs && <Box sx={{ flexGrow: 1 }} />}
-          <Camera />
-        </Stack>
-        <Drawer
-          open={shift > 0}
-          onClose={handleDrawerClose}
-          variant={isMdUp ? 'persistent' : 'temporary'}
-          elevation={1}
-          anchor="right"
-          ModalProps={{ keepMounted: true }}
-          sx={{
-            width: drawerWidth,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth
-            }
-          }}
-        >
-          <Outlet />
-        </Drawer>
-      </Sociogram>
+      <Sociogram
+        sx={{
+          width: '100dvw',
+          height: '100dvh'
+        }}
+      />
+      <Stack
+        spacing={1}
+        sx={theme => ({
+          position: 'absolute',
+          top: theme.spacing(1.5),
+          right: theme.spacing(2),
+          bottom: theme.spacing(1.5),
+          justifyContent: 'center',
+          pointerEvents: 'none',
+          button: {
+            pointerEvents: 'all'
+          }
+        })}
+      >
+        <ChangeColorScheme />
+        <ChangeLocale />
+        {!isXs && <Box sx={{ flexGrow: 1 }} />}
+        <Camera />
+      </Stack>
+      <Drawer
+        open={shift > 0}
+        onClose={handleDrawerClose}
+        variant={isMdUp ? 'persistent' : 'temporary'}
+        elevation={1}
+        anchor="right"
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          width: drawerWidth,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth
+          }
+        }}
+      >
+        <Outlet />
+      </Drawer>
       <Stack
         direction="row"
         sx={theme => ({

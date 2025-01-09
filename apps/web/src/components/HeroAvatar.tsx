@@ -1,39 +1,55 @@
-import React from 'react';
-import { Avatar, AvatarProps } from '@mui/material';
+import React, { Suspense } from 'react';
+import { Avatar, AvatarProps, Skeleton, styled } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { graphAtom } from '~/atoms/graphAtom';
 import { useGetCommunityColor } from '~/hooks/useGetCommunityColor';
 
-export interface HeroAvatarProps extends Omit<AvatarProps, 'src'> {
+const HeroAvatarImage = styled(Avatar, {
+  name: 'HeroAvatar',
+  shouldForwardProp: prop => prop !== 'hero'
+})({
+  background: 'var(--HeroAvatar-background)'
+});
+
+export type HeroAvatarProps<C extends React.ElementType> = Omit<
+  AvatarProps<C, { component?: C }>,
+  'src'
+> & {
   hero: string;
+};
+
+export function HeroAvatarInner<C extends React.ElementType>(
+  props: HeroAvatarProps<C>
+) {
+  const { hero, ...other } = props;
+  const graph = useAtomValue(graphAtom);
+  const getCommunityColor = useGetCommunityColor();
+  const { name, image } = graph.getNodeAttributes(hero);
+
+  return (
+    <HeroAvatarImage
+      src={image}
+      alt={name}
+      style={{
+        '--HeroAvatar-background': getCommunityColor(hero)
+      }}
+      {...other}
+    />
+  );
 }
 
-export const HeroAvatar = React.forwardRef<HTMLDivElement, HeroAvatarProps>(
-  function HeroAvatar(props, ref) {
-    const { hero, sx = [], ...other } = props;
-    const graph = useAtomValue(graphAtom);
-    const getCommunityColor = useGetCommunityColor();
-    const { name, image } = graph.getNodeAttributes(hero);
-    return (
-      <Avatar
-        ref={ref}
-        src={image}
-        alt={name}
-        slotProps={{
-          ...props.slotProps,
-          img: {
-            crossOrigin: 'anonymous',
-            ...props.slotProps?.img
-          }
-        }}
-        sx={[
-          {
-            bgcolor: getCommunityColor(hero)
-          },
-          ...(Array.isArray(sx) ? sx : [sx])
-        ]}
-        {...other}
-      />
-    );
-  }
-);
+export function HeroAvatar<C extends React.ElementType>(
+  props: HeroAvatarProps<C>
+) {
+  return (
+    <Suspense
+      fallback={
+        <Skeleton variant="circular">
+          <HeroAvatarImage {...props} />
+        </Skeleton>
+      }
+    >
+      <HeroAvatarInner {...props} />
+    </Suspense>
+  );
+}

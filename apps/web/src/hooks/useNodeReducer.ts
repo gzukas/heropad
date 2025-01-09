@@ -5,9 +5,9 @@ import { useAtomValue } from 'jotai';
 import { useCommittedRef } from '~/hooks/useCommittedRef';
 import { debouncedHoveredAtom } from '~/atoms/hoveredNodeAtom';
 import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
-import { focusedNodesAtom } from '~/atoms/focusedNodesAtom';
 import { useGetCommunityColor } from './useGetCommunityColor';
 import { useDevicePixelRatio } from './useDevicePixelRatio';
+import { communityGraphAtom } from '~/atoms/communityGraphAtom';
 
 /**
  * Defines the display data for an graph node in the sociogram.
@@ -27,10 +27,10 @@ export type NodeReducer = NonNullable<Settings['nodeReducer']>;
 /**
  * A hook for managing node data in sociogram visualization.
  *
- * This hook provides a memoized function that applies the specified node reducer logic
- * while enhancing it based on application state, such as selected, focused, or hovered nodes, and applies visual enhancments like color, size, and other.
+ * This hook provides a memoized function that enhances node rendering based on application state
+ * (e.g., selected, focused, or hovered nodes) and applies visual updates like color and size.
  *
- * @param edgeReducer A function to apply additional modifications to the node data.
+ * @param nodeReducer A function to apply additional modifications to the node data.
  * Defaults to returning the original data.
  *
  * @example
@@ -50,13 +50,16 @@ export function useNodeReducer(
   const nodeReducerRef = useCommittedRef(nodeReducer);
   const getCommunityColor = useGetCommunityColor();
   const selectedNode = useAtomValue(selectedNodeAtom);
-  const focusedNodes = useAtomValue(focusedNodesAtom);
+  const communityGraph = useAtomValue(communityGraphAtom);
   const debouncedHoveredNode = useAtomValue(debouncedHoveredAtom);
   const devicePixelRatio = useDevicePixelRatio();
 
   const getNodeSettings = useCallback<NodeReducer>(
     (node, data) => {
-      const focused = focusedNodes.has(node);
+      const focused =
+        !selectedNode ||
+        node === selectedNode ||
+        communityGraph.areNeighbors(selectedNode, node);
       const highlighted =
         node === selectedNode || node === debouncedHoveredNode;
       return {
@@ -72,7 +75,7 @@ export function useNodeReducer(
     [
       selectedNode,
       debouncedHoveredNode,
-      focusedNodes,
+      communityGraph,
       getCommunityColor,
       devicePixelRatio
     ]

@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useAtomValue } from 'jotai';
-import { useSigma } from '@react-sigma/core';
 import { Settings } from 'sigma/settings';
 import { EdgeDisplayData } from 'sigma/types';
 import { useCommittedRef } from '~/hooks/useCommittedRef';
 import { graphAtom } from '~/atoms/graphAtom';
 import { selectedNodeAtom } from '~/atoms/selectedNodeAtom';
+import { sigmaAtom } from '~/atoms/sigmaAtom';
 
 /**
  * Defines the display data for an graph edge in the sociogram.
@@ -43,11 +43,11 @@ export function useEdgeReducer(
   const edgeReducerRef = useCommittedRef(edgeReducer);
   const selectedNode = useAtomValue(selectedNodeAtom);
   const graph = useAtomValue(graphAtom);
-  const sigma = useSigma();
+  const sigma = useAtomValue(sigmaAtom);
 
   return useCallback<EdgeReducer>(
     (edge, data) => {
-      const color = sigma.getNodeDisplayData(graph.source(edge))?.color;
+      const color = sigma?.getNodeDisplayData(graph.source(edge))?.color;
       const hidden = !!selectedNode && !graph.hasExtremity(edge, selectedNode);
       return edgeReducerRef.current(edge, {
         ...data,

@@ -1,15 +1,19 @@
 import { useEffect } from 'react';
-import { useLoadGraph } from '@react-sigma/core';
 import { useAtomValue } from 'jotai';
 import { communityGraphAtom } from '~/atoms/communityGraphAtom';
+import { sigmaAtom } from '~/atoms/sigmaAtom';
 
 export function Graph() {
+  const sigma = useAtomValue(sigmaAtom);
   const communityGraph = useAtomValue(communityGraphAtom);
-  const loadGraph = useLoadGraph();
 
   useEffect(() => {
-    loadGraph(communityGraph);
-  }, [loadGraph, communityGraph]);
+    if (sigma) {
+      sigma.getGraph().clear();
+      sigma.getGraph().import(communityGraph);
+      sigma.refresh();
+    }
+  }, [sigma, communityGraph]);
 
   return null;
 }

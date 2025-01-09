@@ -1,17 +1,17 @@
 import { useEffect, useMemo } from 'react';
 import { useTheme } from '@mui/material';
-import { useSetSettings } from '@react-sigma/core';
-import { useStore } from 'jotai';
+import { useAtomValue, useStore } from 'jotai';
 import { useEdgeReducer } from '~/hooks/useEdgeReducer';
 import { useNodeReducer } from '~/hooks/useNodeReducer';
 import { createNodeHoverDrawingFunction } from '~/utils/createNodeHoverDrawingFunction';
 import { blendedColorFamily } from '~/atoms/blendedColorFamily';
+import { sigmaAtom } from '~/atoms/sigmaAtom';
 
 export const NODE_COLOR_BLEND_RATIO = 0.08;
 export const EDGE_COLOR_BLEND_RATIO = 0.76;
 
 export function GraphSettings() {
-  const setSettings = useSetSettings();
+  const sigma = useAtomValue(sigmaAtom);
   const { palette } = useTheme();
   const store = useStore();
 
@@ -57,7 +57,7 @@ export function GraphSettings() {
   );
 
   useEffect(() => {
-    setSettings({
+    sigma?.setSettings({
       nodeReducer,
       edgeReducer,
       defaultDrawNodeHover,
@@ -68,13 +68,7 @@ export function GraphSettings() {
       labelGridCellSize: 60,
       labelRenderedSizeThreshold: 15
     });
-  }, [
-    setSettings,
-    nodeReducer,
-    edgeReducer,
-    textPrimary,
-    defaultDrawNodeHover
-  ]);
+  }, [sigma, nodeReducer, edgeReducer, textPrimary, defaultDrawNodeHover]);
 
   return null;
 }

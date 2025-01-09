@@ -1,16 +1,30 @@
 import { useEffect } from 'react';
-import { useRegisterEvents } from '@react-sigma/core';
 import { useNavigate } from '@tanstack/react-router';
-import { useSetAtom } from 'jotai';
+import { Listener, SigmaEvents } from 'sigma/types';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { debouncedHoveredAtom } from '~/atoms/hoveredNodeAtom';
+import { sigmaAtom } from '~/atoms/sigmaAtom';
 
 export function GraphEvents() {
-  const registerEvents = useRegisterEvents();
   const navigate = useNavigate();
   const setDebouncedHoveredNode = useSetAtom(debouncedHoveredAtom);
+  const sigma = useAtomValue(sigmaAtom);
 
   useEffect(() => {
-    registerEvents({
+    const subscribe = (events: Partial<SigmaEvents>) => {
+      const entries = Object.entries(events) as Array<
+        [keyof typeof events, Listener]
+      >;
+      for (const [event, listener] of entries) {
+        sigma?.on(event, listener);
+      }
+      return () => {
+        for (const [event, listener] of entries) {
+          sigma?.off(event, listener);
+        }
+      };
+    };
+    return subscribe({
       enterNode({ node }) {
         setDebouncedHoveredNode(node);
       },
@@ -18,16 +32,13 @@ export function GraphEvents() {
         setDebouncedHoveredNode(null);
       },
       clickNode({ node }) {
-        navigate({
-          to: '/$hero',
-          params: { hero: node }
-        });
+        navigate({ to: '/$hero', params: { hero: node } });
       },
       clickStage() {
         navigate({ to: '/' });
       }
     });
-  }, [registerEvents, navigate, setDebouncedHoveredNode]);
+  }, [sigma, navigate, setDebouncedHoveredNode]);
 
   return null;
 }

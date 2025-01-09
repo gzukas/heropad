@@ -1,23 +1,21 @@
-import * as React from 'react';
+import { useCallback } from 'react';
 import clsx from 'clsx';
+import { Sigma } from 'sigma';
 import { Settings } from 'sigma/settings';
 import { NodeImageProgram } from '@sigma/node-image';
 import EdgeCurveProgram from '@sigma/edge-curve';
-import { Portal, PortalProps } from '@mui/material';
-import { SigmaContainer, SigmaContainerProps } from '@react-sigma/core';
-import { useWorkerLayoutForceAtlas2 } from '@react-sigma/layout-forceatlas2';
-import { useAtomValue } from 'jotai';
+import { Box, BoxProps } from '@mui/material';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { MultiDirectedGraph } from 'graphology';
-import { inferSettings } from 'graphology-layout-forceatlas2';
-import { type Attributes } from 'graphology-types';
-import { graphAtom, HeroNode } from '~/atoms/graphAtom';
+import { HeroNode } from '~/atoms/graphAtom';
 import { hoveredNodeAtom } from '~/atoms/hoveredNodeAtom';
 import { GraphEvents } from './GraphEvents';
 import { GraphLayout } from './GraphLayout';
 import { GraphSettings } from './GraphSettings';
 import { Graph } from './Graph';
+import { sigmaAtom } from '~/atoms/sigmaAtom';
 
-const defaultGraphSettings: Partial<Settings> = {
+const defaultSettings: Partial<Settings> = {
   nodeProgramClasses: {
     image: NodeImageProgram
   },
@@ -30,38 +28,55 @@ const defaultGraphSettings: Partial<Settings> = {
   zIndex: true
 };
 
-export type SociogramProps = SigmaContainerProps<
-  HeroNode,
-  Attributes,
-  Attributes
-> &
-  React.PropsWithChildren<Pick<PortalProps, 'container' | 'disablePortal'>>;
+export type SociogramProps<C extends React.ElementType> = BoxProps<
+  C,
+  { component?: C }
+>;
 
-export function Sociogram(props: SociogramProps) {
-  const { children, className, container, disablePortal, ...other } = props;
+export function Sociogram<C extends React.ElementType>(
+  props: SociogramProps<C>
+) {
+  const { className, children, sx = [], ...other } = props;
   const hoveredNode = useAtomValue(hoveredNodeAtom);
-  const graph = useAtomValue(graphAtom);
+  const setSigma = useSetAtom(sigmaAtom);
+
+  const handleContainerRef = useCallback(
+    (container: HTMLDivElement | null) => {
+      setSigma(
+        container
+          ? new Sigma(
+              new MultiDirectedGraph<HeroNode>(),
+              container,
+              defaultSettings
+            )
+          : null
+      );
+    },
+    [setSigma]
+  );
 
   return (
-    <SigmaContainer
+    <Box
+      ref={handleContainerRef}
       className={clsx({
         'Sociogram-nodeHovered': Boolean(hoveredNode),
         className
       })}
-      graph={MultiDirectedGraph}
-      settings={defaultGraphSettings}
+      sx={[
+        {
+          '&.Sociogram-nodeHovered': {
+            cursor: 'pointer'
+          }
+        },
+        ...(Array.isArray(sx) ? sx : [sx])
+      ]}
       {...other}
     >
       <Graph />
-      <GraphEvents />
       <GraphSettings />
-      <GraphLayout
-        layout={useWorkerLayoutForceAtlas2}
-        settings={{ settings: inferSettings(graph) }}
-      />
-      <Portal container={container} disablePortal={disablePortal}>
-        {children}
-      </Portal>
-    </SigmaContainer>
+      <GraphEvents />
+      <GraphLayout />
+      {children}
+    </Box>
   );
 }

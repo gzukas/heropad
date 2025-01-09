@@ -46,7 +46,7 @@ Heropad is built within a monorepository powered by [turborepo](https://turbo.bu
 - [Vite](https://vitejs.dev) for fast development tooling
 - [Jotai](https://jotai.org) for lightweight state management
 - [Graphology](https://graphology.github.io) for representing graph data
-- [Sigma.js](https://www.sigmajs.org) with [React Sigma](https://sim51.github.io/react-sigma) for graph rendering
+- [Sigma.js](https://www.sigmajs.org) for graph rendering
 - [Lingui](https://lingui.dev) for internationalization
 - [Tanstack Router](https://tanstack.com/router) for routing
 - [Tanstack Virtual](https://tanstack.com/virtual) for virtualizing long award lists

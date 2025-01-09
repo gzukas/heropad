@@ -14,6 +14,17 @@ type InferAtomTuples<T> = {
 
 type Options = Parameters<typeof useHydrateAtoms>[1];
 
+/**
+ * Hydrates and syncs multiple atoms with the provided values.
+ *
+ * This hooks will initialize the atoms with the provided `values` on the first render.
+ * After the initial render, it will sync the atom values to ensure they remain in sync with
+ * the latest values passed into the hook.
+ *
+ *
+ * @param values A list of tuples, where each tuple contains a writable atom and its associated value.
+ * @param options Optional parameters passed to {@link useHydrateAtoms} for configuring the hydration behavior.
+ */
 export function useHydrateAndSyncAtoms<
   T extends Iterable<readonly [AnyWritableAtom, unknown]>
 >(values: InferAtomTuples<T>, options?: Options) {
