@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react';
+import { useRef } from 'react';
 import { Box, Drawer, Stack, styled, useMediaQuery } from '@mui/material';
 import {
   useParams,
@@ -83,24 +83,22 @@ function Root() {
         {!isXs && <Box sx={{ flexGrow: 1 }} />}
         <Camera />
       </Stack>
-      <Suspense>
-        <Drawer
-          open={shift > 0}
-          onClose={handleDrawerClose}
-          variant={isMdUp ? 'persistent' : 'temporary'}
-          elevation={1}
-          anchor="right"
-          ModalProps={{ keepMounted: true }}
-          sx={{
-            width: drawerWidth,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth
-            }
-          }}
-        >
-          <Outlet />
-        </Drawer>
-      </Suspense>
+      <Drawer
+        open={shift > 0}
+        onClose={handleDrawerClose}
+        variant={isMdUp ? 'persistent' : 'temporary'}
+        elevation={1}
+        anchor="right"
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          width: drawerWidth,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth
+          }
+        }}
+      >
+        <Outlet />
+      </Drawer>
       <Stack
         direction="row"
         sx={theme => ({

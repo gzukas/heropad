@@ -1,4 +1,4 @@
-import { Suspense, useCallback } from 'react';
+import { useCallback } from 'react';
 import clsx from 'clsx';
 import { Sigma } from 'sigma';
 import { Settings } from 'sigma/settings';
@@ -73,9 +73,7 @@ export function Sociogram<C extends React.ElementType>(
       {...other}
     >
       <Graph />
-      <Suspense fallback="wer">
-        <GraphSettings />
-      </Suspense>
+      <GraphSettings />
       <GraphEvents />
       <GraphLayout />
       {children}
